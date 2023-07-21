@@ -17,7 +17,7 @@
               </b-card-title>
             </b-card-header>
             <b-card-body>
-              <b-btn
+              <!-- <b-btn
                 variant="naver"
                 class="btn-naver w-100 py-2"
                 @click="loginWithNaver"
@@ -25,7 +25,47 @@
               >
                 <img :src="require('@/assets/naver.svg')" alt="네이버 심볼" />
                 <span class="ml-2">Naver로 로그인</span>
-              </b-btn>
+              </b-btn> -->
+              <b-form @submit.prevent="login(form)">
+                <b-form-group
+                  label="이메일:"
+                  label-for="email"
+                  label-cols-sm="2"
+                  label-align-sm="left"
+                >
+                  <b-form-input
+                    id="email"
+                    type="email"
+                    v-model="form.email"
+                    placeholder="이메일을 입력하세요"
+                  />
+                </b-form-group>
+                <b-form-group
+                  label="비밀번호:"
+                  label-for="pwd"
+                  label-cols-sm="2"
+                  label-align-sm="left"
+                >
+                  <b-form-input
+                    id="pwd"
+                    v-model="form.pwd"
+                    type="password"
+                    placeholder="비밀번호를 입력하세요"
+                    autocomplete="on"
+                  />
+                </b-form-group>
+
+                <b-row class="mt-5">
+                  <b-col cols="12">
+                    <b-btn
+                      variant="primary w-100"
+                      :disabled="validate"
+                      type="submit"
+                      >로그인
+                    </b-btn>
+                  </b-col>
+                </b-row>
+              </b-form>
               <div class="mt-4 text-center">
                 <small>이미 가입된 아이디가 있다면?</small>
                 <b-btn
@@ -50,7 +90,7 @@ export default {
   name: "auth-login",
   head() {
     return {
-      title: `신물결 | 로그인`,
+      title: `다다매거진 | 로그인`,
       script: [
         {
           src: "https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js",
@@ -66,6 +106,10 @@ export default {
   },
   data() {
     return {
+      form: {
+        email: null,
+        pwd: null,
+      },
       disabled: false,
     };
   },
@@ -83,22 +127,22 @@ export default {
     }
   },
   methods: {
-    // async login(info) {
-    //   const { login } = this.$firebase();
-    //   try {
-    //     const { data, token } = await login(info);
-    //     console.log("data, token:", data, token);
-    //     if (data) {
-    //       // 세션스토리지에 저장
-    //       sessionStorage.setItem(process.env.TOKEN_NAME, token.accessToken);
-    //       // store에 저장
-    //       this.$store.dispatch("setUser", data);
-    //       this.$router.push("/");
-    //     }
-    //   } catch (error) {
-    //     console.error("error:", error);
-    //   }
-    // },
+    async login(info) {
+      const { login } = this.$firebase();
+      try {
+        const { data, token } = await login(info);
+        console.log("data, token:", data, token);
+        if (data) {
+          // 세션스토리지에 저장
+          sessionStorage.setItem(process.env.TOKEN_NAME, token.accessToken);
+          // store에 저장
+          this.$store.dispatch("setUser", data);
+          this.$router.push("/");
+        }
+      } catch (error) {
+        console.error("error:", error);
+      }
+    },
     loginWithNaver() {
       const naverLogin = new naver.LoginWithNaverId({
         clientId: process.env.NAVER_CLIENT_ID,

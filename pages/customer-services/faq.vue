@@ -12,7 +12,7 @@
               variant="text py-3  border-bottom d-flex align-items-center"
               v-b-toggle="`item-${i}`"
             >
-              <strong class="text-2 mr-2">Q</strong>
+              <strong class="text-20 mr-2">Q</strong>
               <span class="fw-700">
                 {{ item.title }}
               </span>

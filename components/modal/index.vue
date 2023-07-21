@@ -8,7 +8,7 @@
     footerClass="border-0 d-flex justify-content-end "
     okTitle="예"
     cancelTitle="취소"
-    okVariant="primary text-1 py-1 px-3"
+    okVariant="primary text-16 py-1 px-3"
     centered
     size="sm"
     noCloseOnBackdrop

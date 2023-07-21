@@ -105,7 +105,7 @@ export default {
   name: "auth-mypage",
   head() {
     return {
-      title: `신물결 | 마이페이지`,
+      title: `다다매거진 | 마이페이지`,
     };
   },
   props: {

@@ -29,7 +29,7 @@ export default {
         domProps: {
           innerHTML: `
           <div class="text-${opt.textVariant}">
-            <span class="text-1 fw-500">${msg}</span>
+            <span class="text-16 fw-500">${msg}</span>
           </div>
           `,
         },

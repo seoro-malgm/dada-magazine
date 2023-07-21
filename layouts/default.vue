@@ -60,7 +60,7 @@ export default {
           headerClass: "rounded-0 bg-primary bg-opacity-15 text-left ",
           footerClass: "border-0 d-flex justify-content-end ",
           okTitle: "예",
-          okVariant: "primary text-1 py-1 px-3",
+          okVariant: "primary text-16 py-1 px-3",
           centered: true,
           size: "sm",
           noCloseOnBackdrop: true,
@@ -75,7 +75,7 @@ export default {
             ? this.$createElement("div", {
                 domProps: {
                   innerHTML: `
-        <span class="text-1 lh-200 opacity-8">${msg}</span>
+        <span class="text-16 lh-200 opacity-8">${msg}</span>
       `,
                 },
               })
@@ -97,8 +97,8 @@ export default {
           footerClass: "border-0 d-flex justify-content-end",
           okTitle: "예",
           cancelTitle: "아니오",
-          okVariant: "primary text-1 py-1 px-3 text-white",
-          cancelVariant: "secondary text-1 py-1 px-3",
+          okVariant: "primary text-16 py-1 px-3 text-white",
+          cancelVariant: "secondary text-16 py-1 px-3",
           centered: true,
           size: "sm",
           noCloseOnBackdrop: true,
@@ -112,8 +112,8 @@ export default {
             ? this.$createElement("div", {
                 domProps: {
                   innerHTML: `
-        <span class="mb-4 text-1 lh-200 opacity-8">${msg}</span>
-        <span class="text-danger text-1 lh-200">${options.dangerMsg}</span>
+        <span class="mb-4 text-16 lh-200 opacity-8">${msg}</span>
+        <span class="text-danger text-16 lh-200">${options.dangerMsg}</span>
       `,
                 },
               })
@@ -125,7 +125,7 @@ export default {
       msg,
       opt = {
         id: "toast",
-        variant: "darkest",
+        variant: "alert",
         textVariant: "white",
       }
     ) {
@@ -136,7 +136,7 @@ export default {
         domProps: {
           innerHTML: `
           <div class="text-${opt.textVariant} text-center">
-            <span class="text-1 fw-500">${msg}</span>
+            <span class="text-16 fw-500">${msg}</span>
           </div>
           `,
         },
@@ -148,7 +148,7 @@ export default {
         headerClass: `bg-${opt.variant} p-0 border-0 text-white fw-600`,
         bodyClass: `bg-${opt.variant} py-3 border-0 rounded text-white fw-600`,
         toastClass: "border-0  pt-0",
-        toaster: "b-toaster-bottom-center",
+        toaster: "b-toaster-top-right",
       });
     },
   },
@@ -162,7 +162,7 @@ $gnb-height: 82px;
   //   padding-top: 72px;
   // }
   // padding-top: 82px;
-  padding-top: calc($gnb-height + 12px);
+  padding-top: 92px;
   // @media (min-width: $breakpoint-md) {
   //   padding-top: calc($gnb-height + 12px);
   // }

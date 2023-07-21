@@ -6,7 +6,7 @@
           <span class="text-category mb-1" v-if="currentBoardItem.category">
             {{ getCategory(currentBoardItem.category) }}
           </span>
-          <h1 class="text-2 text-md-3 mt-1">
+          <h1 class="text-20 text-md-3 mt-1">
             {{ currentBoardItem.title }}
           </h1>
           <div
@@ -83,8 +83,8 @@
             :disabled="!auth"
             @click="likeToggle"
           >
-            <i class="icon icon-heart text-1 text-md-2 mr-3" />
-            <span class="text-1 text-md-1 fw-700">
+            <i class="icon icon-heart text-16 text-md-2 mr-3" />
+            <span class="text-16 text-md-1 fw-700">
               {{ currentBoardItem?.like }}
             </span>
           </b-btn>
@@ -186,12 +186,12 @@ export default {
   },
   head() {
     return {
-      title: `${this.currentBoardItem.title} | 신물결`,
+      title: `${this.currentBoardItem.title} | 다다매거진`,
       meta: [
         {
           hid: "title",
           name: "title",
-          content: `${this.currentBoardItem.title} | 신물결`,
+          content: `${this.currentBoardItem.title} | 다다매거진`,
         },
         {
           hid: "description",

@@ -2,8 +2,8 @@
   <section class="p-5 bg-primary">
     <b-row align-v="center" class="pb-3 pt-lg-3">
       <b-col cols="12" lg="7">
-        <h3 class="mb-3 text-2 text-md-5">뉴스레터를 구독하세요</h3>
-        <p class="text-1 text-md-1 lh-180">
+        <h3 class="mb-3 text-20 text-md-5">뉴스레터를 구독하세요</h3>
+        <p class="text-16 text-md-1 lh-180">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
           consequatur minima rerum animi omnis atque illo dolores doloribus
         </p>
@@ -16,7 +16,7 @@
             </div>
           </template>
           <template v-else>
-            <h6 class="text-1 text-md-2 mb-3">구독 신청</h6>
+            <h6 class="text-16 text-md-2 mb-3">구독 신청</h6>
             <b-form-input
               class="mb-2 p-0 border-primary bg-white"
               v-model="input.email"
@@ -40,7 +40,7 @@
                     @click="$bvModal.show('confirm-newletter')"
                   />
                   <b-btn
-                    variant="text text-1 p-0 pl-1"
+                    variant="text text-16 p-0 pl-1"
                     @click="$bvModal.show('confirm-newletter')"
                   >
                     <strong class="text-secondary">(필수)</strong>
@@ -57,7 +57,7 @@
                   />
 
                   <b-btn
-                    variant="text text-1 p-0 pl-1"
+                    variant="text text-16 p-0 pl-1"
                     @click="$bvModal.show('confirm-agree-ad')"
                   >
                     <strong class="text-secondary">(필수)</strong>

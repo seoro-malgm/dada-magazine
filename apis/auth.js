@@ -1,7 +1,7 @@
 import { app } from "@/plugins/appConfig";
 // auth
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import errorCodes from "@/data/errorCodes.json";
+import errorCodes from "@/assets/json/errorCodes.json";
 
 const auth = getAuth(app);
 
@@ -20,10 +20,7 @@ class authAPI {
       .catch((error) => {
         const errorCode = error.code;
         window.toast(
-          errorCodes?.auth[errorCode] || "에러로 인해 로그인에 실패했습니다.",
-          {
-            toaster: "b-toaster-bottom-left",
-          }
+          errorCodes?.auth[errorCode] || "에러로 인해 로그인에 실패했습니다."
         );
         return;
       });
@@ -38,6 +35,9 @@ class authAPI {
       .catch((error) => {
         throw new Error(error);
       });
+  };
+  signup = (form) => {
+    console.log(form);
   };
 }
 

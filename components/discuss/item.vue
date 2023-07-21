@@ -15,7 +15,7 @@
             <b-col cols="12" md="8" lg="10">
               <div class="pt-lg-3">
                 <h4>{{ item.title }}</h4>
-                <p class="text-1 mt-2">
+                <p class="text-16 mt-2">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Dignissimos aliquam officiis a aperiam nihil voluptate velit
                   amet perferendis quae odit? Dolorum eligendi dolor commodi

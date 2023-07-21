@@ -2,7 +2,7 @@
   <b-container>
     <section class="mt-3 mb-4">
       <header class="mb-3 pb-2">
-        <h1 class="bg-flow text-2 text-lg-3">
+        <h1 class="bg-flow text-20 text-lg-3">
           글쓰기
           <svg-line-path />
         </h1>
@@ -81,8 +81,8 @@
               @click="submit"
               :disabled="!validate"
             >
-              <i class="icon icon-pencil" /> 업로드</b-btn
-            >
+              <i class="icon icon-pencil" /> 업로드
+            </b-btn>
           </template>
         </b-col>
       </b-row>

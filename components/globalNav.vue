@@ -6,7 +6,7 @@
           <nuxt-link to="/" replace>
             <img
               :src="require('@/assets/logo.svg')"
-              alt="신물결 로고 이미지, 메인으로 이동"
+              alt="다다매거진 로고 이미지, 메인으로 이동"
             />
           </nuxt-link>
           <!-- <span class="status-beta" v-if="isBeta"> BETA</span> -->
@@ -17,6 +17,9 @@
           <b-navbar-nav class="d-flex align-items-center w-100">
             <client-only>
               <div class="ml-auto uitls-auth">
+                <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
+                  <i class="icon icon-search"></i>
+                </b-btn>
                 <template v-if="auth">
                   <b-btn variant="text p-0" pill :to="{ name: 'auth-mypage' }">
                     <b-avatar
@@ -86,7 +89,7 @@ export default {
     border-radius: 24px;
     .navbar-brand {
       position: relative;
-      width: 140px;
+      width: 100px;
       > svg {
         width: 100%;
       }

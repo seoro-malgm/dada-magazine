@@ -39,7 +39,7 @@ export default {
   layout: "default",
   head() {
     return {
-      title: `신물결 | 메거진`,
+      title: `다다매거진 | 메거진`,
     };
   },
   async asyncData({ app, $firebase, query }) {
