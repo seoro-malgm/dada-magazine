@@ -35,7 +35,6 @@ export default {
 .floating-button {
   position: fixed;
   z-index: 1055;
-  transition: all 0.2s $default-ease;
   .btn {
     border-radius: 40rem;
     font-size: 1.15rem;

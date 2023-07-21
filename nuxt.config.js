@@ -6,7 +6,7 @@ export default {
   // ssr: true,
   // target: "server",
   head: {
-    title: "다다맵",
+    title: "신물결 | 공주인들을 위한 커뮤니티 플랫폼!",
     htmlAttrs: {
       lang: "ko-KR",
     },
@@ -18,13 +18,13 @@ export default {
         hid: "title",
         name: "title",
         property: "title",
-        content: "다다맵",
+        content: "신물결 | 공주인들을 위한 커뮤니티 플랫폼!",
       },
       {
         hid: "description",
         name: "description",
         property: "description",
-        content: "다다맵",
+        content: "공주시를 위한 새로운 커뮤니티 플랫폼, 신물결입니다.",
       },
       {
         name: "keyword",
@@ -41,7 +41,7 @@ export default {
         hid: "og:title",
         name: "og:title",
         property: "og:title",
-        content: "다다맵",
+        content: "신물결 | 공주인들을 위한 커뮤니티 플랫폼!",
       },
       {
         hid: "og:description",
@@ -62,28 +62,32 @@ export default {
       {
         name: "og:site_name",
         property: "og:site_name",
-        content: "다다맵",
+        content: "신물결 | 공주인들을 위한 커뮤니티 플랫폼!",
       },
-
+      {
+        name: "msapplication-TileImage",
+        property: "msapplication-TileImage",
+        content: "/ms-icon-144x144.png",
+      },
       {
         name: "msapplication-TileColor",
         property: "msapplication-TileColor",
-        content: "#11997c",
+        content: "#2f318e",
       },
       {
         name: "theme-color",
         property: "theme-color",
-        content: "#11997c",
+        content: "#2f318e",
       },
       {
         name: "twitter:card",
         hid: "twitter:card",
         content: "/og-image.png",
       },
-      // {
-      //   property: "twitter:domain",
-      //   content: "seoro-malgm.studio",
-      // },
+      {
+        property: "twitter:domain",
+        content: "seoro-malgm.studio",
+      },
       // {
       //   property: "twitter:url",
       //   hid: "twitter:url",
@@ -92,7 +96,7 @@ export default {
       {
         name: "twitter:title",
         hid: "twitter:title",
-        content: "다다맵",
+        content: "신물결 | 공주인들을 위한 커뮤니티 플랫폼!",
       },
       // {
       //   name: "twitter:description",
@@ -107,36 +111,75 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com" },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
+        rel: "apple-touch-icon",
+        sizes: "57x57",
+        href: "/apple-icon-57x57.png",
       },
-      // {
-      //   rel: "apple-touch-icon",
-      //   sizes: "180x180",
-      //   href: "/apple-touch-icon.png",
-      // },
-      // {
-      //   rel: "icon",
-      //   sizes: "32x32",
-      //   href: "/favicon-32x32.png",
-      // },
-      // {
-      //   rel: "icon",
-      //   sizes: "16x16",
-      //   href: "/favicon-16x16.png",
-      // },
-      // {
-      //   rel: "manifest",
-      //   href: "/site.webmanifest",
-      // },
-      // {
-      //   rel: "mask-icon",
-      //   color: "#5bbad5",
-      //   href: "/safari-pinned-tab.svg",
-      // },
+      {
+        rel: "apple-touch-icon",
+        sizes: "60x60",
+        href: "/apple-icon-60x60.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "72x72",
+        href: "/apple-icon-72x72.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "76x76",
+        href: "/apple-icon-76x76.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "114x114",
+        href: "/apple-icon-114x114.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "120x120",
+        href: "/apple-icon-120x120.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "144x144",
+        href: "/apple-icon-144x144.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "152x152",
+        href: "/apple-icon-152x152.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-icon-180x180.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "192x192",
+        href: "/android-icon-192x192.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "96x96",
+        href: "/favicon-96x96.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
     ],
   },
   css: [
@@ -151,8 +194,6 @@ export default {
     { src: "~/plugins/router.js", mode: "client" },
     { src: "~/plugins/firebase.js" },
     { src: "~/plugins/carousel.js", mode: "client" },
-    { src: "~/plugins/intersectionObserver.client.js", mode: "client" },
-    { src: "~/plugins/googleMaps.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -178,7 +219,7 @@ export default {
     scss: ["~/assets/styles/variables.scss"],
   },
   dev: process.env.NODE_ENV === "development",
-  watchQuery: ["page"],
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
@@ -188,7 +229,6 @@ export default {
     "vue2-editor/nuxt",
     "@nuxtjs/style-resources",
   ],
-  transpile: [/^vue2-google-maps($|\/)/],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -197,10 +237,8 @@ export default {
   },
   // 로딩바
   loading: {
-    color: "#11997c",
+    color: "#00ffe6",
   },
-  // 페이지 트랜지션
-  // transition: '',
   // 환경변수
   env: {
     BASE_URL: process.env.BASE_URL || "http://localhost:3000",
@@ -213,7 +251,6 @@ export default {
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
     TOKEN_NAME: process.env.TOKEN_NAME,
-    // NAVER_CLIENT_ID: process.env.NAVER_CLIENT_ID,
-    // GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    NAVER_CLIENT_ID: process.env.NAVER_CLIENT_ID,
   },
 };

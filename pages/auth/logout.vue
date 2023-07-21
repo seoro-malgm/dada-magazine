@@ -15,7 +15,7 @@ export default {
       const { logout } = this.$firebase();
       await logout();
       // 스토리지에서 제거
-      window.sessionStorage.removeItem(process.env.TOKEN_NAME);
+      sessionStorage.removeItem(process.env.TOKEN_NAME);
       // store에서 제거
       this.$store.dispatch("setState", ["user", null]);
       window.location.href = "/";

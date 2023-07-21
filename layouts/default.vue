@@ -1,65 +1,50 @@
 <template>
   <div id="app">
-    <global-nav :onScrolled="onScrolled" :auth="auth" />
+    <global-nav :auth="auth" />
     <!-- 내용 -->
-    <main id="main" :class="{ 'is-main': path === '/' }">
-      <!-- <transition> -->
-      <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
-      <!-- </transition> -->
+    <main id="main">
+      <nuxt-child :auth="auth" />
     </main>
-    <!-- <btn-floating
+    <btn-floating
+      v-if="auth && routeName !== 'board-write'"
       :position="{
-        bottom: onScrolled ? '2.5rem' : '-4rem',
+        bottom: '2.5rem',
         right: '1.5rem',
       }"
-      variant="sub-2 text-white"
-      @click="$router.push('/pre-register')"
+      variant="primary text-darkest"
+      @click="
+        $router.push({
+          name: 'board-write',
+        })
+      "
     >
       <template #content>
-        <span class="mx-1 fw-700 text-15 text-md-16">사전등록 하러가기</span>
-        <i class="icon icon-right-big" />
+        <i class="icon icon-pencil" />
+        <span class="mx-1 fw-700">글쓰기</span>
       </template>
-    </btn-floating> -->
-
+    </btn-floating>
     <!-- footer -->
-    <!-- <global-footer /> -->
+
+    <global-footer />
   </div>
 </template>
 
 <script>
 export default {
   name: "default",
-  data() {
-    return {
-      scrollY: 0,
-      onScrolled: false,
-    };
+  async mounted() {
+    this.modal();
+    window.toast = this.toast;
   },
   computed: {
     auth() {
       return this.$store.getters.getUser;
     },
-    path() {
-      return this.$route.path;
-    },
     routeName() {
       return this.$route.name;
     },
   },
-  mounted() {
-    this.modal();
-    window.toast = this.toast;
-    // 스크롤 핸들러
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    // 스크롤 핸들러 해제
-    window.removeEventListener("scroll", this.handleScroll);
-  },
   methods: {
-    linkTo(link) {
-      window.open(link, "_blank");
-    },
     modal() {
       window.alert = async (
         msg,
@@ -68,22 +53,21 @@ export default {
         }
       ) => {
         const opt = {
-          titleClass: "text-left text-133",
+          titleClass: "text-left text-1",
           dangerMsg: "",
           bodyClass: "px-3 pt-3 pb-2",
           contentClass: "confirm border-0 overflow-hidden ",
-          headerClass:
-            "rounded-0 bg-primary bg-opacity-15 text-left text-white",
+          headerClass: "rounded-0 bg-primary bg-opacity-15 text-left ",
           footerClass: "border-0 d-flex justify-content-end ",
           okTitle: "예",
-          okVariant: "primary text-133 py-1 px-3",
+          okVariant: "primary text-1 py-1 px-3",
           centered: true,
           size: "sm",
           noCloseOnBackdrop: true,
           autoFocusButton: "ok",
           returnFocus: this.$refs.app,
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-133"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-1"></i>`,
           ...obj,
         };
         const msgVNode =
@@ -91,7 +75,7 @@ export default {
             ? this.$createElement("div", {
                 domProps: {
                   innerHTML: `
-        <span class="text-13 lh-200 opacity-8">${msg}</span>
+        <span class="text-1 lh-200 opacity-8">${msg}</span>
       `,
                 },
               })
@@ -105,23 +89,22 @@ export default {
         }
       ) => {
         const options = {
-          titleClass: "text-left text-13",
+          titleClass: "text-left text-1",
           dangerMsg: "",
           bodyClass: "px-3 pt-3 pb-2",
           contentClass: "confirm border-0 overflow-hidden",
-          headerClass:
-            "rounded-0 bg-primary bg-opacity-15 text-left text-white",
+          headerClass: "rounded-0 bg-primary bg-opacity-15 text-left ",
           footerClass: "border-0 d-flex justify-content-end",
           okTitle: "예",
           cancelTitle: "아니오",
-          okVariant: "outline-alert text-13 py-1 px-3",
-          cancelVariant: "outline-primary text-13 py-1 px-3",
+          okVariant: "primary text-1 py-1 px-3 text-white",
+          cancelVariant: "secondary text-1 py-1 px-3",
           centered: true,
           size: "sm",
           noCloseOnBackdrop: true,
           autoFocusButton: "ok",
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-13"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-1"></i>`,
           ...obj,
         };
         const msgVNode =
@@ -129,8 +112,8 @@ export default {
             ? this.$createElement("div", {
                 domProps: {
                   innerHTML: `
-        <span class="mb-4 text-13 lh-200 opacity-8">${msg}</span>
-        <span class="text-danger text-13 lh-200">${options.dangerMsg}</span>
+        <span class="mb-4 text-1 lh-200 opacity-8">${msg}</span>
+        <span class="text-danger text-1 lh-200">${options.dangerMsg}</span>
       `,
                 },
               })
@@ -142,8 +125,8 @@ export default {
       msg,
       opt = {
         id: "toast",
-        variant: "primary",
-        textVariant: "darkest",
+        variant: "darkest",
+        textVariant: "white",
       }
     ) {
       const h = this.$createElement;
@@ -153,7 +136,7 @@ export default {
         domProps: {
           innerHTML: `
           <div class="text-${opt.textVariant} text-center">
-            <span class="text-15 fw-500">${msg}</span>
+            <span class="text-1 fw-500">${msg}</span>
           </div>
           `,
         },
@@ -165,30 +148,24 @@ export default {
         headerClass: `bg-${opt.variant} p-0 border-0 text-white fw-600`,
         bodyClass: `bg-${opt.variant} py-3 border-0 rounded text-white fw-600`,
         toastClass: "border-0  pt-0",
-        toaster: "b-toaster-top-right",
+        toaster: "b-toaster-bottom-center",
       });
-    },
-    handleScroll(e) {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      this.scrollY = scrollTop;
-      if (scrollTop <= 50) {
-        this.onScrolled = false;
-      }
-
-      if (scrollTop >= 180) {
-        this.onScrolled = true;
-      }
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-// $gnb-height: 82px;
+$gnb-height: 82px;
 #main {
   min-height: 100vh;
-  padding: 0 0 120px;
-  &.is-main {
-    padding: 0;
-  }
+  // @media (max-width: $breakpoint-md) {
+  //   padding-top: 72px;
+  // }
+  // padding-top: 82px;
+  padding-top: calc($gnb-height + 12px);
+  // @media (min-width: $breakpoint-md) {
+  //   padding-top: calc($gnb-height + 12px);
+  // }
+  padding-bottom: 2.5rem;
 }
 </style>

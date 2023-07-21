@@ -2,7 +2,7 @@
   <section class="p-5 bg-primary">
     <b-row align-v="center" class="pb-3 pt-lg-3">
       <b-col cols="12" lg="7">
-        <h3 class="mb-3 text-16 text-md-5">뉴스레터를 구독하세요</h3>
+        <h3 class="mb-3 text-2 text-md-5">뉴스레터를 구독하세요</h3>
         <p class="text-1 text-md-1 lh-180">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
           consequatur minima rerum animi omnis atque illo dolores doloribus
@@ -148,7 +148,7 @@ export default {
           email: this.input.email,
           state: {
             on: true,
-            updateDate: new Date().toLocaleString(),
+            updateDate: new Date(),
           },
         });
         if (data) {

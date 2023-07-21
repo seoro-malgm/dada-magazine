@@ -2,13 +2,8 @@ export default ({ app, store }) => {
   app.router.beforeEach(async (to, from, next) => {
     // authWatcher();
     if (window.sessionStorage.getItem(process.env.TOKEN_NAME)) {
-      if (store?.state?.user) {
-        next();
-      }
-      store.dispatch("setState", [
-        "user",
-        window.sessionStorage.getItem(process.env.TOKEN_NAME),
-      ]);
+      // console.log("%c Hello ", "background: #333399; color: #ededed");
+      store.dispatch("setUser");
       next();
     }
     // // 계정이 필요한 페이지에 접근한 경우 : meta에 requireAuth 속성이 있는 경우
@@ -31,12 +26,11 @@ export default ({ app, store }) => {
     //     next();
     //   } else {
     //     // 사용자가 없는 경우
-    //     next({name:'auth-login'});
+    //     next("/auth/login");
     //   }
     // } else {
     //   next();
     // }
     next();
   });
-  return { x: 0, y: 0 };
 };

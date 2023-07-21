@@ -1,16 +1,28 @@
 <template>
   <footer id="gnf">
-    <b-container fluid class="py-3 pb-5">
-      주관:국립공주대학교 공주학연구원 | 알엠소프트 <br />
-      주최:공주시 <br />
-      문의: 공주학연구원 (041-850-0448)
-      <!-- <ul class="list-unstyled"></ul> -->
-
+    <b-container class="py-3">
+      <ul class="list-unstyled">
+        <li>
+          <h4 class="logo mb-2">
+            <img :src="require('@/assets/logo.svg')" />
+          </h4>
+        </li>
+        <li>
+          <strong> 주식회사 공스타 </strong>
+        </li>
+        <li>대표자 옹아름</li>
+        <li>사무실 주소 : 충남 공주시 흑수골길 41 2층</li>
+        <li>개인정보 보호 책임자 : 이상준</li>
+        <li>마케팅 제휴 문의 : gongstar2021@gmail.com</li>
+        <li>
+          <span class="copyright"> &copy; copyright gongstar reserved. </span>
+        </li>
+        <!-- <li class="mt-4">
+            <b-btn variant="dark" pill>다크모드</b-btn>
+          </li> -->
+      </ul>
       <nav class="footer-nav">
-        <b-btn variant="link " to="/brand">
-          <span class="text-15"> 브랜드 아이덴티티(BI/CI) </span>
-        </b-btn>
-        <!-- <b-btn variant="link" :to="{ name: 'terms-privacy' }"
+        <b-btn variant="link" :to="{ name: 'terms-privacy' }"
           >개인정보처리방침</b-btn
         >
         <b-btn variant="link" :to="{ name: 'customer-services-qna' }"
@@ -18,7 +30,7 @@
         >
         <b-btn variant="link" :to="{ name: 'customer-services-faq' }"
           >자주 묻는 질문</b-btn
-        > -->
+        >
       </nav>
     </b-container>
   </footer>
@@ -53,13 +65,8 @@ export default {
 
 <style lang="scss" scoped>
 #gnf {
-  background-color: black;
-  color: white;
-  position: relative;
-  z-index: 2;
-  @media (max-width: $breakpoint-md) {
-    padding-bottom: 60px;
-  }
+  border-top: 1px solid $gray-600;
+
   .footer-nav {
     display: flex;
     align-items: center;
@@ -79,7 +86,7 @@ export default {
   li {
     margin-bottom: 2px;
     font-size: 13px;
-    color: $white;
+    color: $gray;
     .btn {
       font-size: 0.85rem;
     }
