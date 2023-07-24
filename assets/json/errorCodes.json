@@ -2,6 +2,7 @@
   "auth": {
     "auth/claims-too-large": "용량을 초과했습니다.",
     "auth/email-already-exists": "이미 사용 중인 이메일입니다.",
+    "auth/email-already-in-use": "이미 사용 중인 이메일입니다.",
     "auth/id-token-expired": "토큰이 만료되었습니다.",
     "auth/id-token-revoked": "토큰이 취소되었습니다.",
     "auth/insufficient-permission": "권한이 없는 계정입니다.",

@@ -182,3 +182,14 @@ export const getTimestamp = (date) => {
     return value.toLocaleDateString();
   }
 };
+
+import words from "@/assets/json/words.json";
+export const generateNickname = () => {
+  const { types, names } = words;
+  const index1 = [Math.round(Math.random() * types.length - 1)];
+  const index2 = [Math.round(Math.random() * names.length - 1)];
+
+  const type = types[index1 ? index1 : 0];
+  const name = names[index2 ? index2 : 0];
+  return `${type}${name}`;
+};

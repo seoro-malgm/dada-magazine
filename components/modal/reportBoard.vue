@@ -32,7 +32,7 @@
 export default {
   props: {
     // 글 id
-    boardNo: {
+    docId: {
       type: String,
       default: null,
     },
@@ -57,7 +57,7 @@ export default {
       const { reportBoardItem } = this.$firebase();
       try {
         const data = {
-          boardNo: this.boardNo,
+          docId: this.docId,
           boardUser: this.boardUser.email,
           reportUser: this.reportUser.email,
           content: this.input,

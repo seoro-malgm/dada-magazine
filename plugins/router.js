@@ -2,6 +2,7 @@ export default ({ app, store }) => {
   app.router.beforeEach(async (to, from, next) => {
     // authWatcher();
     if (window.sessionStorage.getItem(process.env.TOKEN_NAME)) {
+      const token = window.sessionStorage.getItem(process.env.TOKEN_NAME);
       // console.log("%c Hello ", "background: #333399; color: #ededed");
       store.dispatch("setUser");
       next();

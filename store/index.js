@@ -1,18 +1,12 @@
 export const state = () => ({
   // counter: 0,
   user: null,
-  materials: null,
-  urls: {
-    youtube: "https://www.youtube.com/@gongjusalon/videos",
-  },
+  userLogined: false,
 });
 
 export const getters = {
   getUser(state) {
     return state.user;
-  },
-  getMaterials(state) {
-    return state.materials;
   },
 };
 
@@ -25,5 +19,23 @@ export const mutations = {
 export const actions = {
   setState({ commit }, [key, value]) {
     commit("setState", [key, value]);
+  },
+  async setUser({ commit, state, dispatch }) {
+    // 세션스토리지에 저장
+    const { authWatcher, getUserInfo } = this.$firebase();
+    const userEmail = await authWatcher();
+    if (userEmail) {
+      const currentUser = await getUserInfo(userEmail);
+      if (currentUser) {
+        commit("setState", ["user", currentUser]);
+        // if (!currentUser.emailVerified) {
+        //   this.$router.push({
+        //     name: "auth-verifiedForm",
+        //   });
+        // }
+      } else {
+        commit("setState", ["user", null]);
+      }
+    }
   },
 };

@@ -23,7 +23,7 @@ const db = getFirestore(app);
 
 class boardItemsAPI {
   // boardItem 전체 불러오기
-  getAllBoardItems = async (collectionName, queryData, count) => {
+  getAllBoardItems = async (collectionName = "board", queryData, count) => {
     try {
       const queryConstraints = [];
       if (queryData) {
@@ -53,9 +53,9 @@ class boardItemsAPI {
   };
 
   // boardItem 디테일 불러오기
-  getBoardItem = async (collectionName, id) => {
+  getBoardItem = async (collectionName = "board", [key = "id", id]) => {
     try {
-      const q = query(collection(db, collectionName), where("id", "==", id));
+      const q = query(collection(db, collectionName), where(key, "==", id));
       const snapshot = await getDocs(q);
       if (snapshot) {
         const docs = snapshot.docs.map((doc) => {
@@ -73,9 +73,9 @@ class boardItemsAPI {
   };
 
   // id 구하기
-  getDocItem = async (collectionName, id) => {
+  getDocItem = async (collectionName = "board", [key = "docId", id]) => {
     try {
-      const q = query(collection(db, collectionName), where("id", "==", id));
+      const q = query(collection(db, collectionName), where(key, "==", id));
       const snapshot = await getDocs(q);
       if (snapshot) {
         const docs = snapshot?.docs.map((doc) => {
@@ -100,7 +100,7 @@ class boardItemsAPI {
   // };
 
   // boardItem 추가
-  addBoardItem = async (collectionName, data) => {
+  addBoardItem = async (collectionName = "board", data) => {
     const response = new Promise(async (resolve, reject) => {
       try {
         const docRef = await addDoc(collection(db, collectionName), data);
@@ -115,10 +115,10 @@ class boardItemsAPI {
   };
 
   // boardItem 삭제
-  removeBoardItem = async (collectionName, id) => {
+  removeBoardItem = async (collectionName = "board", [key = "docId", id]) => {
     if (!id) throw new Error("id가 없습니다");
     const response = new Promise(async (resolve, reject) => {
-      const docId = await this.getDocItem(collectionName, id);
+      const docId = await this.getDocItem(collectionName, [key, id]);
       try {
         await deleteDoc(doc(db, collectionName, docId));
         return resolve(true);
@@ -130,10 +130,14 @@ class boardItemsAPI {
   };
 
   // boardItem 수정
-  updateBoardItem = async (collectionName, id, data) => {
+  updateBoardItem = async (
+    collectionName = "board",
+    [key = "docId", id],
+    data
+  ) => {
     if (!id) throw new Error("id가 없습니다");
     const response = new Promise(async (resolve, reject) => {
-      const docId = await this.getDocItem(collectionName, id);
+      const docId = await this.getDocItem(collectionName, [key, id]);
       try {
         await setDoc(doc(db, collectionName, docId), data);
         return resolve(true);
@@ -163,8 +167,17 @@ class boardItemsAPI {
   };
 
   // 한 값만 변형
-  updateItemValue = async (collectionName, id, key, value) => {
-    const docId = await this.getDocItem(collectionName, id);
+  updateItemValue = async (
+    collectionName = "board",
+    [docKey = "docId", id],
+    key,
+    value
+  ) => {
+    const docId = await this.getDocItem(
+      collectionName,
+      [docKey, id],
+      [key, value]
+    );
     if (docId) {
       const ref = doc(db, collectionName, docId);
       const response = new Promise(async (resolve, reject) => {
@@ -182,8 +195,8 @@ class boardItemsAPI {
   };
 
   // 조회수 추가
-  incrementViewer = async (collectionName, id) => {
-    const docId = await this.getDocItem(collectionName, id);
+  incrementViewer = async (collectionName = "board", [key = "docId", id]) => {
+    const docId = await this.getDocItem(collectionName, [key, id]);
     if (docId) {
       const ref = doc(db, collectionName, docId);
       updateDoc(ref, {
@@ -193,8 +206,8 @@ class boardItemsAPI {
   };
 
   // 좋아요 추가
-  incrementLike = async (collectionName, id) => {
-    const docId = await this.getDocItem(collectionName, id);
+  incrementLike = async (collectionName = "board", [key, id]) => {
+    const docId = await this.getDocItem(collectionName, [key, id]);
     if (docId) {
       const ref = doc(db, collectionName, docId);
       updateDoc(ref, {

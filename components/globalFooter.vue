@@ -1,6 +1,6 @@
 <template>
   <footer id="gnf">
-    <b-container class="py-3">
+    <b-container fluid class="py-3">
       <ul class="list-unstyled">
         <li>
           <h4 class="logo mb-2">

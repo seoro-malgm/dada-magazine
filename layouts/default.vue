@@ -5,7 +5,7 @@
     <main id="main">
       <nuxt-child :auth="auth" />
     </main>
-    <btn-floating
+    <!-- <btn-floating
       v-if="auth && routeName !== 'board-write'"
       :position="{
         bottom: '2.5rem',
@@ -22,7 +22,7 @@
         <i class="icon icon-pencil" />
         <span class="mx-1 fw-700">글쓰기</span>
       </template>
-    </btn-floating>
+    </btn-floating> -->
     <!-- footer -->
 
     <global-footer />
@@ -125,7 +125,7 @@ export default {
       msg,
       opt = {
         id: "toast",
-        variant: "alert",
+        variant: "info",
         textVariant: "white",
       }
     ) {
@@ -148,7 +148,7 @@ export default {
         headerClass: `bg-${opt.variant} p-0 border-0 text-white fw-600`,
         bodyClass: `bg-${opt.variant} py-3 border-0 rounded text-white fw-600`,
         toastClass: "border-0  pt-0",
-        toaster: "b-toaster-top-right",
+        toaster: "b-toaster-bottom-right",
       });
     },
   },
@@ -162,7 +162,7 @@ $gnb-height: 82px;
   //   padding-top: 72px;
   // }
   // padding-top: 82px;
-  padding-top: 92px;
+  padding-top: 91.5px;
   // @media (min-width: $breakpoint-md) {
   //   padding-top: calc($gnb-height + 12px);
   // }

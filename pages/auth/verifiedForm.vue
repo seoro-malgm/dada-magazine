@@ -70,7 +70,7 @@ export default {
   name: "auth-verifiedForm",
   props: {
     auth: {
-      type: Object,
+      type: [Object, String],
       default: null,
     },
   },

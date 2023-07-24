@@ -1,27 +1,30 @@
 <template>
   <div>
-    <b-container class="mb-5 pb-5">
+    <b-container fluid class="mb-5 pb-5">
       <section class="mb-5">
         <template v-if="pending.items">
-          <div class="text-center p-4">
+          <div class="text-center p-5">
             <b-spinner />
           </div>
         </template>
         <template v-else>
           <template v-if="items?.length">
-            <ul class="list-unstyled border-top border-gray-500">
-              <li v-for="(item, i) in itemPinned" :key="`pinned-${i}`">
-                <article-item :item="item" />
-              </li>
-              <li v-for="(item, i) in items" :key="i">
-                <article-item :item="item" />
-              </li>
-            </ul>
+            <b-row align-v="center" align-h="center" class="mx-n1">
+              <b-col
+                cols="6"
+                class="px-1 mb-1"
+                v-for="(item, i) in items"
+                :key="i"
+              >
+                <board-item :item="item" />
+              </b-col>
+            </b-row>
           </template>
         </template>
         <template v-if="!items?.length && !pending.items">
           <div class="text-center p-4 border-top border-bottom">
-            <small>글이 없습니다.</small>
+            <b-spinner />
+            <!-- <small>글이 없습니다.</small>
             <div class="mt-2">
               <b-btn
                 variant="primary"
@@ -33,7 +36,7 @@
                 <i class="icon icon-pencil" />
                 글쓰기
               </b-btn>
-            </div>
+            </div> -->
           </div>
         </template>
       </section>
@@ -50,7 +53,7 @@ export default {
 
   props: {
     auth: {
-      type: Object,
+      type: [Object, String],
       default: null,
     },
   },
@@ -75,11 +78,11 @@ export default {
   },
   watch: {
     query(n) {
-      // this.getItems(n);
+      this.getItems(n);
     },
   },
   mounted() {
-    // this.getItems();
+    this.getItems();
   },
   methods: {
     async getItems(query) {
@@ -88,7 +91,7 @@ export default {
         const data = await this.$firebase().getAllBoardItems(query, 30);
         if (data) {
           this.items = data;
-          console.log("data:", data);
+          // console.log("data:", data);
           this.pending.items = false;
           window.scrollTo(0, 0);
         }
@@ -104,6 +107,12 @@ export default {
           category,
         },
       });
+    },
+    // 카테고리 불러오기
+    getCategory(category) {
+      return this.allCategories[category]
+        ? this.allCategories[category]
+        : this.allCategories["ETC"];
     },
   },
 };

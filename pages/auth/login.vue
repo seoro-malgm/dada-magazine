@@ -100,7 +100,7 @@ export default {
   },
   props: {
     auth: {
-      type: Object,
+      type: [Object, String],
       default: null,
     },
   },
@@ -127,16 +127,15 @@ export default {
     }
   },
   methods: {
-    async login(info) {
+    async login(form) {
       const { login } = this.$firebase();
       try {
-        const { data, token } = await login(info);
-        console.log("data, token:", data, token);
-        if (data) {
+        const { token } = await login(form);
+        if (token) {
           // 세션스토리지에 저장
           sessionStorage.setItem(process.env.TOKEN_NAME, token.accessToken);
           // store에 저장
-          this.$store.dispatch("setUser", data);
+          this.$store.dispatch("setUser");
           this.$router.push("/");
         }
       } catch (error) {

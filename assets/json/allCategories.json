@@ -1,9 +1,9 @@
 {
-  "FREE": "아무말",
-  "QUESTION": "질문",
-  "ANNOUNCE": "알립니다",
-  "JOB": "구인/구직",
-  "WORRY": "고민",
-  "GROUPING": "모임/스터디",
+  "FOOD": "음식",
+  "ART": "예술",
+  "PLACE": "장소",
+  "PEOPLE": "인물",
+  "TECH": "기술/IT",
+  "REVIEW": "리뷰",
   "ETC": "기타"
 }

@@ -1,49 +1,70 @@
 <template>
-  <b-container>
-    <section class="mt-3 mb-4">
-      <header class="mb-3 pb-2">
-        <h1 class="bg-flow text-20 text-lg-3">
-          글쓰기
-          <svg-line-path />
-        </h1>
-      </header>
-      <b-row>
-        <b-col cols="12" md="4" lg="3">
-          <h6 class="py-2">카테고리</h6>
-          <b-form-select v-model="form.category">
-            <b-form-select-option :value="null" disabled>
-              카테고리를 선택하세요
-            </b-form-select-option>
-            <client-only>
-              <b-form-select-option
-                v-for="(value, key) in allCategories"
-                :key="key"
-                :value="key"
-                >{{ value }}
-              </b-form-select-option>
-            </client-only>
-          </b-form-select>
-        </b-col>
-        <b-col cols="12" md="8" lg="9">
-          <h6 class="py-2">제목</h6>
-          <b-form-input v-model="form.title" placeholder="제목을 입력하세요" />
-        </b-col>
-      </b-row>
-    </section>
-    <section class="mb-4">
-      <client-only>
-        <h6 class="mt-3 mb-2">내용</h6>
-        <vue-editor
-          useCustomImageHandler
-          @image-removed="onImageRemoved"
-          @image-added="onImageAdded"
-          v-model="form.desc"
-          placeholder="내용을 입력하세요"
+  <div class="mb-5 pb-5">
+    <header
+      class="mb-5 bg-img header-thumbnail border-bottom border-primary position-relative"
+      :class="form?.thumbnail ? 'ratio-sm-90 ratio-45' : 'ratio-sm-45 ratio-15'"
+    >
+      <b-container class="py-5">
+        <input-image
+          path="thumbnails"
+          label="썸네일"
+          :file="form.thumbnail"
+          @on-change="($event) => (form.thumbnail = $event)"
+          :size="1920"
+          class="position-center"
         />
-      </client-only>
-    </section>
+      </b-container>
+      <img
+        :alt="`${form.title} 썸네일 이미지`"
+        :src="form.thumbnail?.url"
+        v-if="form.thumbnail?.url && form.thumbnail?.name"
+      />
+    </header>
+    <b-container>
+      <section class="mt-3 mb-4">
+        <b-row>
+          <b-col cols="12" md="8" lg="9">
+            <h6 class="py-2">제목</h6>
+            <b-form-input
+              v-model="form.title"
+              placeholder="제목을 입력하세요"
+              class="text-20 text-md-24"
+            />
+          </b-col>
+          <b-col cols="12" md="4" lg="3">
+            <h6 class="py-2">카테고리</h6>
+            <b-form-select v-model="form.category">
+              <b-form-select-option :value="null" disabled>
+                카테고리를 선택하세요
+              </b-form-select-option>
+              <client-only>
+                <b-form-select-option
+                  v-for="(value, key) in allCategories"
+                  :key="key"
+                  :value="key"
+                  >{{ value }}
+                </b-form-select-option>
+              </client-only>
+            </b-form-select>
+          </b-col>
+        </b-row>
+      </section>
+      <section class="mb-4">
+        <client-only>
+          <h6 class="mt-3 mb-2">내용</h6>
+          <editor-write
+            @on-update="($event) => updateDesc($event)"
+            @on-image-added="($event) => onImageAdded($event)"
+            @on-image-removed="($event) => onImageRemoved($event)"
+            @on-error="($event) => onError($event)"
+            imagePath="images"
+            :content="form.desc"
+            :imageSize="1920"
+          />
+        </client-only>
+      </section>
 
-    <!-- <section class="mt-5 border-top border-bottom pb-4">
+      <!-- <section class="mt-5 border-top border-bottom pb-4">
       <header class="mt-2 mb-3">
         <h5>썸네일</h5>
       </header>
@@ -57,7 +78,7 @@
           />
           <label
             :for="`file-${index}`"
-            name="thumnaiilSelected"
+            name="thumbnailSelected"
             class="label-thumbnail"
           >
             <img :src="url" :alt="`${index + 1}번째로 추가된 이미지`" />
@@ -65,33 +86,33 @@
         </li>
       </ul>
     </section> -->
-    <section class="mt-4">
-      <b-row align-h="end" class="mt-3">
-        <b-col cols="12" md="3">
-          <template v-if="no">
-            <b-btn variant="outline-primary w-100 py-3 fw-700" @click="update">
-              <i class="icon icon-edit" />
-
-              수정</b-btn
-            >
-          </template>
-          <template v-else>
-            <b-btn
-              variant="primary w-100 py-3 fw-700"
-              @click="submit"
-              :disabled="!validate"
-            >
-              <i class="icon icon-pencil" /> 업로드
-            </b-btn>
-          </template>
-        </b-col>
-      </b-row>
-    </section>
-  </b-container>
+      <section class="mt-4">
+        <b-row align-h="end" class="mt-3">
+          <b-col cols="12" md="3">
+            <template v-if="docId">
+              <b-btn variant="primary w-100 py-3 fw-700" @click="update">
+                <i class="icon icon-edit" />
+                수정
+              </b-btn>
+            </template>
+            <template v-else>
+              <b-btn
+                variant="primary w-100 py-3 fw-700"
+                @click="submit"
+                :disabled="!validate"
+              >
+                <i class="icon icon-pencil" /> 업로드
+              </b-btn>
+            </template>
+          </b-col>
+        </b-row>
+      </section>
+    </b-container>
+  </div>
 </template>
 
 <script>
-import { resize, createHash } from "~/plugins/commons.js";
+import { createHash } from "~/plugins/commons.js";
 import allCategories from "~/assets/json/allCategories";
 
 export default {
@@ -99,7 +120,7 @@ export default {
   name: "board-write",
   props: {
     auth: {
-      type: Object,
+      type: [Object, String],
       default: null,
     },
   },
@@ -118,12 +139,11 @@ export default {
       },
       imagesAttached: [],
       allCategories,
-      resize,
     };
   },
   computed: {
-    no() {
-      return this.$route.query?.no;
+    docId() {
+      return this.$route.query?.docId;
     },
     validate() {
       return !(
@@ -146,33 +166,45 @@ export default {
       });
     }
 
-    if (this.no) {
-      await this.init(this.no);
+    if (this.docId) {
+      console.log("%c Hello ", "background: #333399; color: #ededed");
+      await this.init(this.docId);
     }
   },
   methods: {
     createHash,
-    async init(no) {
+    updateDesc(n) {
+      this.form.desc = n;
+    },
+    async init(docId) {
       this.pending.init = true;
-      if (!no) {
-        if (this.form?.user.id !== this.auth.id) {
-          window.toast("잘못된 접근입니다");
+      if (!docId) {
+        if (this.form?.writer.userId !== this.auth.id) {
+          // this.$router.push("/");
+          window.toast("잘못된 접근입니다 1");
         }
         return;
       } else {
         try {
           const { getBoardItem } = this.$firebase();
-          const loadBoardItem = await getBoardItem(no);
+          const loadBoardItem = await getBoardItem("board", ["docId", docId]);
+          console.log("loadBoardItem:", loadBoardItem);
           if (loadBoardItem) {
             // ref를 찾은 뒤에 form에 적용함
             this.form = {
               ...loadBoardItem,
+              writer: {
+                userId: this.auth?.id,
+                nickname: this.auth?.nickname,
+                profile_image_url: this.auth?.profile_image_url,
+              },
             };
             // 완료
             this.pending.init = false;
           }
         } catch (error) {
-          window.toast("잘못된 접근입니다");
+          window.toast("잘못된 접근입니다 2");
+          // this.$router.push("/");
           console.error("error:", error);
         }
       }
@@ -188,72 +220,41 @@ export default {
       this.form = defaultForm;
     },
 
-    async onImageAdded(file, Editor, cursorLocation, resetUploader) {
-      let _this = this;
-      // Editor.insertEmbed(cursorLocation, "image", uploadedFile.url)
-      const { getImageURL } = this.$firebase();
-      // Vue editor 에서 제공하는 이미지핸들러
-      const type = file.name.split(".").at(-1); // split으로 .을 기준으로 두번째 배열인 것을 가져옴, 파일이름은 제외하고 뒤의 확장자만 가져온다
-      const fileName = `image_${new Date().valueOf()}.${type}`; // 학장자를 가져오고 그 앞에 초단위의 날짜를 입력하여 이름이 중복되지 않게 한다
-      // gif 이미지 업로드
-      if (type === "gif") {
-        try {
-          const uploadedFile = await getImageURL(file, "gif/");
-          if (uploadedFile?.url) {
-            Editor.insertEmbed(cursorLocation, "image", uploadedFile.url); //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
-            resetUploader();
-          }
-        } catch (error) {
-          window.toast("파일업로드 실패");
-        }
-      } else {
-        this.resize.photo("w", file, 720, "object", async (result) => {
-          const uploadedFile = await getImageURL(
-            result.blob,
-            result.blob.type,
-            "images",
-            fileName
-          );
-          if (uploadedFile?.url) {
-            Editor.insertEmbed(cursorLocation, "image", uploadedFile.url); //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
-            // 이미지 목록에도 추가
-            _this.imagesAttached.push(uploadedFile.url);
-            _this.form.thumbnail = uploadedFile.url;
-            resetUploader();
-          }
-        });
-      }
-    },
-    // 이미지가 제거되었을 때 file의 url을 불러옴
     onImageRemoved(url) {
       if (this.form.thumbnail === url) {
         this.form.thumbnail = null;
       }
       this.imagesAttached.splice(url, 1);
-      const { deleteImage } = $firebase();
+      const { deleteImage } = this.$firebase();
       deleteImage(url);
     },
+
+    onImageAdded(url) {
+      // 이미지 목록에도 추가
+      this.imagesAttached.push(url);
+      this.form.thumbnail = url;
+    },
+
     // 업로드
     async submit() {
       this.form.createdAt = new Date();
       const { addBoardItem, getBoardCount } = this.$firebase();
       try {
-        const no = this.createHash(); // await getBoardCount();
-        const data = await addBoardItem({
+        const docId = this.createHash(); // await getBoardCount();
+        const data = await addBoardItem("board", {
           ...this.form,
-          no,
+          docId,
           viewer: 0,
           like: 0,
-          user: {
-            nickname: this.auth?.nickname || null,
-            email: this.auth?.email || null,
-            profile_image_url: this.auth?.profile_image_url || null,
-            id: this.auth?.id || null,
+          writer: {
+            userId: this.auth?.id,
+            nickname: this.auth?.nickname,
+            profile_image_url: this.auth?.profile_image_url,
           },
         });
         if (data) {
           window.toast("업로드에 성공했습니다.");
-          this.$router.push(`/board/${no}`);
+          this.$router.push(`/board/${docId}`);
         }
       } catch (error) {
         window.toast("업로드에 실패했습니다.");
@@ -265,17 +266,28 @@ export default {
       this.form.createdAt = new Date();
       const { updateBoardItem } = this.$firebase();
       try {
-        const updated = await updateBoardItem(this.no, this.form);
+        const updated = await updateBoardItem("board", ["docId", this.docId], {
+          ...this.form,
+          writer: {
+            userId: this.auth?.id,
+            nickname: this.auth?.nickname,
+            profile_image_url: this.auth?.profile_image_url,
+          },
+        });
         // console.log('updated:', updated)
         if (updated) {
           window.toast("수정에 성공했습니다.");
           // this.reset()
-          this.$router.push(`/board/${this.no}`);
+          this.$router.push(`/board/${this.docId}`);
         }
       } catch (error) {
         window.toast("수정에 실패했습니다.");
         console.error("error:", error);
       }
+    },
+    onError(text) {
+      window.toast(text);
+      console.error("error:", text);
     },
   },
 };
@@ -362,5 +374,9 @@ export default {
       }
     }
   }
+}
+
+.header-thumbnail {
+  transition: padding 0.4s $default-ease;
 }
 </style>

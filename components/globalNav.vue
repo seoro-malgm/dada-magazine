@@ -1,7 +1,7 @@
 <template>
   <div id="gnb">
     <b-navbar type="light" variant="white">
-      <b-container>
+      <b-container fluid>
         <b-navbar-brand class="mr-5 mr-md-0">
           <nuxt-link to="/" replace>
             <img
@@ -18,21 +18,33 @@
             <client-only>
               <div class="ml-auto uitls-auth">
                 <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
-                  <i class="icon icon-search"></i>
+                  <i class="icon icon-search" />
                 </b-btn>
                 <template v-if="auth">
+                  <template v-if="auth?.isEditor">
+                    <b-btn
+                      variant="outline-primary mx-2 d-none d-lg-block px-3"
+                      pill
+                      :to="{ name: 'board-write' }"
+                    >
+                      글쓰기
+                    </b-btn>
+                  </template>
+                  <template v-else-if="!auth?.isEditor">
+                    <b-btn
+                      variant="outline-primary mx-2 d-none d-lg-block px-3"
+                      pill
+                      :to="{ name: 'auth-editorConfirm' }"
+                      >에디터 신청
+                    </b-btn>
+                  </template>
+
                   <b-btn variant="text p-0" pill :to="{ name: 'auth-mypage' }">
                     <b-avatar
                       size="3rem"
                       :src="auth?.profile_image_url"
                     ></b-avatar>
                   </b-btn>
-                  <b-btn
-                    variant="outline-light mx-2 d-none d-lg-block px-3"
-                    pill
-                    :to="{ name: 'board-write' }"
-                    >글쓰기</b-btn
-                  >
                 </template>
                 <template v-else>
                   <b-btn
@@ -61,7 +73,7 @@
 export default {
   props: {
     auth: {
-      type: Object,
+      type: [Object, String],
       default: null,
     },
   },

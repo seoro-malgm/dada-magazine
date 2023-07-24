@@ -25,7 +25,7 @@
                 <img :src="require('@/assets/naver.svg')" alt="네이버 심볼" />
                 <span class="ml-2">Naver로 회원가입</span>
               </b-btn> -->
-              <b-form @submit.prevent="setAuth(form)">
+              <b-form @submit.prevent="signup(form)">
                 <b-form-group
                   label="이메일:"
                   label-for="email"
@@ -48,21 +48,21 @@
                   <b-form-input
                     id="pwd"
                     v-model="form.pwd"
-                    type="pwd"
+                    type="password"
                     placeholder="비밀번호를 입력하세요"
                     autocomplete="on"
                   />
                 </b-form-group>
                 <b-form-group
                   label="비밀번호 확인:"
-                  label-for="pwd"
+                  label-for="pwdConfirm"
                   label-cols-sm="2"
                   label-align-sm="left"
                 >
                   <b-form-input
-                    id="pwd"
+                    id="pwdConfirm"
                     v-model="form.pwdConfirm"
-                    type="pwd"
+                    type="password"
                     placeholder="비밀번호를 입력하세요"
                     autocomplete="on"
                   />
@@ -123,29 +123,29 @@ export default {
   },
   computed: {
     validate() {
-      return false;
+      const { email, pwd, pwdConfirm } = this.form;
+      return !(email && pwd && pwdConfirm && pwd === pwdConfirm);
     },
     redirect() {
       return this.$route.query.redirect;
     },
   },
   methods: {
-    async signup(info) {
-      window.toast("회원가입 기능은 준비중입니다.");
-      return;
-      // const { signup } = this.$firebase();
-      // try {
-      //   const { data, token } = await signup(info);
-      //   if (data) {
-      //     // 세션스토리지에 저장
-      //     sessionStorage.setItem(process.env.TOKEN_NAME, token.accessToken);
-      //     // store에 저장
-      //     this.$store.dispatch("setUser", data);
-      //     this.$router.push("/");
-      //   }
-      // } catch (error) {
-      //   console.error("error:", error);
-      // }
+    async signup(form) {
+      const { signup } = this.$firebase();
+      try {
+        const { data, token } = await signup(form);
+        if (data) {
+          window.toast("회원가입이 완료되었습니다!");
+          // 세션스토리지에 저장
+          sessionStorage.setItem(process.env.TOKEN_NAME, token);
+          // store에 저장
+          this.$store.dispatch("setUser");
+          this.$router.push("/");
+        }
+      } catch (error) {
+        console.error("error:", error);
+      }
     },
     // loginWithNaver() {
     //   const naverLogin = new naver.LoginWithNaverId({
