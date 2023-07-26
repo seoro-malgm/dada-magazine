@@ -3,10 +3,10 @@
     <template v-if="currentBoardItem">
       <header
         class="bg-img header-thumbnail ratio-sm-90 ratio-45"
-        v-if="currentBoardItem.thumbnail?.url"
+        v-if="currentBoardItem.thumbnail"
       >
         <img
-          :src="currentBoardItem.thumbnail?.url"
+          :src="currentBoardItem.thumbnail"
           :alt="`${currentBoardItem.title} 썸네일 이미지`"
         />
       </header>
@@ -62,7 +62,9 @@
             </div>
           </header>
           <section class="bg-white p-4">
-            <board-content :content="currentBoardItem.desc" />
+            <client-only>
+              <board-content :content="currentBoardItem.desc" />
+            </client-only>
           </section>
           <!-- 글 하단 버튼 -->
           <section class="my-5 py-5">
@@ -133,12 +135,12 @@
               <b-avatar
                 size="5rem"
                 class="mr-3"
-                :src="currentBoardItemWriter?.profile_image_url"
+                :src="currentBoardItem?.author?.profile_image_url"
               >
               </b-avatar>
               <div class="d-flex flex-column">
                 <span class="text-gray-800 text-15 text-md-18 fw-700 mb-1">
-                  {{ currentBoardItemWriter?.nickname || "-" }}
+                  {{ currentBoardItem?.author?.nickname || "-" }}
                 </span>
                 <small class="text-13"> ... </small>
               </div>
@@ -256,7 +258,7 @@ export default {
   async asyncData({ params, $firebase }) {
     const { getBoardItem } = $firebase();
     const boardItem = await getBoardItem("board", ["docId", params.docId]);
-    // console.log("boardItem:", boardItem);
+
     return {
       currentBoardItem: boardItem,
     };
@@ -284,12 +286,7 @@ export default {
     },
     // 내가 쓴 글인경우
     isMine() {
-      return this.currentBoardItem?.writer?.userId === this.auth?.id;
-    },
-    currentBoardItemWriter() {
-      return {
-        ...this.currentBoardItem?.writer,
-      };
+      return this.currentBoardItem?.author?.uid === this.auth?.uid;
     },
   },
 

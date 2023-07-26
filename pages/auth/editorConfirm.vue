@@ -57,7 +57,7 @@ export default {
     async submit() {
       try {
         const { setUserEditor } = this.$firebase();
-        const data = await setUserEditor(this.auth?.id);
+        const data = await setUserEditor(this.auth?.email);
         if (data) {
           window.toast("에디터 신청이 완료되었습니다. 이제 글을 쓸 수 있어요!");
           this.$router.push("/");

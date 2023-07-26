@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-container fluid class="mb-5 pb-5">
-      <section class="mb-5">
+    <b-container fluid>
+      <section>
         <template v-if="pending.items">
           <div class="text-center p-5">
             <b-spinner />
@@ -19,10 +19,13 @@
                 <board-item :item="item" />
               </b-col>
             </b-row>
+            <div class="my-4 d-flex">
+              <b-pagination class="mx-auto"></b-pagination>
+            </div>
           </template>
         </template>
         <template v-if="!items?.length && !pending.items">
-          <div class="text-center p-4 border-top border-bottom">
+          <div class="text-center p-4">
             <b-spinner />
             <!-- <small>글이 없습니다.</small>
             <div class="mt-2">
@@ -64,6 +67,7 @@ export default {
       pending: {
         items: false,
       },
+      page: 0,
     };
   },
   computed: {
@@ -88,7 +92,12 @@ export default {
     async getItems(query) {
       this.pending.items = true;
       try {
-        const data = await this.$firebase().getAllBoardItems(query, 30);
+        const data = await this.$firebase().getAllBoardItems(
+          "board",
+          query,
+          30,
+          ["createdAt", "desc"]
+        );
         if (data) {
           this.items = data;
           // console.log("data:", data);

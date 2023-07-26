@@ -53,7 +53,7 @@ export default {
         }
       ) => {
         const opt = {
-          titleClass: "text-left text-1",
+          titleClass: "text-left text-16",
           dangerMsg: "",
           bodyClass: "px-3 pt-3 pb-2",
           contentClass: "confirm border-0 overflow-hidden ",
@@ -67,7 +67,7 @@ export default {
           autoFocusButton: "ok",
           returnFocus: this.$refs.app,
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-1"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-16"></i>`,
           ...obj,
         };
         const msgVNode =
@@ -89,7 +89,7 @@ export default {
         }
       ) => {
         const options = {
-          titleClass: "text-left text-1",
+          titleClass: "text-left text-16",
           dangerMsg: "",
           bodyClass: "px-3 pt-3 pb-2",
           contentClass: "confirm border-0 overflow-hidden",
@@ -104,7 +104,7 @@ export default {
           noCloseOnBackdrop: true,
           autoFocusButton: "ok",
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-1"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-16"></i>`,
           ...obj,
         };
         const msgVNode =
@@ -166,6 +166,6 @@ $gnb-height: 82px;
   // @media (min-width: $breakpoint-md) {
   //   padding-top: calc($gnb-height + 12px);
   // }
-  padding-bottom: 2.5rem;
+  // padding-bottom: 2.5rem;
 }
 </style>

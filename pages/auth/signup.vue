@@ -79,7 +79,7 @@
                 </b-row>
               </b-form>
               <div class="mt-4 text-center">
-                <small>가입한 적이 없다면?</small>
+                <small>이미 가입을 했다면?</small>
                 <b-btn
                   variant="outline-light ml-2"
                   :to="{ name: 'auth-login' }"

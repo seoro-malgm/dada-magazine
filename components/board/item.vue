@@ -3,12 +3,12 @@
     <router-link :to="`/board/${item.docId}`">
       <figure
         class="board-item bg-img ratio-sm-90 ratio-56"
-        :class="{ 'bg-primary text-white': !item.thumbnail?.url }"
+        :class="{ 'bg-primary text-white': !item.thumbnail }"
       >
-        <template v-if="item.thumbnail?.url">
+        <template v-if="item?.thumbnail">
           <img
             class="item-image"
-            :src="item.thumbnail?.url"
+            :src="item.thumbnail"
             :alt="`${item.title} 썸네일 이미지`"
           />
         </template>
@@ -80,6 +80,11 @@ export default {
     z-index: 2;
     background-color: $primary;
   }
+  img {
+    object-fit: contain;
+    height: auto;
+    min-width: 100%;
+  }
 
   .item-image,
   figcaption {
@@ -118,7 +123,7 @@ export default {
         width: 100%;
         max-width: 120px;
         border-bottom: 5px solid $primary;
-        margin: 0.5rem 0 0.75rem;
+        margin: 0.5rem auto 0.75rem;
       }
     }
     @media (max-width: 1320px) {

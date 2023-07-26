@@ -28,11 +28,6 @@ export const actions = {
       const currentUser = await getUserInfo(userEmail);
       if (currentUser) {
         commit("setState", ["user", currentUser]);
-        // if (!currentUser.emailVerified) {
-        //   this.$router.push({
-        //     name: "auth-verifiedForm",
-        //   });
-        // }
       } else {
         commit("setState", ["user", null]);
       }

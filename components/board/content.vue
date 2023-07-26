@@ -152,5 +152,8 @@ $default-line-height: 1.6;
       min-height: 480px;
     }
   }
+  &:deep(img) {
+    max-width: 100%;
+  }
 }
 </style>

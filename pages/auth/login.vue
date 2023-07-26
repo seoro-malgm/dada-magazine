@@ -67,7 +67,7 @@
                 </b-row>
               </b-form>
               <div class="mt-4 text-center">
-                <small>이미 가입된 아이디가 있다면?</small>
+                <small>이미 가입된 아이디가 없다면?</small>
                 <b-btn
                   variant="outline-light ml-2"
                   :to="{ name: 'auth-signup' }"

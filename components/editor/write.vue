@@ -1,12 +1,13 @@
 <template>
-  <div class="editor-wrapper">
+  <div id="writer-editor">
     <vue-editor
       useCustomImageHandler
       @image-removed="onImageRemoved"
       @image-added="onImageAdded"
+      @ready="initializeEditor"
       v-model="desc"
       placeholder="내용을 입력하세요"
-      id="editor"
+      ref="editor"
     />
   </div>
 </template>
@@ -31,6 +32,7 @@ export default {
   },
   data() {
     return {
+      quill: null, // Variable to store the Quill editor instance
       desc: null,
       resize,
     };
@@ -42,10 +44,45 @@ export default {
     },
     content(n) {
       this.desc = n;
-      console.log("n:", n);
     },
   },
+  beforeDestroy() {
+    if (this.quill) {
+      this.quill.root.removeEventListener("paste", this.onPaste);
+    }
+  },
   methods: {
+    initializeEditor(editor) {
+      this.quill = editor;
+      this.quill.root.addEventListener("paste", this.onPaste);
+    },
+    async onPaste(e) {
+      const clipboardData =
+        e.clipboardData || (e.originalEvent && e.originalEvent.clipboardData);
+      if (!clipboardData) return;
+
+      console.log("clipboardData:", clipboardData);
+      const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+      console.log("items:", items);
+      for (const item of items) {
+        if (item.kind === "file") {
+          const file = item.getAsFile();
+          if (file.type.startsWith("image/")) {
+            console.log(
+              "%c Hello file",
+              "background: #333399; color: #ededed",
+              file
+            );
+            try {
+              const location = (this.quill.getSelection() || {}).index || 0;
+              await this.onImageAdded(file, this.quill, location);
+            } catch (error) {
+              console.error("Error uploading image:", error);
+            }
+          }
+        }
+      }
+    },
     async onImageAdded(file, Editor, cursorLocation, resetUploader) {
       let _this = this;
       // Editor.insertEmbed(cursorLocation, "image", uploadedFile.url)
@@ -59,7 +96,9 @@ export default {
           const uploadedFile = await getImageURL(file, "gif/");
           if (uploadedFile?.url) {
             Editor.insertEmbed(cursorLocation, "image", uploadedFile.url); //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
-            resetUploader();
+            if (resetUploader) {
+              resetUploader();
+            }
           }
         } catch (error) {
           this.$emit("on-error", "파일업로드 실패");
@@ -80,7 +119,9 @@ export default {
             if (uploadedFile?.url) {
               Editor.insertEmbed(cursorLocation, "image", uploadedFile.url); //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
               this.$emit("on-image-added", uploadedFile.url);
-              resetUploader();
+              if (resetUploader) {
+                resetUploader();
+              }
             } else {
               this.$emit("on-error", "파일업로드 실패");
             }
@@ -96,15 +137,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $default-line-height: 1.6;
-#editor {
-  position: relative;
+#writer-editor {
+  .quillWrapper {
+    position: relative !important;
+  }
   .ql-editor {
-    min-height: 85vh;
+    max-height: 85vh;
     overflow-y: scroll;
-    padding-top: 88px;
-    line-height: $default-line-height !important;
+    padding-top: 56px;
+    line-height: $default-line-height;
   }
   .ql-toolbar {
     position: absolute;
@@ -116,6 +159,9 @@ $default-line-height: 1.6;
   }
   .ql-container {
     font-family: "Roboto", "Noto Sans KR", "Pretendard-Regular", sans-serif !important;
+  }
+  em {
+    font-style: italic;
   }
 
   // desc
@@ -240,20 +286,26 @@ $default-line-height: 1.6;
       min-height: 480px;
     }
   }
-}
 
-h6,
-.h6,
-h5,
-.h5,
-h4,
-.h4,
-h3,
-.h3,
-h2,
-.h2,
-h1,
-.h1 {
-  line-height: $default-line-height !important;
+  h6,
+  .h6,
+  h5,
+  .h5,
+  h4,
+  .h4,
+  h3,
+  .h3,
+  h2,
+  .h2,
+  h1,
+  .h1 {
+    line-height: $default-line-height !important;
+  }
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
 }
 </style>

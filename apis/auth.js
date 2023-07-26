@@ -78,6 +78,7 @@ class authAPI {
             accessToken: user.accessToken,
             refreshToken: user.refreshToken,
           };
+          // console.log("data, token:", data, token);
           return { data, token };
         }
       })
@@ -132,11 +133,9 @@ class authAPI {
       if (snapshot) {
         const docs = snapshot.docs.map((doc) => {
           return {
-            id: doc.id,
             ...doc.data(),
           };
         });
-        // console.log("obj:", obj);
         return docs[0];
       }
     } catch (error) {
@@ -146,58 +145,58 @@ class authAPI {
 
   // 유저정보 저장하기
   setUserInfo = async (data) => {
-    const response = new Promise(async (resolve, reject) => {
-      if (!data?.id) {
-        window.toast("오류가 발생했습니다.");
-        return reject(false);
-      }
-      try {
-        await setDoc(doc(db, "users", data.id), data);
+    const [userId, userInfo] = await Promise.all([
+      this.getUserId("users", ["email", data.email]),
+      this.getUserInfo(data.email),
+    ]);
+    if (userId && userInfo) {
+      const response = new Promise(async (resolve, reject) => {
+        await setDoc(doc(db, "users", userId), {
+          ...userInfo,
+          ...data,
+        });
         return resolve(true);
-      } catch (error) {
-        return reject(false);
-      }
-    });
-    return response;
+      });
+      return response;
+    }
   };
 
   // 계정 활성화 동의하기
-  setUserVerify = async (id) => {
-    const response = new Promise(async (resolve, reject) => {
-      if (!id) {
-        window.toast("오류가 발생했습니다.");
-        return reject(false);
-      }
-      try {
-        const ref = doc(db, "users", id);
-        await updateDoc(ref, {
-          emailVerified: true,
-        });
-        return resolve(true);
-      } catch (error) {
-        return reject(false);
-      }
-    });
-    return response;
-  };
+  setUserVerify = async (id) => {};
 
   // 에디터 신청하기
-  setUserEditor = async (id) => {
+  setUserEditor = async (email) => {
     const response = new Promise(async (resolve, reject) => {
-      if (!id) {
-        return reject(false);
-      }
-      try {
-        const ref = doc(db, "users", id);
+      const userId = await this.getUserId("users", ["email", email]);
+      if (userId) {
+        const ref = doc(db, "users", userId);
         await updateDoc(ref, {
           isEditor: true,
         });
         return resolve(true);
-      } catch (error) {
-        return reject(false);
+      } else {
+        return reject();
       }
     });
     return response;
+  };
+
+  // id 구하기
+  getUserId = async (collectionName = "users", [key = "email", value]) => {
+    try {
+      const q = query(collection(db, collectionName), where(key, "==", value));
+      const snapshot = await getDocs(q);
+      if (snapshot) {
+        const docs = snapshot?.docs.map((doc) => {
+          return {
+            id: doc.id,
+          };
+        });
+        return docs[0].id;
+      }
+    } catch (error) {
+      console.error("error::", error);
+    }
   };
 
   // 토큰 갱신 취소

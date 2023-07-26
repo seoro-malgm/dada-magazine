@@ -17,7 +17,10 @@
               <ul class="list-unstyled">
                 <li class="mb-4">
                   <h6 class="mb-2">프로필 이미지</h6>
-                  <label for="profile_image" class="input-profile_image">
+                  <label
+                    for="profile_image"
+                    class="input-profile_image cursor-pointer"
+                  >
                     <template v-if="pending.profile_image_url">
                       <div class="label-text">
                         <b-spinner />
@@ -35,6 +38,9 @@
                         <b-avatar size="6rem"></b-avatar>
                       </template>
                     </template>
+                    <div class="icon-wrap">
+                      <i class="icon icon-file-image m-auto" />
+                    </div>
                   </label>
                   <input
                     type="file"
@@ -173,7 +179,6 @@ export default {
         if (uploadedFile?.url) {
           // console.log("uploadedFile:", uploadedFile);
           await this.$nextTick();
-          console.log("uploadedFile:", uploadedFile);
           this.input = {
             ...this.input,
             profile_image: uploadedFile.name,
@@ -181,10 +186,7 @@ export default {
           };
           // this.input.profile_image = uploadedFile.name;
           // this.input.profile_image_url = uploadedFile.url;
-          console.log(
-            "this.$refs.profile_image_attached.value:",
-            this.$refs.profile_image_attached.value
-          );
+
           this.pending.profile = false;
         }
       });
@@ -194,7 +196,10 @@ export default {
       this.pending.submit = true;
       const { setUserInfo } = this.$firebase();
       try {
-        const data = await setUserInfo(this.input);
+        const data = await setUserInfo({
+          ...this.input,
+          email: this.auth.email,
+        });
         if (data) {
           window.toast("유저정보가 업데이트 되었습니다.");
           this.pending.submit = true;
@@ -214,4 +219,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.input-profile_image {
+  position: relative;
+  .icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $info;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+  }
+}
+</style>

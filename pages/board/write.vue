@@ -16,8 +16,8 @@
       </b-container>
       <img
         :alt="`${form.title} 썸네일 이미지`"
-        :src="form.thumbnail?.url"
-        v-if="form.thumbnail?.url && form.thumbnail?.name"
+        :src="form.thumbnail"
+        v-if="form.thumbnail && typeof form.thumbnail === 'string'"
       />
     </header>
     <b-container>
@@ -54,7 +54,6 @@
           <h6 class="mt-3 mb-2">내용</h6>
           <editor-write
             @on-update="($event) => updateDesc($event)"
-            @on-image-added="($event) => onImageAdded($event)"
             @on-image-removed="($event) => onImageRemoved($event)"
             @on-error="($event) => onError($event)"
             imagePath="images"
@@ -167,7 +166,6 @@ export default {
     }
 
     if (this.docId) {
-      console.log("%c Hello ", "background: #333399; color: #ededed");
       await this.init(this.docId);
     }
   },
@@ -179,32 +177,28 @@ export default {
     async init(docId) {
       this.pending.init = true;
       if (!docId) {
-        if (this.form?.writer.userId !== this.auth.id) {
-          // this.$router.push("/");
-          window.toast("잘못된 접근입니다 1");
+        if (this.form?.author !== this.auth.uid) {
+          this.$router.push("/");
+          window.toast("잘못된 접근입니다");
         }
         return;
       } else {
         try {
           const { getBoardItem } = this.$firebase();
           const loadBoardItem = await getBoardItem("board", ["docId", docId]);
-          console.log("loadBoardItem:", loadBoardItem);
+          // console.log("loadBoardItem:", loadBoardItem);
           if (loadBoardItem) {
             // ref를 찾은 뒤에 form에 적용함
             this.form = {
               ...loadBoardItem,
-              writer: {
-                userId: this.auth?.id,
-                nickname: this.auth?.nickname,
-                profile_image_url: this.auth?.profile_image_url,
-              },
+              author: this.auth?.uid,
             };
             // 완료
             this.pending.init = false;
           }
         } catch (error) {
-          window.toast("잘못된 접근입니다 2");
-          // this.$router.push("/");
+          window.toast("잘못된 접근입니다");
+          this.$router.push("/");
           console.error("error:", error);
         }
       }
@@ -229,29 +223,20 @@ export default {
       deleteImage(url);
     },
 
-    onImageAdded(url) {
-      // 이미지 목록에도 추가
-      this.imagesAttached.push(url);
-      this.form.thumbnail = url;
-    },
-
     // 업로드
     async submit() {
       this.form.createdAt = new Date();
       const { addBoardItem, getBoardCount } = this.$firebase();
       try {
         const docId = this.createHash(); // await getBoardCount();
-        const data = await addBoardItem("board", {
+        const body = {
           ...this.form,
           docId,
           viewer: 0,
           like: 0,
-          writer: {
-            userId: this.auth?.id,
-            nickname: this.auth?.nickname,
-            profile_image_url: this.auth?.profile_image_url,
-          },
-        });
+          author: this.auth?.uid,
+        };
+        const data = await addBoardItem("board", body);
         if (data) {
           window.toast("업로드에 성공했습니다.");
           this.$router.push(`/board/${docId}`);
@@ -268,11 +253,7 @@ export default {
       try {
         const updated = await updateBoardItem("board", ["docId", this.docId], {
           ...this.form,
-          writer: {
-            userId: this.auth?.id,
-            nickname: this.auth?.nickname,
-            profile_image_url: this.auth?.profile_image_url,
-          },
+          author: this.auth?.uid,
         });
         // console.log('updated:', updated)
         if (updated) {

@@ -17,30 +17,41 @@ import {
   limit,
   where,
   getCountFromServer,
+  startAt,
 } from "firebase/firestore";
 
 const db = getFirestore(app);
 
 class boardItemsAPI {
   // boardItem 전체 불러오기
-  getAllBoardItems = async (collectionName = "board", queryData, count) => {
+  getAllBoardItems = async (
+    collectionName = "board",
+    queryData,
+    count,
+    [orderType, orderValue]
+  ) => {
     try {
       const queryConstraints = [];
       if (queryData) {
         for (const [key, value] of Object.entries(queryData)) {
+          // console.log("key:", key);
+          // if (key === "page") {
+          //   queryConstraints.push(startAt(+value * count));
+          // } else {
           queryConstraints.push(where(key, "==", value));
+          // }
         }
       }
       if (count) queryConstraints.push(limit(count));
-
+      if (orderType) queryConstraints.push(orderBy(orderType, orderValue));
       // 최종 쿼리
       const q = query(collection(db, collectionName), ...queryConstraints);
-      // console.log("q:", queryConstraints);
+      console.log("queryConstraints:", queryConstraints);
       const snapshot = await getDocs(q);
       if (snapshot) {
         const boardItems = snapshot.docs.map((doc) => {
           return {
-            id: doc.id,
+            // id: doc.id,
             ...doc.data(),
           };
         });
@@ -58,13 +69,18 @@ class boardItemsAPI {
       const q = query(collection(db, collectionName), where(key, "==", id));
       const snapshot = await getDocs(q);
       if (snapshot) {
-        const docs = snapshot.docs.map((doc) => {
+        const docs = snapshot.docs.map(async (doc) => {
+          const author = await this.getAuthor("users", [
+            "uid",
+            doc?.data()?.author,
+          ]);
           return {
-            id: doc.id,
+            // id: doc.id,
             ...doc.data(),
+            author,
           };
         });
-        // console.log("obj:", obj);
+
         return docs[0];
       }
     } catch (error) {
@@ -213,6 +229,35 @@ class boardItemsAPI {
       updateDoc(ref, {
         like: increment(1),
       });
+    }
+  };
+
+  // 글쓴이 불러오기
+  getAuthor = async (collectionName = "users", [key = "uid", id]) => {
+    try {
+      const q = query(collection(db, collectionName), where(key, "==", id));
+      const snapshot = await getDocs(q);
+      if (snapshot) {
+        const users = snapshot.docs.map((doc) => {
+          const { nickname, email, profile_image_url, uid } = doc.data();
+          return {
+            nickname,
+            email,
+            profile_image_url,
+            uid,
+          };
+        });
+        return users[0];
+      } else {
+        return {
+          nickname: "",
+          email: "",
+          profile_image_url: "",
+          uid: "",
+        };
+      }
+    } catch (error) {
+      console.error("error:", error);
     }
   };
 

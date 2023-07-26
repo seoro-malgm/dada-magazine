@@ -1,10 +1,6 @@
 <template>
   <div>
-    <label
-      for="file"
-      v-if="!file?.name && !file?.url"
-      class="btn btn-outline-primary text-black"
-    >
+    <label for="file" v-if="!file" class="btn btn-outline-primary text-black">
       {{ label }} 추가 <i class="icon icon-file-image" />
       <b-form-file
         id="file"
@@ -74,10 +70,7 @@ export default {
   watch: {
     fileURL(n) {
       if (n) {
-        this.$emit("on-change", {
-          name: this.fileName,
-          url: this.fileURL,
-        });
+        this.$emit("on-change", this.fileURL);
       }
     },
   },
