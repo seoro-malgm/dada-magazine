@@ -46,7 +46,7 @@ class boardItemsAPI {
       if (orderType) queryConstraints.push(orderBy(orderType, orderValue));
       // 최종 쿼리
       const q = query(collection(db, collectionName), ...queryConstraints);
-      console.log("queryConstraints:", queryConstraints);
+      // console.log("queryConstraints:", queryConstraints);
       const snapshot = await getDocs(q);
       if (snapshot) {
         const boardItems = snapshot.docs.map((doc) => {
@@ -239,12 +239,13 @@ class boardItemsAPI {
       const snapshot = await getDocs(q);
       if (snapshot) {
         const users = snapshot.docs.map((doc) => {
-          const { nickname, email, profile_image_url, uid } = doc.data();
+          const { nickname, email, profile_image_url, uid, pid } = doc.data();
           return {
             nickname,
             email,
             profile_image_url,
             uid,
+            pid,
           };
         });
         return users[0];

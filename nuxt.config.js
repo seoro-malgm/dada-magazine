@@ -241,6 +241,7 @@ export default {
   },
   // 환경변수
   env: {
+    MODE: process.env.MODE,
     BASE_URL: process.env.BASE_URL || "http://localhost:3000",
     API_KEY: process.env.API_KEY,
     PROJECT_ID: process.env.PROJECT_ID,

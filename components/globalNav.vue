@@ -1,72 +1,48 @@
 <template>
-  <div id="gnb">
-    <b-navbar type="light" variant="white">
-      <b-container fluid>
-        <b-navbar-brand class="mr-5 mr-md-0">
-          <nuxt-link to="/" replace>
-            <img
-              :src="require('@/assets/logo.svg')"
-              alt="다다매거진 로고 이미지, 메인으로 이동"
-            />
-          </nuxt-link>
-          <!-- <span class="status-beta" v-if="isBeta"> BETA</span> -->
-        </b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+  <header>
+    <div id="gnb">
+      <b-navbar type="light" variant="white">
+        <b-container fluid>
+          <b-navbar-brand class="mr-5 mr-md-0">
+            <nuxt-link to="/" replace>
+              <img
+                :src="require('@/assets/logo.svg')"
+                alt="다다매거진 로고 이미지, 메인으로 이동"
+              />
+            </nuxt-link>
+            <span class="status-beta" v-if="isBeta">BETA</span>
+            <span class="status-beta" v-if="isDev">DEV</span>
+          </b-navbar-brand>
+          <!-- <b-navbar-toggle target="nav-collapse" /> -->
 
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav class="d-flex align-items-center w-100">
-            <client-only>
-              <div class="ml-auto uitls-auth">
-                <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
-                  <i class="icon icon-search" />
-                </b-btn>
-                <template v-if="auth">
-                  <template v-if="auth?.isEditor">
-                    <b-btn
-                      variant="outline-primary mx-2 d-none d-lg-block px-3"
-                      pill
-                      :to="{ name: 'board-write' }"
-                    >
-                      글쓰기
-                    </b-btn>
-                  </template>
-                  <template v-else-if="!auth?.isEditor">
-                    <b-btn
-                      variant="outline-primary mx-2 d-none d-lg-block px-3"
-                      pill
-                      :to="{ name: 'auth-editorConfirm' }"
-                      >에디터 신청
-                    </b-btn>
-                  </template>
-
-                  <b-btn variant="text p-0" pill :to="{ name: 'auth-mypage' }">
-                    <b-avatar
-                      size="3rem"
-                      :src="auth?.profile_image_url"
-                    ></b-avatar>
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="d-flex align-items-center w-100">
+              <client-only>
+                <div class="ml-auto uitls-auth">
+                  <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
+                    <i class="icon icon-search text-20 text-lg-24" />
                   </b-btn>
-                </template>
-                <template v-else>
                   <b-btn
-                    variant="primary mr-1"
+                    variant="text p-0"
                     pill
-                    :to="{ name: 'auth-login' }"
-                    >로그인</b-btn
+                    @click="showSidebar = !showSidebar"
                   >
-                  <b-btn
-                    variant="outline-light"
-                    pill
-                    :to="{ name: 'auth-signup' }"
-                    >회원가입</b-btn
-                  >
-                </template>
-              </div>
-            </client-only>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-container>
-    </b-navbar>
-  </div>
+                    <i class="icon icon-menu text-20 text-lg-24" />
+                  </b-btn>
+                </div>
+              </client-only>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-container>
+      </b-navbar>
+    </div>
+    <global-sidebar
+      :auth="auth"
+      :isBeta="isBeta"
+      :visible="showSidebar"
+      @on-close="showSidebar = false"
+    />
+  </header>
 </template>
 
 <script>
@@ -80,7 +56,20 @@ export default {
   data() {
     return {
       isBeta: false,
+      showSidebar: false,
     };
+  },
+  computed: {
+    isDev() {
+      return process.env.MODE === "DEV";
+    },
+  },
+  watch: {
+    $route(n) {
+      if (this.showSidebar) {
+        this.showSidebar = false;
+      }
+    },
   },
 };
 </script>
@@ -108,13 +97,14 @@ export default {
       .status-beta {
         position: absolute;
         top: 0;
-        right: -40px;
-        background-color: $primary;
+        right: -24px;
+        background-color: black;
         color: $darkest;
         font-size: 12px;
         font-weight: 700;
         border-radius: 20rem;
-        padding: 2px 4px;
+        padding: 2px 10px;
+        color: white;
       }
     }
     .utils {

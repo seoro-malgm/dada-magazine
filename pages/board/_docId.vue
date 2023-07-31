@@ -132,16 +132,24 @@
               <h4 class="text-15 text-md-16 mb-2">에디터</h4>
             </header>
             <div class="d-flex align-items-center">
-              <b-avatar
-                size="5rem"
-                class="mr-3"
-                :src="currentBoardItem?.author?.profile_image_url"
+              <b-btn
+                :to="`/@${currentBoardItem?.author?.pid}`"
+                variant="text p-0"
               >
-              </b-avatar>
+                <b-avatar
+                  size="5rem"
+                  class="mr-3"
+                  :src="currentBoardItem?.author?.profile_image_url"
+                >
+                </b-avatar>
+              </b-btn>
               <div class="d-flex flex-column">
-                <span class="text-gray-800 text-15 text-md-18 fw-700 mb-1">
+                <b-btn
+                  variant="text p-0 text-gray-800 text-15 text-md-18 fw-700 mb-1"
+                  :to="`/@${currentBoardItem?.author?.pid}`"
+                >
                   {{ currentBoardItem?.author?.nickname || "-" }}
-                </span>
+                </b-btn>
                 <small class="text-13"> ... </small>
               </div>
             </div>
@@ -170,7 +178,7 @@
               v-for="(item, i) in items"
               :key="i"
             >
-              <board-item :item="item" />
+              <board-item :item="item" titleClass="text-15 text-lg-18" />
             </b-col>
           </b-row>
         </section>
@@ -312,8 +320,14 @@ export default {
     },
     async getItems(query) {
       try {
-        const data = await this.$firebase().getAllBoardItems(query, 30);
+        const data = await this.$firebase().getAllBoardItems(
+          "board",
+          query,
+          3,
+          ["createdAt", "desc"]
+        );
         if (data) {
+          console.log("data:", data);
           this.items = data.filter((d) => d.docId !== this.docId);
         }
       } catch (error) {

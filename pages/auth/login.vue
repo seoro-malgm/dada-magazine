@@ -5,14 +5,17 @@
       class="py-5 my-5 w-100 d-flex flex-column align-items-center justify-content-center"
     >
       <b-row align-h="center" class="w-100">
-        <b-col cols="12" md="7" xl="5">
+        <b-col cols="12" md="8" lg="6">
           <b-card class="w-100">
             <b-card-header
               header-bg-variant="white"
               header-border-variant="white"
               header-tag="header"
             >
-              <b-card-title title-tag="h1" class="text-center">
+              <b-card-title
+                title-tag="h2"
+                class="text-center text-20 text-lg-24"
+              >
                 로그인
               </b-card-title>
             </b-card-header>
@@ -58,7 +61,7 @@
                 <b-row class="mt-5">
                   <b-col cols="12">
                     <b-btn
-                      variant="primary w-100"
+                      variant="primary w-100 py-3 text-18 text-lg-20"
                       :disabled="validate"
                       type="submit"
                       >로그인

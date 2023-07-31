@@ -67,7 +67,7 @@ export default {
           autoFocusButton: "ok",
           returnFocus: this.$refs.app,
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-16"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-16"/>`,
           ...obj,
         };
         const msgVNode =
@@ -104,7 +104,7 @@ export default {
           noCloseOnBackdrop: true,
           autoFocusButton: "ok",
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-16"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-16"/>`,
           ...obj,
         };
         const msgVNode =

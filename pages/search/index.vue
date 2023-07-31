@@ -12,7 +12,7 @@
       />
       <template #append>
         <b-btn variant="text p-0 btn-search" @click="search(str)">
-          <i class="icon icon-search text-24"></i>
+          <i class="icon icon-search text-24" />
         </b-btn>
       </template>
       <!-- </div>

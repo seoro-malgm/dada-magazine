@@ -29,7 +29,6 @@ import {
   where,
 } from "firebase/firestore";
 const db = getFirestore(app);
-import { generateNickname } from "@/plugins/commons.js";
 
 class authAPI {
   currentUser = null;
@@ -37,14 +36,15 @@ class authAPI {
 
   // 회원가입
   signup = (form) => {
-    const { email, pwd } = form;
+    const { email, pwd, pid, nickname } = form;
     return createUserWithEmailAndPassword(auth, email, pwd)
       .then((userCredential) => {
         const user = userCredential.user;
         const data = {
           email: user.email,
           uid: user.uid,
-          nickname: generateNickname(),
+          nickname,
+          pid,
           emailVerified: false,
           isEditor: false,
         };
@@ -196,6 +196,60 @@ class authAPI {
       }
     } catch (error) {
       console.error("error::", error);
+    }
+  };
+
+  // 중복유저인지 체크
+  checkDuplicate = async (field, value) => {
+    const response = new Promise(async (resolve, reject) => {
+      try {
+        const q = query(collection(db, "users"), where(field, "==", value));
+        const snapshot = await getDocs(q);
+        // 비어있어야 중복이 아님
+        const isDuplicate = !snapshot?.empty;
+        // console.log("data", { field, value, empty: snapshot?.empty });
+        // 중복일 경우
+        if (isDuplicate) {
+          return resolve(true);
+        } else {
+          // 중복이 아닐 경우
+          return resolve(false);
+        }
+        // 에러
+      } catch (error) {
+        return reject(errors);
+      }
+    });
+    return response;
+  };
+
+  // 프로필 불러오기
+  getProfile = async ([key = "pid", value]) => {
+    try {
+      const q = query(collection(db, "users"), where(key, "==", value));
+      const snapshot = await getDocs(q);
+      if (snapshot) {
+        const users = snapshot.docs.map((doc) => {
+          const { nickname, email, profile_image_url, uid, pid } = doc.data();
+          return {
+            nickname,
+            email,
+            profile_image_url,
+            uid,
+            pid,
+          };
+        });
+        return users[0];
+      } else {
+        return {
+          nickname: "",
+          email: "",
+          profile_image_url: "",
+          uid: "",
+        };
+      }
+    } catch (error) {
+      console.error("error:", error);
     }
   };
 

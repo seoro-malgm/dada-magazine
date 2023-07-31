@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <article>
+    <article class="mt-5">
       <b-row align-h="center" class="w-100">
         <b-col cols="12" md="7" xl="5">
           <b-card class="w-100">
@@ -31,11 +31,11 @@
                         <b-avatar
                           size="6rem"
                           :src="input.profile_image_url"
-                          alt="새 썸네일"
+                          alt="프로필 이미지"
                         />
                       </template>
                       <template v-else>
-                        <b-avatar size="6rem"></b-avatar>
+                        <b-avatar size="6rem" />
                       </template>
                     </template>
                     <div class="icon-wrap">
@@ -56,15 +56,99 @@
                   <span>{{ auth?.email }}</span>
                 </li>
                 <li class="mb-4">
-                  <h6 class="mb-2">별명</h6>
-                  <b-form-group
-                    :state="validate.nickname"
-                    invalid-feedback="8자 이하의 한글, 영문, 숫자로 조합 가능합니다"
-                  >
+                  <h6 class="mb-2">프로필 아이디</h6>
+                  <b-form-group>
                     <b-form-input
-                      v-model="input.nickname"
-                      placeholder="새 별명을 입력해주세요."
+                      id="pid"
+                      type="text"
+                      v-model="input.pid"
+                      @input="checkUser('pid', input.pid)"
+                      placeholder="아이디를 입력하세요"
+                      :state="state.pid"
                     />
+                    <b-form-invalid-feedback>
+                      <span class="text-14 text-lg-15 fw-700 text-alert">
+                        <i class="icon icon-window-close" />
+                        사용할 수 없는 아이디입니다
+                      </span>
+                      <small class="d-block text-alert">
+                        2~15자, 영문, 언더바(_)사용가능
+                      </small>
+                    </b-form-invalid-feedback>
+                    <template v-if="state.pid">
+                      <template v-if="pending.pid">
+                        <span>
+                          <b-spinner small /> 중복된 아이디인지 검사중입니다...
+                        </span>
+                      </template>
+                      <template v-else>
+                        <span
+                          class="text-14 text-lg-15 fw-700"
+                          :class="`text-${check.pid ? 'info' : 'alert'}`"
+                          v-if="typeof check.pid === 'boolean'"
+                        >
+                          <i
+                            :class="`icon icon-${
+                              check.pid ? 'check' : 'window-close'
+                            }`"
+                          />
+                          <template v-if="check.pid === true">
+                            사용가능한 아이디입니다
+                          </template>
+                          <template v-if="check.pid === false">
+                            중복된 아이디입니다.
+                          </template>
+                        </span>
+                      </template>
+                    </template>
+                  </b-form-group>
+                </li>
+                <li class="mb-4">
+                  <h6 class="mb-2">별명</h6>
+                  <b-form-group :state="state.nickname">
+                    <b-form-input
+                      id="nickname"
+                      type="text"
+                      v-model="input.nickname"
+                      @input="checkUser('nickname', input.nickname)"
+                      placeholder="닉네임을 입력하세요"
+                      :state="state.nickname"
+                    />
+                    <b-form-invalid-feedback>
+                      <span class="text-14 text-lg-15 fw-700 text-alert">
+                        <i class="icon icon-window-close" />
+                        사용할 수 없는 닉네임입니다
+                      </span>
+                      <small class="d-block text-alert">
+                        2~15자 한/영조합
+                      </small>
+                    </b-form-invalid-feedback>
+                    <template v-if="state.nickname">
+                      <template v-if="pending.nickname">
+                        <span>
+                          <b-spinner small /> 중복된 닉네임인지 검사중입니다...
+                        </span>
+                      </template>
+                      <template v-else>
+                        <span
+                          class="text-14 text-lg-15 fw-700"
+                          :class="`text-${check.nickname ? 'info' : 'alert'}`"
+                          v-if="typeof check.nickname === 'boolean'"
+                        >
+                          <i
+                            :class="`icon icon-${
+                              check.nickname ? 'check' : 'window-close'
+                            }`"
+                          />
+                          <template v-if="check.nickname === true">
+                            사용가능한 닉네임입니다
+                          </template>
+                          <template v-if="check.nickname === false">
+                            중복된 아이디입니다.
+                          </template>
+                        </span>
+                      </template>
+                    </template>
                   </b-form-group>
                 </li>
               </ul>
@@ -74,11 +158,7 @@
                 variant="primary w-100 py-2"
                 @click="submit"
                 pill
-                :disabled="
-                  Object.values(validate).includes(false) ||
-                  pending.profile ||
-                  pending.submit
-                "
+                :disabled="!validate || pending.profile || pending.submit"
               >
                 <span class="text-14"> 정보 저장하기</span>
               </b-btn>
@@ -92,19 +172,22 @@
             </b-btn>
             <b-btn
               variant="outline-alert px-3"
-              pill
               :to="{ name: 'auth-logout' }"
+              pill
               >로그아웃
             </b-btn>
           </div>
         </b-col>
       </b-row>
     </article>
+    <!-- validate: {{ validate }} -->
   </b-container>
 </template>
 
 <script>
 import { resize } from "~/plugins/commons.js";
+import { validateIdHelper, validateNicknameHelper } from "~/plugins/helper";
+
 export default {
   name: "auth-mypage",
   head() {
@@ -122,11 +205,21 @@ export default {
     return {
       pending: {
         profile: false,
+        email: false,
+        pid: false,
+        nickname: false,
+        submit: false,
         submit: false,
       },
       input: {
         profile_image: null,
         profile_image_url: null,
+        nickname: null,
+      },
+
+      check: {
+        email: null,
+        pid: null,
         nickname: null,
       },
       fileAttached: null,
@@ -135,11 +228,26 @@ export default {
   },
   computed: {
     validate() {
-      const nicknameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+      // 입력체크
+      const { pid, nickname } = this.input;
+
+      // 중복체크
+      const allChecked =
+        this.state.pid &&
+        this.check.pid &&
+        this.state.nickname &&
+        this.check.nickname;
+
+      return pid && nickname && allChecked;
+    },
+    state() {
+      const pid =
+        this.input?.pid === this.auth?.pid || validateIdHelper(this.input?.pid);
       const nickname =
-        nicknameRegex.test(this.input.nickname) &&
-        String(this.input.nickname).length <= 8;
+        this.input?.nickname === this.auth?.nickname ||
+        validateNicknameHelper(this.input?.nickname, 15);
       return {
+        pid,
         nickname,
       };
     },
@@ -150,6 +258,8 @@ export default {
       this.input = {
         ...this.auth,
       };
+      this.checkUser("pid", this.input.pid);
+      this.checkUser("nickname", this.input.nickname);
     }
   },
   methods: {
@@ -214,6 +324,25 @@ export default {
     // 회원삭제
     async onRemoveUser() {
       window.toast("죄송합니다. 현재 기능 준비중입니다.");
+    },
+    // 유저 중복 체크
+    async checkUser(field, value) {
+      if (value && value !== "") {
+        if (this.auth[field] === value) {
+          this.check[field] = true;
+          this.pending[field] = false;
+        } else {
+          this.pending[field] = true;
+          const { checkDuplicate } = this.$firebase();
+          try {
+            const check = await checkDuplicate(field, value);
+            this.check[field] = !check;
+            this.pending[field] = false;
+          } catch (error) {
+            console.error("error:", error);
+          }
+        }
+      }
     },
   },
 };

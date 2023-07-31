@@ -18,7 +18,7 @@
               {{ getCategory(item.category) }}
             </span>
             <hr />
-            <h6 class="text-20 text-lg-24 px-3 fw-700">
+            <h6 class="px-2 fw-700 text-truncate line-2" :class="titleClass">
               {{ item.title }}
             </h6>
           </div>
@@ -40,6 +40,10 @@ export default {
     articleKey: {
       type: String,
       default: "docId",
+    },
+    titleClass: {
+      type: String,
+      default: "text-20 text-lg-24",
     },
   },
   data() {
@@ -103,7 +107,7 @@ export default {
   figcaption {
     width: 100%;
     height: 100%;
-    background-color: rgba($color: #000, $alpha: 0.3);
+    background-color: rgba($color: #000, $alpha: 0.4);
     // display: flex;
     // flex-direction: column;
     // align-items: center;
@@ -118,6 +122,8 @@ export default {
       padding: 4px;
       top: 50%;
       left: 50%;
+      width: 90%;
+      max-width: 90%;
       transform: translate(-50%, -50%);
       hr {
         width: 100%;

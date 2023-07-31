@@ -14,7 +14,7 @@
     noCloseOnBackdrop
     autoFocusButton="ok"
     hideHeaderClose
-    headerCloseContent="`<i class='icon icon-times text-1'></i>``"
+    headerCloseContent="`<i class='icon icon-times text-1'/>``"
   >
     asd
   </b-modal>

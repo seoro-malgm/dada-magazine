@@ -348,3 +348,11 @@ a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.form-control {
+  &.is-valid,
+  &.is-invalid {
+    background-image: none;
+    border-color: inherit;
+  }
+}

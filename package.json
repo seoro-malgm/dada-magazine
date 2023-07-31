@@ -9,6 +9,7 @@
     "build": "nuxt build --dotenv .env.prod",
     "start": "nuxt start --dotenv .env.prod",
     "generate": "nuxt generate --dotenv .env.prod",
+    "deploy": "nuxt generate --dotenv .env.prod && firebase deploy",
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:prettier",
     "lintfix": "prettier --write --list-different ."
