@@ -2,7 +2,7 @@
   <div>
     <router-link :to="`/board/${item.docId}`">
       <figure
-        class="board-item bg-img ratio-sm-90 ratio-56"
+        class="board-item bg-img ratio-sm-67 ratio-56"
         :class="{ 'bg-primary text-white': !item.thumbnail }"
       >
         <template v-if="item?.thumbnail">
@@ -43,7 +43,7 @@ export default {
     },
     titleClass: {
       type: String,
-      default: "text-20 text-lg-24",
+      default: "text-18  text-xl-22",
     },
   },
   data() {
@@ -74,6 +74,7 @@ export default {
   position: relative;
   overflow: hidden;
   transition: transform 0.3s $default-ease;
+  border-radius: 8px;
 
   &:after {
     position: absolute;

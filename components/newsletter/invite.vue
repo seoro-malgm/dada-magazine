@@ -1,86 +1,97 @@
 <template>
-  <section class="p-5 bg-primary">
-    <b-row align-v="center" class="pb-3 pt-lg-3">
-      <b-col cols="12" lg="7">
-        <h3 class="mb-3 text-20 text-md-5">뉴스레터를 구독하세요</h3>
-        <p class="text-16 text-md-1 lh-180">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-          consequatur minima rerum animi omnis atque illo dolores doloribus
-        </p>
-      </b-col>
-      <b-col cols="12" lg="4" offset-lg="1">
-        <b-form class="invite-form" @submit.prevent="submit">
-          <template v-if="pending.submit">
-            <div class="p-4 text-center">
-              <b-spinner />
-            </div>
-          </template>
-          <template v-else>
-            <h6 class="text-16 text-md-2 mb-3">구독 신청</h6>
-            <b-form-input
-              class="mb-2 p-0 border-primary bg-white"
-              v-model="input.email"
-              :readonly="lastSubmitted"
-              placeholder="구독받을 이메일을 입력해주세요"
-            />
+  <section class="py-5 bg-primary">
+    <b-container class="py-5 my-md-5">
+      <b-row align-v="center" class="pb-3 pt-lg-3">
+        <b-col cols="12" lg="6" class="mb-4 mb-lg-0">
+          <div class="mb-2">
+            <i class="icon icon-book text-40 text-md-64" />
+          </div>
+          <h3 class="mb-3 text-32 text-md-72 lh-110">
+            다다매거진을 구독하세요!
+          </h3>
+          <p class="text-16 text-lg-18">
+            다다매거진은 여러분들의 다재다능한 이야기를 모아 잡지로
+            만들어드립니다. <br />
+            이 잡지를 무료로 구독해보세요! 당장 최신의 잡지부터 전송해드릴게요!
+            <br />
+            이메일만 작성하시면 저희가 잡지를 만들 때마다 계속 보내드리겠습니다.
+          </p>
+        </b-col>
+        <b-col cols="12" lg="5" offset-lg="1">
+          <b-form class="invite-form" @submit.prevent="submit">
+            <template v-if="pending.submit">
+              <div class="p-4 text-center">
+                <b-spinner />
+              </div>
+            </template>
+            <template v-else>
+              <h6 class="text-18 text-md-24 mb-3">구독 신청</h6>
+              <b-form-input
+                class="mb-2 p-0 border-primary bg-white"
+                v-model="input.email"
+                :disabled="lastSubmitted"
+                placeholder="구독받을 이메일을 입력해주세요"
+              />
 
-            <div class="mt-2">
-              <template v-if="lastSubmitted">
-                <span class="text-1">
-                  구독해주셔서 감사합니다! 메일을 확인해주세요.
-                </span>
-              </template>
-              <template v-else>
-                <div class="d-flex align-items-center mb-1">
-                  <input
-                    class="form-check"
-                    type="checkbox"
-                    v-model="input.agreePrivacy"
-                    readonly
-                    @click="$bvModal.show('confirm-newletter')"
-                  />
-                  <b-btn
-                    variant="text text-16 p-0 pl-1"
-                    @click="$bvModal.show('confirm-newletter')"
-                  >
-                    <strong class="text-secondary">(필수)</strong>
-                    개인정보 수집에 동의합니다 .
-                  </b-btn>
-                </div>
-                <div class="d-flex align-items-center mb-1">
-                  <input
-                    class="form-check"
-                    type="checkbox"
-                    v-model="input.agreeAd"
-                    readonly
-                    @click="$bvModal.show('confirm-newletter')"
-                  />
+              <div class="mt-2">
+                <template v-if="lastSubmitted">
+                  <span class="text-18 text-info">
+                    구독해주셔서 감사합니다! 메일을 확인해주세요.
+                  </span>
+                </template>
+                <template v-else>
+                  <div class="d-flex align-items-center mb-1">
+                    <input
+                      class="form-check"
+                      type="checkbox"
+                      v-model="input.agreePrivacy"
+                      readonly
+                      @click="$bvModal.show('confirm-newletter')"
+                    />
+                    <b-btn
+                      variant="text text-16 p-0 pl-1"
+                      @click="$bvModal.show('confirm-newletter')"
+                    >
+                      <strong class="text-secondary">(필수)</strong>
+                      개인정보 수집에 동의합니다 .
+                    </b-btn>
+                  </div>
+                  <div class="d-flex align-items-center mb-1">
+                    <input
+                      class="form-check"
+                      type="checkbox"
+                      v-model="input.agreeAd"
+                      readonly
+                      @click="$bvModal.show('confirm-newletter')"
+                    />
 
+                    <b-btn
+                      variant="text text-16 p-0 pl-1"
+                      @click="$bvModal.show('confirm-agree-ad')"
+                    >
+                      <strong class="text-secondary">(필수)</strong>
+                      광고성 정보 수신에 동의합니다.
+                    </b-btn>
+                  </div>
                   <b-btn
-                    variant="text text-16 p-0 pl-1"
-                    @click="$bvModal.show('confirm-agree-ad')"
-                  >
-                    <strong class="text-secondary">(필수)</strong>
-                    광고성 정보 수신에 동의합니다.
+                    variant="outline-primary rounded-0 px-3 mt-3"
+                    :disabled="validate"
+                    type="submit"
+                    >구독하기
                   </b-btn>
-                </div>
-                <b-btn
-                  variant="outline-primary rounded-0 px-3 mt-3"
-                  :disabled="validate"
-                  type="submit"
-                  >구독하기
-                </b-btn>
-              </template>
-            </div>
-          </template>
-        </b-form>
-      </b-col>
-    </b-row>
+                </template>
+              </div>
+            </template>
+          </b-form>
+        </b-col>
+      </b-row>
+    </b-container>
     <b-modal
       id="confirm-newletter"
       title="개인정보 수집 동의(필수)"
       @cancel="input.agreePrivacy = false"
       @ok="input.agreePrivacy = true"
+      centered
     >
       <template #default>
         뉴스레터 발송을 위한 최소한의 개인정보를 수집하고 이용합니다. 수집된
@@ -95,6 +106,7 @@
       title="광고성 메일 받기 동의(필수)"
       @cancel="input.agreeAd = false"
       @ok="input.agreeAd = true"
+      centered
     >
       <template #default>
         제휴 콘텐츠, 프로모션, 이벤트 정보 등의 광고성 정보를 수신합니다.

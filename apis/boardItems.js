@@ -22,6 +22,9 @@ import {
 
 const db = getFirestore(app);
 
+// dto
+import Editor from "~/dto/Editor";
+
 class boardItemsAPI {
   // boardItem 전체 불러오기
   getAllBoardItems = async (
@@ -34,28 +37,25 @@ class boardItemsAPI {
       const queryConstraints = [];
       if (queryData) {
         for (const [key, value] of Object.entries(queryData)) {
-          // console.log("key:", key);
-          // if (key === "page") {
-          //   queryConstraints.push(startAt(+value * count));
-          // } else {
-          queryConstraints.push(where(key, "==", value));
-          // }
+          // console.log("key, value:", key, value);
+          if (typeof value === "object") {
+            queryConstraints.push(where(key, value[0], value[1], value[2]));
+          } else {
+            queryConstraints.push(where(key, "==", value));
+          }
         }
       }
       if (count) queryConstraints.push(limit(count));
       if (orderType) queryConstraints.push(orderBy(orderType, orderValue));
       // 최종 쿼리
       const q = query(collection(db, collectionName), ...queryConstraints);
-      // console.log("queryConstraints:", queryConstraints);
       const snapshot = await getDocs(q);
       if (snapshot) {
         const boardItems = snapshot.docs.map((doc) => {
           return {
-            // id: doc.id,
             ...doc.data(),
           };
         });
-
         return boardItems;
       }
     } catch (error) {
@@ -239,23 +239,9 @@ class boardItemsAPI {
       const snapshot = await getDocs(q);
       if (snapshot) {
         const users = snapshot.docs.map((doc) => {
-          const { nickname, email, profile_image_url, uid, pid } = doc.data();
-          return {
-            nickname,
-            email,
-            profile_image_url,
-            uid,
-            pid,
-          };
+          return new Editor(doc.data());
         });
         return users[0];
-      } else {
-        return {
-          nickname: "",
-          email: "",
-          profile_image_url: "",
-          uid: "",
-        };
       }
     } catch (error) {
       console.error("error:", error);

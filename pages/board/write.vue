@@ -87,7 +87,7 @@
     </section> -->
       <section class="mt-4">
         <b-row align-h="end" class="mt-3">
-          <b-col cols="12" md="3">
+          <b-col cols="12" md="4">
             <template v-if="docId">
               <b-btn variant="primary w-100 py-3 fw-700" @click="update">
                 <i class="icon icon-edit" />

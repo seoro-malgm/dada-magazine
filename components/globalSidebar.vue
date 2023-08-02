@@ -7,6 +7,7 @@
     text-variant="darkest"
     :visible="visible"
     right
+    backdrop
   >
     <div class="d-flex flex-column justify-content-between h-100">
       <!-- header -->
@@ -20,8 +21,7 @@
         </div>
         <!-- 로그인 -->
         <template v-if="auth">
-          <b-btn variant="text mb-3 p-0" pill to="/auth/mypage">
-            <!-- :to="`/@${auth.pid}`" -->
+          <b-btn variant="text mb-3 p-0" pill :to="`/${auth.pid}`">
             <b-avatar size="3rem" :src="auth?.profile_image_url" />
             <div class="mt-3">
               <h3 class="text-center">{{ auth?.nickname }}</h3>
@@ -75,7 +75,7 @@
           <template v-if="auth">
             <ul>
               <li class="text-center">
-                <b-btn variant="text text-15 text-md-18" :to="`/@${auth.pid}`">
+                <b-btn variant="text text-15 text-md-18" :to="`/${auth.pid}`">
                   나의 다다
                 </b-btn>
               </li>

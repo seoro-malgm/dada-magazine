@@ -131,28 +131,27 @@
             <header>
               <h4 class="text-15 text-md-16 mb-2">에디터</h4>
             </header>
-            <div class="d-flex align-items-center">
-              <b-btn
-                :to="`/@${currentBoardItem?.author?.pid}`"
-                variant="text p-0"
-              >
-                <b-avatar
-                  size="5rem"
-                  class="mr-3"
-                  :src="currentBoardItem?.author?.profile_image_url"
-                >
-                </b-avatar>
-              </b-btn>
-              <div class="d-flex flex-column">
-                <b-btn
-                  variant="text p-0 text-gray-800 text-15 text-md-18 fw-700 mb-1"
-                  :to="`/@${currentBoardItem?.author?.pid}`"
-                >
-                  {{ currentBoardItem?.author?.nickname || "-" }}
+            <template v-if="author">
+              <div class="d-flex align-items-center">
+                <b-btn :to="`/${author?.pid}`" variant="text p-0">
+                  <b-avatar
+                    size="5rem"
+                    class="mr-3"
+                    :src="author?.profile_image_url"
+                  >
+                  </b-avatar>
                 </b-btn>
-                <small class="text-13"> ... </small>
+                <div class="d-flex flex-column align-items-start">
+                  <b-btn
+                    variant="text p-0 text-gray-800 text-15 text-md-18 fw-700 mb-1"
+                    :to="`/${author?.pid}`"
+                  >
+                    {{ author?.nickname || "-" }}
+                  </b-btn>
+                  <small class="text-13"> {{ author?.introduction }} </small>
+                </div>
               </div>
-            </div>
+            </template>
           </section>
 
           <!-- 에디터의 다른 글 -->
@@ -170,11 +169,11 @@
         </section>
         <section class="py-3" v-if="items?.length">
           <h5 class="text-16 text-md-18 mb-2">이런 글은 어떠세요?</h5>
-          <b-row class="mx-0">
+          <b-row class="mx-n2">
             <b-col
               cols="6"
               md="4"
-              class="px-0"
+              class="px-2"
               v-for="(item, i) in items"
               :key="i"
             >
@@ -292,9 +291,12 @@ export default {
       const { seconds } = this.currentBoardItem?.createdAt;
       return seconds ? getTimestamp(new Date(seconds * 1000)) : "";
     },
+    author() {
+      return this.currentBoardItem?.author;
+    },
     // 내가 쓴 글인경우
     isMine() {
-      return this.currentBoardItem?.author?.uid === this.auth?.uid;
+      return this.author?.uid === this.auth?.uid;
     },
   },
 
@@ -319,16 +321,19 @@ export default {
       window.scrollTo(0, 0);
     },
     async getItems(query) {
+      const { getAllBoardItems } = this.$firebase();
       try {
-        const data = await this.$firebase().getAllBoardItems(
+        const data = await getAllBoardItems(
           "board",
-          query,
+          {
+            ...query,
+            docId: ["<", this.docId, 3],
+          },
           3,
-          ["createdAt", "desc"]
+          ["docId"]
         );
         if (data) {
-          console.log("data:", data);
-          this.items = data.filter((d) => d.docId !== this.docId);
+          this.items = data;
         }
       } catch (error) {
         console.error("error:", error);

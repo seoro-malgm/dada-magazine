@@ -2,17 +2,28 @@ export const state = () => ({
   // counter: 0,
   user: null,
   userLogined: false,
+  // 상태를 임시로 표시할 salt
+  salt: {
+    mypageUpdated: false,
+  },
 });
 
 export const getters = {
   getUser(state) {
     return state.user;
   },
+  getSalt(state) {
+    return state.salt;
+  },
 };
 
 export const mutations = {
   setState(state, [key, value]) {
     state[key] = value;
+  },
+  setSalt(state, [key, value]) {
+    state["salt"][key] = value;
+    console.log('state["salt"][key]:', key, state["salt"][key]);
   },
 };
 

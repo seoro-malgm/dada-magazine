@@ -30,6 +30,9 @@ import {
 } from "firebase/firestore";
 const db = getFirestore(app);
 
+// dto
+import Editor from "~/dto/Editor";
+
 class authAPI {
   currentUser = null;
   tester = auth.currentUser;
@@ -230,23 +233,9 @@ class authAPI {
       const snapshot = await getDocs(q);
       if (snapshot) {
         const users = snapshot.docs.map((doc) => {
-          const { nickname, email, profile_image_url, uid, pid } = doc.data();
-          return {
-            nickname,
-            email,
-            profile_image_url,
-            uid,
-            pid,
-          };
+          return new Editor(doc.data());
         });
         return users[0];
-      } else {
-        return {
-          nickname: "",
-          email: "",
-          profile_image_url: "",
-          uid: "",
-        };
       }
     } catch (error) {
       console.error("error:", error);

@@ -13,7 +13,7 @@
         </header>
         <ul class="mt-4 mb-5">
           <li class="mb-5">
-            <div class="bg-gray-200 rounded py-4 px-3">
+            <div class="bg-lightest rounded py-4 px-3">
               <div class="text-center">
                 <strong>로그인한 계정</strong>
                 <div class="mt-2">

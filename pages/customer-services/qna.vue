@@ -5,7 +5,7 @@
         <h3>고객 지원</h3>
       </header>
       <section>
-        <div class="p-3 bg-gray-200 rounded">
+        <div class="p-3 bg-lightest rounded">
           <small>문의 메일 주소 :</small>
           <h5 class="mb-2">gongstar2021@gmail.com</h5>
           <small>

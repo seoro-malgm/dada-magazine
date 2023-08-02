@@ -75,7 +75,7 @@ pre.terms {
   width: 100%;
   max-height: 300px;
   overflow: auto;
-  background-color: $gray-200;
+  background-color: $lightest;
   color: $gray-700;
   padding: 1rem;
   font-size: 14px;
