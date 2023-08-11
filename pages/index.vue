@@ -64,14 +64,16 @@
               <h4 class="text-20 text-md-30 text-lg-36 text-primary">
                 EDITORS
               </h4>
-              <span>다다 매거진의 다재다능한 에디터들을 만나보세요. </span>
+              <span
+                >다다매거진의 다재다능한 유능한 에디터들을 만나보세요.
+              </span>
             </header>
             <div class="py-5">
               <b-row align-v="start" align-h="center" class="mx-n1 mx-md-n2">
                 <b-col
                   cols="4"
                   md="3"
-                  class="px-1 px-md-2"
+                  class="px-1 px-md-2 mb-5"
                   v-for="(editor, i) in editors"
                   :key="i"
                 >
@@ -174,10 +176,17 @@ export default {
       this.pending.editors = true;
       const { getAllBoardItems } = this.$firebase();
       try {
-        const data = await getAllBoardItems("users", null, 12, ["pid"]);
+        const data = await getAllBoardItems(
+          "users",
+          {
+            isSponsored: true,
+          },
+          12,
+          ["pid"]
+        );
         if (data) {
           this.editors = data;
-          console.log("editors:", data);
+          // console.log("editors:", data);
           this.pending.editors = false;
         }
       } catch (error) {

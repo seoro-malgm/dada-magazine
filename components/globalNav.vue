@@ -6,7 +6,7 @@
           <b-navbar-brand class="mr-5 mr-md-0">
             <nuxt-link to="/" replace>
               <img
-                :src="require('@/assets/logo.svg')"
+                :src="require('@/assets/logo-short.svg')"
                 alt="다다매거진 로고 이미지, 메인으로 이동"
               />
             </nuxt-link>
@@ -90,7 +90,10 @@ export default {
     border-radius: 24px;
     .navbar-brand {
       position: relative;
-      width: 100px;
+      width: 180px;
+      // @media (min-width: $breakpoint-lg) {
+      //   width: 210px;
+      // }
       > svg {
         width: 100%;
       }

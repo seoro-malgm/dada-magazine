@@ -7,7 +7,7 @@
             <i class="icon icon-book text-40 text-md-64" />
           </div>
           <h3 class="mb-3 text-32 text-md-72 lh-110">
-            다다매거진을 구독하세요!
+            다재다능매거진을 구독하세요!
           </h3>
           <p class="text-16 text-lg-18">
             다다매거진은 여러분들의 다재다능한 이야기를 모아 잡지로
@@ -74,7 +74,7 @@
                     </b-btn>
                   </div>
                   <b-btn
-                    variant="outline-primary rounded-0 px-3 mt-3"
+                    variant="outline-darkest rounded-0 px-3 mt-3"
                     :disabled="validate"
                     type="submit"
                     >구독하기

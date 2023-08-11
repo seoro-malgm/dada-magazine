@@ -50,6 +50,7 @@ class authAPI {
           pid,
           emailVerified: false,
           isEditor: false,
+          isSponsored: false,
         };
         const token = {
           accessToken: user.accessToken,

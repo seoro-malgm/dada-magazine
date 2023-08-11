@@ -4,7 +4,7 @@
       <ul class="list-unstyled">
         <li>
           <h4 class="logo mb-2">
-            <img :src="require('@/assets/logo.svg')" />
+            <img :src="require('@/assets/symbol-gongstar-white.svg')" />
           </h4>
         </li>
         <li>
@@ -65,8 +65,8 @@ export default {
 
 <style lang="scss" scoped>
 #gnf {
-  border-top: 1px solid $gray-600;
-
+  background-color: $darkest;
+  color: $lightest;
   .footer-nav {
     display: flex;
     align-items: center;
@@ -80,13 +80,13 @@ export default {
   }
   h4.logo {
     > img {
-      width: 80px;
+      width: 72px;
     }
   }
   li {
     margin-bottom: 2px;
     font-size: 13px;
-    color: $gray;
+    color: $lightest;
     .btn {
       font-size: 0.85rem;
     }

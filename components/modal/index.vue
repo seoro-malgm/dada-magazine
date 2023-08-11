@@ -16,7 +16,6 @@
     hideHeaderClose
     headerCloseContent="`<i class='icon icon-times text-1'/>``"
   >
-    asd
   </b-modal>
 </template>
 

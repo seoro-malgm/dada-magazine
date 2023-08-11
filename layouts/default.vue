@@ -162,7 +162,7 @@ $gnb-height: 82px;
   //   padding-top: 72px;
   // }
   // padding-top: 82px;
-  padding-top: 91.5px;
+  padding-top: 84px;
   // @media (min-width: $breakpoint-md) {
   //   padding-top: calc($gnb-height + 12px);
   // }

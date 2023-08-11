@@ -149,7 +149,7 @@
                         사용할 수 없는 아이디입니다
                       </span>
                       <small class="d-block text-alert">
-                        2~15자, 영문, 언더바(_)사용가능
+                        2~15자, 영문 소문자, 언더바(_)사용가능
                       </small>
                     </b-form-invalid-feedback>
                     <template v-if="state.pid">

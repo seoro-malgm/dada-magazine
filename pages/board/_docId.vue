@@ -285,7 +285,7 @@ export default {
       return this.$route.params?.docId;
     },
     url() {
-      return process.env.BASE_URL + this.$route.fullPath;
+      return `${process.env.BASE_URL}/board/${this.docId}`;
     },
     createdDate() {
       const { seconds } = this.currentBoardItem?.createdAt;

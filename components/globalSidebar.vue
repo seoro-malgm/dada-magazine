@@ -72,6 +72,7 @@
       <!-- body -->
       <section class="mt-4 mb-auto algin-self-stretch">
         <div class="px-3">
+          <!-- 로그인 -->
           <template v-if="auth">
             <ul>
               <li class="text-center">
@@ -88,7 +89,22 @@
                 </b-btn>
               </li>
             </ul>
+            <hr class="my-4" />
           </template>
+          <!-- 비로그인 -->
+          <template v-else> </template>
+          <!-- 공통 -->
+          <ul>
+            <li class="text-center">
+              <a
+                class="btn btn-text text-15 text-md-18 text-gray-600"
+                href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
+                target="_blank"
+              >
+                다재다능매거진에 대하여
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
       <!-- footer -->
