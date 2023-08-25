@@ -149,7 +149,7 @@ export default {
     },
   },
   async mounted() {
-    this.getItems();
+    await this.getItems();
     await this.getEditors();
   },
   methods: {

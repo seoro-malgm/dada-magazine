@@ -13,11 +13,34 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/style-resources": "^1.2.1",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.2",
+    "bootstrap-vue": "^2.22.0",
+    "chokidar": "^3.5.2",
+    "core-js": "^3.25.3",
+    "firebase": "^9.15.0",
     "firebase-admin": "^11.8.0",
-    "firebase-functions": "^4.3.1"
+    "firebase-functions": "^4.4.1",
+    "googleapis": "^118.0.0",
+    "nuxt": "^2.15.8",
+    "nuxt-start": "^2.17.1",
+    "vue": "^2.7.10",
+    "vue-carousel": "^0.18.0",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
+    "vue2-editor": "^2.10.3",
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
-    "firebase-functions-test": "^3.1.0"
+    "eslint-config-prettier": "^8.5.0",
+    "firebase-functions-test": "^3.1.0",
+    "prettier": "^2.7.1",
+    "sass": "^1.65.1",
+    "sass-loader": "^10.4.1"
   },
   "private": true
 }

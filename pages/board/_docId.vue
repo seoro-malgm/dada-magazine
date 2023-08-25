@@ -245,23 +245,7 @@ export default {
       default: null,
     },
   },
-  head() {
-    return {
-      title: `${this.currentBoardItem?.title} | 다다매거진`,
-      meta: [
-        {
-          hid: "title",
-          name: "title",
-          content: `${this.currentBoardItem?.title} | 다다매거진`,
-        },
-        {
-          hid: "description",
-          name: "description",
-          content: this.currentBoardItem?.desc,
-        },
-      ],
-    };
-  },
+
   async asyncData({ params, $firebase }) {
     const { getBoardItem } = $firebase();
     const boardItem = await getBoardItem("board", ["docId", params.docId]);
@@ -272,6 +256,7 @@ export default {
   },
   data() {
     return {
+      currentBoardItem: null,
       items: [],
       newReply: null,
       onLikeToggle: false,
@@ -301,11 +286,16 @@ export default {
   },
 
   async mounted() {
+    // await this.getItem();
     // 조회수 추가
     const { incrementViewer } = this.$firebase();
     await incrementViewer("board", ["docId", this.docId]);
     // 다른 글 불러오기
-    this.getItems();
+    await this.getItems();
+
+    if (!this.currentBoardItem) {
+      await this.getItem();
+    }
   },
 
   methods: {
@@ -319,6 +309,17 @@ export default {
     // 맨 위로
     goTop() {
       window.scrollTo(0, 0);
+    },
+    async getItem() {
+      const { getBoardItem } = this.$firebase();
+      try {
+        const data = await getBoardItem("board", ["docId", this.docId]);
+        if (data) {
+          this.currentBoardItem = data;
+        }
+      } catch (error) {
+        console.error("error:", error);
+      }
     },
     async getItems(query) {
       const { getAllBoardItems } = this.$firebase();
@@ -372,6 +373,23 @@ export default {
         }
       }
     },
+  },
+  head() {
+    return {
+      title: `${this.currentBoardItem.title} | 다다매거진`,
+      meta: [
+        {
+          hid: "title",
+          name: "title",
+          content: `${this.currentBoardItem.title} | 다다매거진`,
+        },
+        {
+          hid: "description",
+          name: "description",
+          content: this.currentBoardItem.desc,
+        },
+      ],
+    };
   },
 };
 </script>

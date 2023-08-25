@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 954.97 968">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #efefef;
+      }
+
+      .cls-2 {
+        fill: #aaabab;
+      }
+
+      .cls-3 {
+        fill: #727171;
+      }
+
+      .cls-4 {
+        fill: url(#_무제_그라디언트_24);
+      }
+
+      .cls-5 {
+        fill: url(#_무제_그라디언트_68);
+      }
+
+      .cls-6 {
+        fill: url(#_무제_그라디언트_46);
+      }
+    </style>
+    <linearGradient id="_무제_그라디언트_46" data-name="무제 그라디언트 46" x1="388.76" y1="409.25" x2="526.28" y2="375.08" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#595757"/>
+      <stop offset="1" stop-color="#898989"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_68" data-name="무제 그라디언트 68" x1="-68.86" y1="628.2" x2="623.15" y2="566.78" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#b5b5b6"/>
+      <stop offset="1" stop-color="#595757"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_24" data-name="무제 그라디언트 24" x1="58.62" y1="541.95" x2="457.21" y2="23.39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#b5b5b6"/>
+      <stop offset="1" stop-color="#efefef"/>
+    </linearGradient>
+  </defs>
+  <polygon class="cls-6" points="409.2 407.85 441.13 404.2 568.03 368.28 486.69 376.96 404.12 398.91 409.2 407.85"/>
+  <polygon class="cls-2" points="419.24 395.54 486.69 376.96 475.39 301.84 419.24 395.54"/>
+  <path class="cls-5" d="m14.43,590.87l554.02-57.74s-13.82,14.93-22.89,25.55c-9.08,10.62-11.7,78.23-11.7,78.23l74.51-7.1s36.82-78.83,87.27-131.66l-553.7,56.69-127.5,36.05Z"/>
+  <path class="cls-4" d="m303.48,44.92L432.4,8.08c.68,0,67.73,379.62-305.08,454.02L0,498.14l112.6-31.87c145.65-81.09,213-218.84,190.88-421.35Z"/>
+  <path class="cls-1" d="m432.4,8.08L513.35,0l54.67,368.28-81.34,8.67-11.29-75.12c-20.55,49.32-48.5,94.36-87.92,132.74l553.95-58.24,13.55,93.23c-238.14,20.79-326.86,268.36-303.42,453.33l-82.03,8.87-54.15-369.96,81.63-8.47,11.37,76.46c25.32-51.84,53.74-97.15,87.27-131.66l-553.7,56.69-14.62-92.72C356,412.99,454.64,253.3,432.4,8.08Z"/>
+  <polygon class="cls-2" points="0 498.14 14.43 590.87 141.94 554.83 127.32 462.11 0 498.14"/>
+  <polygon class="cls-2" points="386.69 599.04 515.37 561.81 569.52 931.77 441.86 968 386.69 599.04"/>
+  <polygon class="cls-3" points="441.86 968 525.02 959.74 651.55 922.9 569.52 931.77 441.86 968"/>
+</svg>

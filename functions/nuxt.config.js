@@ -191,7 +191,7 @@ module.exports = {
   ],
 
   plugins: [
-    { src: "~/plugins/axios.js" },
+    // { src: "~/plugins/axios.js" },
     { src: "~/plugins/router.js", mode: "client" },
     { src: "~/plugins/firebase.js" },
     { src: "~/plugins/carousel.js", mode: "client" },
