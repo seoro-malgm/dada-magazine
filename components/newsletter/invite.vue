@@ -1,10 +1,10 @@
 <template>
   <section class="py-5 bg-primary">
     <b-container class="py-5 my-md-5">
-      <b-row align-v="center" class="pb-3 pt-lg-3">
-        <b-col cols="12" lg="6" class="mb-4 mb-lg-0">
+      <b-row align-v="center" class="pb-3 pt-lg-3 justify-content-lg-center">
+        <b-col cols="12" lg="6" class="mb-4 mb-lg-0 text-lg-center">
           <div class="mb-2">
-            <i class="icon icon-book text-40 text-md-64" />
+            <i class="icon icon-book text-56 text-md-100" />
           </div>
           <h3 class="mb-3 text-32 text-md-72 lh-110">
             다재다능매거진을 구독하세요!
@@ -16,9 +16,19 @@
             <br />
             이메일만 작성하시면 저희가 잡지를 만들 때마다 계속 보내드리겠습니다.
           </p>
+          <div class="mt-5">
+            <a
+              class="btn btn-darkest text-primary px-4 py-3 rounded-pill text-18 text-lg-28"
+              href="https://dada-magazine.stibee.com/subscribe/"
+              target="_blank"
+            >
+              <i class="icon icon-paper-plane" />
+              구독신청하러가기
+            </a>
+          </div>
         </b-col>
-        <b-col cols="12" lg="5" offset-lg="1">
-          <b-form class="invite-form" @submit.prevent="submit">
+        <!-- <b-col cols="12" lg="5" offset-lg="1"> -->
+        <!-- <b-form class="invite-form" @submit.prevent="submit">
             <template v-if="pending.submit">
               <div class="p-4 text-center">
                 <b-spinner />
@@ -82,8 +92,8 @@
                 </template>
               </div>
             </template>
-          </b-form>
-        </b-col>
+          </b-form> -->
+        <!-- </b-col> -->
       </b-row>
     </b-container>
     <b-modal

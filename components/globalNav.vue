@@ -19,9 +19,9 @@
             <b-navbar-nav class="d-flex align-items-center w-100">
               <client-only>
                 <div class="ml-auto uitls-auth">
-                  <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
+                  <!-- <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
                     <i class="icon icon-search text-20 text-lg-24" />
-                  </b-btn>
+                  </b-btn> -->
                   <b-btn
                     variant="text p-0"
                     pill

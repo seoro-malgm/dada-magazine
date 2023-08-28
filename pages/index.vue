@@ -105,6 +105,25 @@
     </section>
     <!-- 뉴스레터 구독 -->
     <newsletter-invite></newsletter-invite>
+    <!--  -->
+    <section class="section-gap">
+      <b-container>
+        <header class="text-center py-3">
+          <h2 class="text-20 text-lg-32">SNS</h2>
+        </header>
+        <b-row align-h="center">
+          <b-col cols="4" class="text-center">
+            <a
+              href="https://www.instagram.com/dada_magazine23/"
+              target="_blank"
+              class="btn btn-outline-primary p-4 rounded-circle text-40 text-lg-48"
+            >
+              <i class="icon icon-instagram"></i>
+            </a>
+          </b-col>
+        </b-row>
+      </b-container>
+    </section>
   </div>
 </template>
 
@@ -113,7 +132,6 @@ import allCategories from "~/assets/json/allCategories";
 
 export default {
   layout: "default",
-  components: {},
 
   props: {
     auth: {
@@ -148,9 +166,9 @@ export default {
       this.getItems(n);
     },
   },
-  async mounted() {
-    await this.getItems();
-    await this.getEditors();
+  mounted() {
+    this.getItems();
+    this.getEditors();
   },
   methods: {
     // 글 불러오기

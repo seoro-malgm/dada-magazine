@@ -235,7 +235,7 @@
 
 <script>
 import allCategories from "~/assets/json/allCategories";
-import { getTimestamp, copyText } from "~/plugins/commons";
+import { getTimestamp } from "~/plugins/commons";
 export default {
   layout: "default",
   name: "board-detail",
@@ -245,13 +245,40 @@ export default {
       default: null,
     },
   },
-
-  async asyncData({ params, $firebase }) {
-    const { getBoardItem } = $firebase();
-    const boardItem = await getBoardItem("board", ["docId", params.docId]);
-
+  head() {
+    return {
+      title: `${this.currentBoardItem?.title} | 다다매거진`,
+      meta: [
+        {
+          hid: "title",
+          name: "title",
+          content: `${this.currentBoardItem?.title} | 다다매거진`,
+        },
+        {
+          hid: "description",
+          name: "description",
+          content: this.currentBoardItem?.desc,
+        },
+      ],
+    };
+  },
+  async asyncData({ params, query, $firebase }) {
+    const { getBoardItem, getAllBoardItems } = $firebase();
+    const [boardItem, items] = await Promise.all([
+      getBoardItem("board", ["docId", params.docId]),
+      getAllBoardItems(
+        "board",
+        {
+          ...query,
+          docId: ["<", params.docId, 3],
+        },
+        3,
+        ["docId"]
+      ),
+    ]);
     return {
       currentBoardItem: boardItem,
+      items,
     };
   },
   data() {
@@ -270,14 +297,16 @@ export default {
       return this.$route.params?.docId;
     },
     url() {
-      return `${process.env.BASE_URL}/board/${this.docId}`;
+      return this.docId ? `${process.env.BASE_URL}/board/${this.docId}` : "";
     },
     createdDate() {
       const { seconds } = this.currentBoardItem?.createdAt;
-      return seconds ? getTimestamp(new Date(seconds * 1000)) : "";
+      return seconds && this.getTimestamp
+        ? this.getTimestamp(new Date(seconds * 1000))
+        : "";
     },
     author() {
-      return this.currentBoardItem?.author;
+      return this.currentBoardItem?.author || "";
     },
     // 내가 쓴 글인경우
     isMine() {
@@ -290,16 +319,31 @@ export default {
     // 조회수 추가
     const { incrementViewer } = this.$firebase();
     await incrementViewer("board", ["docId", this.docId]);
-    // 다른 글 불러오기
-    await this.getItems();
 
-    if (!this.currentBoardItem) {
-      await this.getItem();
-    }
+    // 다른 글 불러오기
+    // await this.getItems();
+
+    // if (!this.currentBoardItem) {
+    //   await this.getItem();
+    // }
   },
 
   methods: {
-    copyText,
+    getTimestamp,
+    copyText(text) {
+      const board = navigator.clipboard;
+      board
+        .writeText(
+          `${this.url}
+        출처: ${this.currentBoardItem?.title} | 우리들의 다재다능한 이야기, 다다매거진`
+        )
+        .then(() => {
+          window.toast("클립보드에 복사되었습니다.");
+        })
+        .catch((error) => {
+          window.toast(error);
+        });
+    },
     // 카테고리 불러오기
     getCategory(category) {
       return this.allCategories[category]
@@ -321,25 +365,25 @@ export default {
         console.error("error:", error);
       }
     },
-    async getItems(query) {
-      const { getAllBoardItems } = this.$firebase();
-      try {
-        const data = await getAllBoardItems(
-          "board",
-          {
-            ...query,
-            docId: ["<", this.docId, 3],
-          },
-          3,
-          ["docId"]
-        );
-        if (data) {
-          this.items = data;
-        }
-      } catch (error) {
-        console.error("error:", error);
-      }
-    },
+    // async getItems(query) {
+    //   const { getAllBoardItems } = this.$firebase();
+    //   try {
+    //     const data = await getAllBoardItems(
+    //       "board",
+    //       {
+    //         ...query,
+    //         docId: ["<", this.docId, 3],
+    //       },
+    //       3,
+    //       ["docId"]
+    //     );
+    //     if (data) {
+    //       this.items = data;
+    //     }
+    //   } catch (error) {
+    //     console.error("error:", error);
+    //   }
+    // },
     selectCategory(category) {
       this.$router.push({
         name: "index",
@@ -373,23 +417,6 @@ export default {
         }
       }
     },
-  },
-  head() {
-    return {
-      title: `${this.currentBoardItem.title} | 다다매거진`,
-      meta: [
-        {
-          hid: "title",
-          name: "title",
-          content: `${this.currentBoardItem.title} | 다다매거진`,
-        },
-        {
-          hid: "description",
-          name: "description",
-          content: this.currentBoardItem.desc,
-        },
-      ],
-    };
   },
 };
 </script>

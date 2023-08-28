@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{492:function(t,n,e){"use strict";e.r(n);var c={},r=e(44),component=Object(r.a)(c,(function(){var t=this._self._c;return t("div",{staticClass:"text-center"},[t("b-btn",{attrs:{variant:"white shadow"}},[this._v("VIEW MORE")])],1)}),[],!1,null,"02a63ce7",null);n.default=component.exports}}]);
