@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /   
+Allow: /$
+Allow: /board$  
+Sitemap: https://dada-magazine.com/sitemap.xml

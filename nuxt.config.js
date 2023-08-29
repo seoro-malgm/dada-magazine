@@ -53,7 +53,7 @@ module.exports = {
       {
         name: "og:url",
         property: "og:url",
-        content: "",
+        content: "https://dada-magazine.com/",
       },
       {
         name: "og:type",
@@ -87,13 +87,13 @@ module.exports = {
       },
       {
         property: "twitter:domain",
-        content: "seoro-malgm.studio",
+        content: "https://dada-magazine.com/",
       },
-      // {
-      //   property: "twitter:url",
-      //   hid: "twitter:url",
-      //   content: "https://seoro-malgm.studio",
-      // },
+      {
+        property: "twitter:url",
+        hid: "twitter:url",
+        content: "https://dada-magazine.com/",
+      },
       {
         name: "twitter:title",
         hid: "twitter:title",
