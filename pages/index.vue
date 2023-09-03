@@ -1,57 +1,39 @@
 <template>
-  <div>
-    <b-container fluid>
-      <section>
-        <template v-if="pending.items">
-          <div class="text-center p-5 min-vh-100">
-            <b-spinner />
-          </div>
-        </template>
-        <template v-else>
-          <template v-if="items?.length">
-            <div class="py-5">
-              <b-row align-v="center" align-h="center" class="mx-2 mx-xl-4">
-                <b-col
-                  cols="6"
-                  md="4"
-                  xl="3"
-                  class="px-2 px-xl-4 mb-2 mb-xl-5"
-                  v-for="(item, i) in items"
-                  :key="i"
-                >
-                  <board-item :item="item" />
-                </b-col>
-              </b-row>
-            </div>
+  <div class="pt-5 pt-lg-0">
+    <!-- 뉴스레터 구독 -->
+    <newsletter-invite />
 
-            <!-- <div class="my-4 d-flex">
-              <b-pagination class="mx-auto" />
-            </div> -->
-          </template>
-        </template>
-        <template v-if="!items?.length && !pending.items">
-          <div class="text-center p-4">
-            <b-spinner />
-            <!-- <small>글이 없습니다.</small>
-            <div class="mt-2">
-              <b-btn
-                variant="primary"
-                pill
-                :to="{
-                  name: 'board-write',
-                }"
-              >
-                <i class="icon icon-pencil" />
-                글쓰기
-              </b-btn>
-            </div> -->
-          </div>
-        </template>
-      </section>
+    <!-- header -->
+    <!-- <header class="px-3">
+      <b-container fluid class="pt-5 pt-lg-3">
+        <h1 class="fw-900 text-24 text-lg-48 text-primary">
+          우리들의 다재다능한 이야기
+        </h1>
+        <b-row>
+          <b-col cols="12" lg="4">
+            <p class="text-13 text-md-15 text-light">
+              충남 공주시의 다재다능한 이야기를 만나보세요. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Eaque id ex recusandae
+              dolores ipsum nulla dolorum quidem veniam distinctio repellat.
+            </p>
+          </b-col>
+        </b-row>
+      </b-container>
+    </header> -->
 
-      <!-- editors: {{ editors }} -->
-    </b-container>
-    <section class="py-5 bg-lightest">
+    <!-- 큐레이션 -->
+    <section class="my-5 py-5">
+      <header-section title="큐레이션" />
+    </section>
+
+    <!-- 글들 -->
+    <section class="py-5 bg-gray-100">
+      <h3 class="text-20 text-lg-28 fw-700 text-center">포스트</h3>
+      <!-- <header-section title="포스트" /> -->
+      <board-list />
+    </section>
+    <!-- 에디터 -->
+    <!-- <section class="py-5 bg-lightest">
       <template v-if="pending.editors">
         <div class="text-center p-5">
           <b-spinner />
@@ -71,8 +53,8 @@
             <div class="py-5">
               <b-row align-v="start" align-h="center" class="mx-n1 mx-md-n2">
                 <b-col
-                  cols="4"
-                  md="3"
+                  cols="6"
+                  lg="3"
                   class="px-1 px-md-2 mb-5"
                   v-for="(editor, i) in editors"
                   :key="i"
@@ -87,32 +69,16 @@
       <template v-if="!editors?.length && !pending.editors">
         <div class="text-center p-4">
           <b-spinner />
-          <!-- <small>글이 없습니다.</small>
-            <div class="mt-2">
-              <b-btn
-                variant="primary"
-                pill
-                :to="{
-                  name: 'board-write',
-                }"
-              >
-                <i class="icon icon-pencil" />
-                글쓰기
-              </b-btn>
-            </div> -->
         </div>
       </template>
-    </section>
-    <!-- 뉴스레터 구독 -->
-    <newsletter-invite></newsletter-invite>
-    <!--  -->
-    <section class="section-gap">
-      <b-container>
-        <header class="text-center py-3">
-          <h2 class="text-20 text-lg-32">SNS</h2>
-        </header>
+    </section> -->
+
+    <!-- SNS -->
+    <!-- <section class="section-gap">
+      <header-section title="SNS" />
+      <b-container class="mt-4">
         <b-row align-h="center">
-          <b-col cols="4" class="text-center">
+          <b-col cols="3" class="text-center">
             <a
               href="https://www.instagram.com/dada_magazine23/"
               target="_blank"
@@ -123,7 +89,7 @@
           </b-col>
         </b-row>
       </b-container>
-    </section>
+    </section> -->
   </div>
 </template>
 
@@ -132,7 +98,7 @@ import allCategories from "~/assets/json/allCategories";
 
 export default {
   layout: "default",
-
+  name: "index",
   props: {
     auth: {
       type: [Object, String],
@@ -141,55 +107,19 @@ export default {
   },
   data() {
     return {
-      items: [],
       editors: [],
       allCategories,
       pending: {
-        items: false,
         editors: false,
       },
       page: 0,
     };
   },
-  computed: {
-    itemPinned() {
-      if (!this.items?.length) return [];
-      const pinned = this.items.filter((i) => i.pinned);
-      return pinned;
-    },
-    query() {
-      return this.$route.query;
-    },
-  },
-  watch: {
-    query(n) {
-      this.getItems(n);
-    },
-  },
+
   mounted() {
-    this.getItems();
     this.getEditors();
   },
   methods: {
-    // 글 불러오기
-    async getItems(query) {
-      this.pending.items = true;
-      const { getAllBoardItems } = this.$firebase();
-      try {
-        const data = await getAllBoardItems("board", query, 30, [
-          "createdAt",
-          "desc",
-        ]);
-        if (data) {
-          this.items = data;
-          this.pending.items = false;
-          window.scrollTo(0, 0);
-        }
-      } catch (error) {
-        console.error("error:", error);
-        this.pending.items = false;
-      }
-    },
     async getEditors() {
       this.pending.editors = true;
       const { getAllBoardItems } = this.$firebase();
@@ -204,7 +134,6 @@ export default {
         );
         if (data) {
           this.editors = data;
-          // console.log("editors:", data);
           this.pending.editors = false;
         }
       } catch (error) {

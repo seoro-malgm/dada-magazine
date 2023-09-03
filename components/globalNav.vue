@@ -76,7 +76,7 @@ export default {
 
 <style lang="scss" scoped>
 #gnb {
-  border-bottom: 1px solid $primary;
+  border-bottom: 1px solid $gray-200;
   position: fixed;
   width: 100%;
   padding: 0.5rem 0 0;
@@ -90,10 +90,10 @@ export default {
     border-radius: 24px;
     .navbar-brand {
       position: relative;
-      width: 180px;
-      // @media (min-width: $breakpoint-lg) {
-      //   width: 210px;
-      // }
+      width: 120px;
+      @media (min-width: $breakpoint-lg) {
+        width: 180px;
+      }
       > svg {
         width: 100%;
       }

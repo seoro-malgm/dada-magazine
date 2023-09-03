@@ -61,6 +61,7 @@
               </template>
             </div>
           </header>
+          <bar-horizon class="my-3" />
           <section class="bg-white p-4">
             <client-only>
               <board-content :content="currentBoardItem.desc" />
@@ -126,8 +127,8 @@
         </client-only> -->
         </article>
         <section class="my-3 py-3 border-top border-bottom border-primary">
+          <!-- 에디터 정보 -->
           <section>
-            <!-- 에디터 정보 -->
             <header>
               <h4 class="text-15 text-md-16 mb-2">에디터</h4>
             </header>
@@ -247,17 +248,27 @@ export default {
   },
   head() {
     return {
-      title: `${this.currentBoardItem?.title} | 다다매거진`,
+      title: `${this.currentBoardItem.title} | 다다매거진`,
       meta: [
         {
           hid: "title",
           name: "title",
-          content: `${this.currentBoardItem?.title} | 다다매거진`,
+          content: `${this.currentBoardItem.title} | 다다매거진`,
         },
         {
           hid: "description",
           name: "description",
-          content: this.currentBoardItem?.desc,
+          content: this.currentBoardItem.desc,
+        },
+        {
+          hid: "og:image",
+          name: "og:image",
+          content: this.currentBoardItem?.thumbnail || "/og-image.png",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: `${this.currentBoardItem.title} | 다다매거진`,
         },
       ],
     };
@@ -335,7 +346,7 @@ export default {
       board
         .writeText(
           `${this.url}
-        출처: ${this.currentBoardItem?.title} | 우리들의 다재다능한 이야기, 다다매거진`
+출처: ${this.currentBoardItem?.title} | 우리들의 다재다능한 이야기, 다다매거진`
         )
         .then(() => {
           window.toast("클립보드에 복사되었습니다.");

@@ -60,7 +60,7 @@ export default {
         const data = await setUserEditor(this.auth?.email);
         if (data) {
           window.toast("에디터 신청이 완료되었습니다. 이제 글을 쓸 수 있어요!");
-          this.$router.push("/");
+          this.$router.push("/board/write");
         }
       } catch (error) {
         window.toast("오류료 인해 신청에 실패했습니다.");

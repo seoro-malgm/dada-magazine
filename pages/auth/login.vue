@@ -5,7 +5,7 @@
       class="py-5 my-5 w-100 d-flex flex-column align-items-center justify-content-center"
     >
       <b-row align-h="center" class="w-100">
-        <b-col cols="12" md="8" lg="6">
+        <b-col cols="12" md="10" lg="6">
           <b-card class="w-100">
             <b-card-header
               header-bg-variant="white"
@@ -94,11 +94,11 @@ export default {
   head() {
     return {
       title: `다다매거진 | 로그인`,
-      script: [
-        {
-          src: "https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js",
-        },
-      ],
+      // script: [
+      //   {
+      //     src: "https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js",
+      //   },
+      // ],
     };
   },
   props: {

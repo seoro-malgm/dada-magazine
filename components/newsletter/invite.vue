@@ -1,24 +1,25 @@
 <template>
-  <section class="py-5 bg-primary">
-    <b-container class="py-5 my-md-5">
-      <b-row align-v="center" class="pb-3 pt-lg-3 justify-content-lg-center">
-        <b-col cols="12" lg="6" class="mb-4 mb-lg-0 text-lg-center">
+  <section class="bg-primary">
+    <b-container class="py-5">
+      <b-row align-v="center" class="pb-3 pt-lg-3 justify-content-center">
+        <b-col cols="12" lg="6" class="mb-4 mb-lg-0 text-center">
           <div class="mb-2">
             <i class="icon icon-book text-56 text-md-100" />
           </div>
-          <h3 class="mb-3 text-32 text-md-72 lh-110">
+          <h3 class="mb-3 text-24 text-md-36 lh-110">
+            우리들의 다재다능한 이야기, <br />
             다재다능매거진을 구독하세요!
           </h3>
           <p class="text-16 text-lg-18">
-            다다매거진은 여러분들의 다재다능한 이야기를 모아 잡지로
-            만들어드립니다. <br />
+            다다매거진은 로컬의 귀중한 이야기를 매거진으로 만들어드립니다.
+            <br />
             이 잡지를 무료로 구독해보세요! 당장 최신의 잡지부터 전송해드릴게요!
             <br />
             이메일만 작성하시면 저희가 잡지를 만들 때마다 계속 보내드리겠습니다.
           </p>
           <div class="mt-5">
             <a
-              class="btn btn-darkest text-primary px-4 py-3 rounded-pill text-18 text-lg-28"
+              class="btn btn-darkest text-primary px-4 py-3 rounded-pill text-18 text-lg-20"
               href="https://dada-magazine.stibee.com/subscribe/"
               target="_blank"
             >

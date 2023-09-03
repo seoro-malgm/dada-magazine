@@ -2,11 +2,11 @@
   <footer id="gnf">
     <b-container fluid class="py-3">
       <ul class="list-unstyled">
-        <li>
+        <!-- <li>
           <h4 class="logo mb-2">
             <img :src="require('@/assets/symbol-gongstar-white.svg')" />
           </h4>
-        </li>
+        </li> -->
         <li>
           <strong> 주식회사 공스타 </strong>
         </li>
@@ -21,17 +21,29 @@
             <b-btn variant="dark" pill>다크모드</b-btn>
           </li> -->
       </ul>
-      <nav class="footer-nav">
-        <b-btn variant="link" :to="{ name: 'terms-privacy' }"
-          >개인정보처리방침</b-btn
-        >
-        <b-btn variant="link" :to="{ name: 'customer-services-qna' }"
-          >고객지원</b-btn
-        >
-        <b-btn variant="link" :to="{ name: 'customer-services-faq' }"
-          >자주 묻는 질문</b-btn
-        >
-      </nav>
+      <div class="d-flex justify-content-between">
+        <nav class="footer-nav">
+          <b-btn variant="link" :to="{ name: 'terms-privacy' }"
+            >개인정보처리방침</b-btn
+          >
+          <b-btn variant="link" :to="{ name: 'customer-services-qna' }"
+            >고객지원</b-btn
+          >
+          <b-btn variant="link" :to="{ name: 'customer-services-faq' }"
+            >자주 묻는 질문</b-btn
+          >
+        </nav>
+        <ul class="list-unstyled">
+          <li>
+            <a
+              href="https://www.instagram.com/gong__star2021/?hl=ko"
+              target="_blank"
+            >
+              <i class="icon icon-instagram text-14 text-lg-16"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </b-container>
   </footer>
 </template>

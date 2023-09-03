@@ -249,7 +249,7 @@
                 >로그아웃
               </b-btn>
             </div>
-            <div class="d-flex justify-content-center my-3">
+            <!-- <div class="d-flex justify-content-center my-3">
               <b-btn
                 variant="link p-0 text-light text-14 mx-4"
                 @click="
@@ -266,7 +266,7 @@
               >
                 회원 탈퇴하기
               </b-btn>
-            </div>
+            </div> -->
           </template>
         </b-col>
       </b-row>

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="py-5">
     <article>
       <header class="mb-3">
         <h3>자주 묻는 질문</h3>
@@ -42,14 +42,14 @@ export default {
   data() {
     return {
       items: [
-        {
-          title: "회원가입은 어떻게하나요?",
-          content: "네이버 로그인을 지원합니다.",
-        },
-        {
-          title: "로그인이 안됩니다.",
-          content: "네이버 로그인을 지원합니다.",
-        },
+        // {
+        //   title: "회원가입은 어떻게하나요?",
+        //   content: "네이버 로그인을 지원합니다.",
+        // },
+        // {
+        //   title: "로그인이 안됩니다.",
+        //   content: "네이버 로그인을 지원합니다.",
+        // },
       ],
     };
   },

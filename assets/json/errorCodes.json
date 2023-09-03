@@ -5,6 +5,7 @@
     "auth/email-already-in-use": "이미 사용 중인 이메일입니다.",
     "auth/id-token-expired": "토큰이 만료되었습니다.",
     "auth/id-token-revoked": "토큰이 취소되었습니다.",
+    "auth/wrong-password": "비밀번호가 틀립니다.",
     "auth/insufficient-permission": "권한이 없는 계정입니다.",
     "auth/internal-error": "요청에 실패했습니다. 오류가 계속되면 운영관리자에게 문제를 신고하시기 바랍니다.",
     "auth/invalid-argument": "최대 인증 횟수를 초과하였습니다.",

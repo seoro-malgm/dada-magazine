@@ -1,30 +1,38 @@
 <template>
   <div>
-    <router-link :to="`/board/${item.docId}`">
-      <figure
-        class="board-item bg-img ratio-sm-67 ratio-56"
-        :class="{ 'bg-primary text-white': !item.thumbnail }"
-      >
-        <template v-if="item?.thumbnail">
-          <img
-            class="item-image"
-            :src="item.thumbnail"
-            :alt="`${item.title} 썸네일 이미지`"
-          />
-        </template>
-        <figcaption>
-          <div class="text">
-            <span class="text-13 d-block mb-2">
-              {{ getCategory(item.category) }}
-            </span>
-            <hr />
-            <h6 class="px-2 fw-700 text-truncate line-2" :class="titleClass">
-              {{ item.title }}
-            </h6>
-          </div>
-        </figcaption>
-      </figure>
-    </router-link>
+    <template v-if="item">
+      <nuxt-link :to="`/board/${item.docId}`">
+        <figure
+          class="board-item bg-img ratio-100"
+          :class="{ 'bg-primary text-white': !item.thumbnail }"
+        >
+          <template v-if="item?.thumbnail">
+            <img
+              class="item-image"
+              :src="item.thumbnail"
+              :alt="`${item.title} 썸네일 이미지`"
+            />
+          </template>
+          <figcaption>
+            <div class="text">
+              <span class="text-13 d-block mb-2">
+                {{ getCategory(item.category) }}
+              </span>
+              <hr />
+              <h6
+                class="px-2 fw-700 text-truncate line-2 text-13 text-lg-16"
+                :class="titleClass"
+              >
+                {{ item.title }}
+              </h6>
+            </div>
+          </figcaption>
+        </figure>
+      </nuxt-link>
+    </template>
+    <template v-else-if="!item">
+      <b-skeleton-img height="210px" animation="wave" class="rounded" />
+    </template>
   </div>
 </template>
 
@@ -133,7 +141,7 @@ export default {
         margin: 0.5rem auto 0.75rem;
       }
     }
-    @media (max-width: 1320px) {
+    @media (max-width: $breakpoint-lg) {
       opacity: 1;
       top: 50%;
       transform: translate(-50%, -50%);

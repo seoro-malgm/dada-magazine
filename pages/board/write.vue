@@ -1,9 +1,10 @@
 <template>
   <div class="mb-5 pb-5">
     <header
-      class="mb-5 bg-img header-thumbnail border-bottom border-primary position-relative"
-      :class="form?.thumbnail ? 'ratio-sm-90 ratio-45' : 'ratio-sm-45 ratio-15'"
+      class="mb-5 bg-img header-thumbnail border-bottom border-gray-200 position-relative"
+      :class="{ 'thumbnail-added': form?.thumbnail }"
     >
+      <!-- :class="form?.thumbnail ? 'ratio-sm-90 ratio-45' : 'ratio-sm-45 ratio-28'" -->
       <b-container class="py-5">
         <input-image
           path="thumbnails"
@@ -22,18 +23,21 @@
     </header>
     <b-container>
       <section class="mt-3 mb-4">
-        <b-row>
+        <b-row align-v="end">
           <b-col cols="12" md="8" lg="9">
-            <h6 class="py-2">제목</h6>
+            <!-- <h6 class="py-2 category-title">제목</h6> -->
             <b-form-input
               v-model="form.title"
               placeholder="제목을 입력하세요"
-              class="text-20 text-md-24"
+              class="text-20 text-md-40"
             />
           </b-col>
           <b-col cols="12" md="4" lg="3">
-            <h6 class="py-2">카테고리</h6>
-            <b-form-select v-model="form.category">
+            <!-- <h6 class="py-2 category-title">카테고리</h6> -->
+            <b-form-select
+              class="rounded-0 text-18 text-md-20"
+              v-model="form.category"
+            >
               <b-form-select-option :value="null" disabled>
                 카테고리를 선택하세요
               </b-form-select-option>
@@ -49,9 +53,12 @@
           </b-col>
         </b-row>
       </section>
-      <section class="mb-4">
+    </b-container>
+
+    <b-container fluid class="my-5">
+      <section>
         <client-only>
-          <h6 class="mt-3 mb-2">내용</h6>
+          <!-- <h6 class="mt-3 mb-2 category-title">내용</h6> -->
           <editor-write
             @on-update="($event) => updateDesc($event)"
             @on-image-removed="($event) => onImageRemoved($event)"
@@ -59,11 +66,12 @@
             imagePath="images"
             :content="form.desc"
             :imageSize="1920"
+            :thumbnailAdded="form?.thumbnail"
           />
         </client-only>
       </section>
-
-      <!-- <section class="mt-5 border-top border-bottom pb-4">
+    </b-container>
+    <!-- <section class="mt-5 border-top border-bottom pb-4">
       <header class="mt-2 mb-3">
         <h5>썸네일</h5>
       </header>
@@ -85,8 +93,9 @@
         </li>
       </ul>
     </section> -->
+    <b-container>
       <section class="mt-4">
-        <b-row align-h="end" class="mt-3">
+        <b-row align-h="center" class="mt-3">
           <b-col cols="12" md="4">
             <template v-if="docId">
               <b-btn variant="primary w-100 py-3 fw-700" @click="update">
@@ -96,7 +105,7 @@
             </template>
             <template v-else>
               <b-btn
-                variant="primary w-100 py-3 fw-700"
+                variant="primary w-100 py-3 fw-700 text-20 text-md-24"
                 @click="submit"
                 :disabled="!validate"
               >
@@ -357,7 +366,20 @@ export default {
   }
 }
 
+h6.category-title {
+  color: $gray-600;
+}
 .header-thumbnail {
-  transition: padding 0.4s $default-ease;
+  transition: padding-bottom 0.4s $default-ease;
+  padding-bottom: 300px;
+  &.thumbnail-added {
+    padding-bottom: 600px;
+  }
+  @media (min-width: $breakpoint-lg) {
+    padding-bottom: 400px;
+    &.thumbnail-added {
+      padding-bottom: 1080px;
+    }
+  }
 }
 </style>

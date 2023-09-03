@@ -8,6 +8,10 @@
       v-model="desc"
       placeholder="내용을 입력하세요"
       ref="editor"
+      :class="[
+        { 'on-scrolled': onScrolled },
+        { 'thumbnail-added': thumbnailAdded },
+      ]"
     />
   </div>
 </template>
@@ -29,12 +33,17 @@ export default {
       type: Number,
       default: 720,
     },
+    thumbnailAdded: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       quill: null, // Variable to store the Quill editor instance
       desc: null,
       resize,
+      onScrolled: false,
     };
   },
   watch: {
@@ -50,6 +59,12 @@ export default {
     if (this.quill) {
       this.quill.root.removeEventListener("paste", this.onPaste);
     }
+    // 스크롤 핸들러 해제
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
+    // 스크롤 핸들러
+    window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
     initializeEditor(editor) {
@@ -133,6 +148,18 @@ export default {
     onImageRemoved(url) {
       this.$emit("on-image-removed", url);
     },
+    // 스크롤바
+    handleScroll(e) {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      this.scrollY = scrollTop;
+      if (scrollTop <= 300) {
+        this.onScrolled = false;
+      }
+
+      if (scrollTop >= 400) {
+        this.onScrolled = true;
+      }
+    },
   },
 };
 </script>
@@ -142,23 +169,59 @@ $default-line-height: 1.6;
 #writer-editor {
   .quillWrapper {
     position: relative !important;
+    &.on-scrolled {
+      .ql-toolbar {
+        position: fixed;
+        top: 83.1px;
+        // @media (min-width: $breakpoint-lg) {
+        //   top: 50%;
+        // }
+      }
+      // &.thumbnail-added {
+      //   .ql-toolbar {
+      //     top: 50%;
+      //     @media (min-width: $breakpoint-lg) {
+      //       top: 50%;
+      //     }
+      //   }
+      // }
+    }
   }
   .ql-editor {
-    max-height: 85vh;
+    // max-height: 85vh;
+    min-height: 800px;
     overflow-y: scroll;
     padding-top: 56px;
     line-height: $default-line-height;
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track {
+      display: none;
+      width: 0;
+    }
+    overflow-y: auto;
   }
   .ql-toolbar {
     position: absolute;
+    border-left-width: 0;
+    border-right-width: 0;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1050;
+    // width: 48px;
+    // flex-direction: column;
     background-color: white;
+    // transition: top 0.3s $default-ease;
+    .ql-formats {
+      margin-bottom: 12px;
+    }
   }
   .ql-container {
     font-family: "Roboto", "Noto Sans KR", "Pretendard-Regular", sans-serif !important;
+    padding: 24px 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    // border-bottom-width: 0;
   }
   em {
     font-style: italic;

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="py-5">
     <article>
       <header class="mb-3">
         <h3>고객 지원</h3>

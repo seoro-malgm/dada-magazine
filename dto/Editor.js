@@ -31,7 +31,7 @@ class Editor {
     this.pid = pid;
     this.introduction = introduction;
     // this.validate();
-    this.popularity = like * 0.7 + viewer * 0.3 - report * -0.3;
+    this.popularity = like * 0.1 + viewer * 0.2 - report * -0.3;
   }
   // validate() {
   //     if (!this.id) {

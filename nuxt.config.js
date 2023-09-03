@@ -1,7 +1,7 @@
 require("dotenv").config();
 // import head from "./utils/head.json";
 
-module.exports = {
+export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: true,
   // mode: "universal",
@@ -53,7 +53,7 @@ module.exports = {
       {
         name: "og:url",
         property: "og:url",
-        content: "https://dada-magazine.com/",
+        content: "https://dada-magazine.com",
       },
       {
         name: "og:type",
@@ -87,12 +87,12 @@ module.exports = {
       },
       {
         property: "twitter:domain",
-        content: "https://dada-magazine.com/",
+        content: "https://dada-magazine.com",
       },
       {
         property: "twitter:url",
         hid: "twitter:url",
-        content: "https://dada-magazine.com/",
+        content: "https://dada-magazine.com",
       },
       {
         name: "twitter:title",
@@ -170,7 +170,7 @@ module.exports = {
       },
     },
   },
-  // buildDir: "public",
+  // buildDir: "client",
   generate: {
     dir: "dist",
   },

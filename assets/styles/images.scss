@@ -1,6 +1,9 @@
 $ratios: (
   15,
   20,
+  25,
+  28,
+  30,
   35,
   40,
   45,
@@ -116,7 +119,7 @@ figure.image-wrapper {
 
 // 더미이미지
 .image-dummy {
-  background-image: url("../images/dummy-square.png");
+  // background-image: url("../images/dummy-square.png");
   background-size: cover;
   background-position: center center;
 }

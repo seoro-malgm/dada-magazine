@@ -80,14 +80,14 @@
                   나의 다다
                 </b-btn>
               </li>
-              <li class="text-center">
+              <!-- <li class="text-center">
                 <b-btn
                   variant="text text-15 text-md-18"
                   :to="{ name: 'auth-stats' }"
                 >
                   내 글 통계
                 </b-btn>
-              </li>
+              </li> -->
             </ul>
             <hr class="my-4" />
           </template>
@@ -112,7 +112,7 @@
         <div class="px-4 text-right">
           <template v-if="auth">
             <b-btn
-              variant="text text-gray-600 p-0 text-14 text-lg-15"
+              variant="outline-gray-600 px-2 py-1 text-14 text-lg-15"
               pill
               :to="{ name: 'auth-logout' }"
               >로그아웃
