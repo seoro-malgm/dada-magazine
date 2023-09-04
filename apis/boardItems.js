@@ -18,6 +18,7 @@ import {
   where,
   getCountFromServer,
   startAt,
+  startAfter,
 } from "firebase/firestore";
 
 const db = getFirestore(app);
@@ -35,18 +36,29 @@ class boardItemsAPI {
   ) => {
     try {
       const queryConstraints = [];
+      if (orderType) {
+        if (orderValue) {
+          queryConstraints.push(orderBy(orderType, orderValue));
+        } else {
+          queryConstraints.push(orderBy(orderType));
+        }
+      }
       if (queryData) {
         for (const [key, value] of Object.entries(queryData)) {
           // console.log("key, value:", key, value);
           if (typeof value === "object") {
             queryConstraints.push(where(key, value[0], value[1], value[2]));
           } else {
-            queryConstraints.push(where(key, "==", value));
+            if (key === "startAfter") {
+              queryConstraints.push(startAfter(value));
+            } else {
+              queryConstraints.push(where(key, "==", value));
+            }
           }
         }
       }
       if (count) queryConstraints.push(limit(count));
-      if (orderType) queryConstraints.push(orderBy(orderType, orderValue));
+
       // 최종 쿼리
       const q = query(collection(db, collectionName), ...queryConstraints);
       const snapshot = await getDocs(q);

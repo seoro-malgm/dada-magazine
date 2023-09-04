@@ -7,6 +7,7 @@
 <script>
 export default {
   name: "auth-stats",
+  layout: "trash",
 };
 </script>
 

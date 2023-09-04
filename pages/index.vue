@@ -1,15 +1,12 @@
 <template>
   <div class="pt-5 pt-lg-0">
-    <!-- 뉴스레터 구독 -->
-    <newsletter-invite />
-
     <!-- header -->
-    <!-- <header class="px-3">
-      <b-container fluid class="pt-5 pt-lg-3">
+    <header class="px-3 text-center">
+      <b-container fluid class="pt-5">
         <h1 class="fw-900 text-24 text-lg-48 text-primary">
           우리들의 다재다능한 이야기
         </h1>
-        <b-row>
+        <b-row align-h="center">
           <b-col cols="12" lg="4">
             <p class="text-13 text-md-15 text-light">
               충남 공주시의 다재다능한 이야기를 만나보세요. Lorem ipsum dolor
@@ -19,21 +16,20 @@
           </b-col>
         </b-row>
       </b-container>
-    </header> -->
+    </header>
 
     <!-- 큐레이션 -->
-    <section class="my-5 py-5">
+    <!-- <section class="my-5 py-5">
       <header-section title="큐레이션" />
-    </section>
+    </section> -->
 
     <!-- 글들 -->
-    <section class="py-5 bg-gray-100">
-      <h3 class="text-20 text-lg-28 fw-700 text-center">포스트</h3>
+    <section class="pt-3 pb-5">
       <!-- <header-section title="포스트" /> -->
       <board-list />
     </section>
     <!-- 에디터 -->
-    <!-- <section class="py-5 bg-lightest">
+    <section class="py-5 bg-lightest">
       <template v-if="pending.editors">
         <div class="text-center p-5">
           <b-spinner />
@@ -50,7 +46,12 @@
                 >다다매거진의 다재다능한 유능한 에디터들을 만나보세요.
               </span>
             </header>
-            <div class="py-5">
+            <b-row align-h="center" class="mt-2 mb-3">
+              <b-col cols="12" md="10" lg="7">
+                <bar-horizon />
+              </b-col>
+            </b-row>
+            <div class="pt-3 pb-5">
               <b-row align-v="start" align-h="center" class="mx-n1 mx-md-n2">
                 <b-col
                   cols="6"
@@ -71,7 +72,7 @@
           <b-spinner />
         </div>
       </template>
-    </section> -->
+    </section>
 
     <!-- SNS -->
     <!-- <section class="section-gap">
@@ -90,6 +91,35 @@
         </b-row>
       </b-container>
     </section> -->
+    <!-- 뉴스레터 구독 -->
+    <newsletter-invite />
+    <!-- 협력요청 -->
+    <b-row class="py-3 py-md-0">
+      <b-col
+        cols="12"
+        md="6"
+        class="text-center py-2 py-md-4 px-2 border-right"
+      >
+        <a
+          class="btn btn-outline-primary rounded-pill px-4 text-18 text-md-24"
+          href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
+          target="_blank"
+        >
+          <i class="icon icon-left-dir" />
+          다재다능매거진에 대하여
+        </a>
+      </b-col>
+      <b-col cols="12" md="6" class="text-center py-2 py-md-4 px-2">
+        <a
+          class="btn btn-outline-primary rounded-pill px-4 text-18 text-md-24"
+          href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
+          target="_blank"
+        >
+          다재다능매거진과 협업하기
+          <i class="icon icon-right-dir" />
+        </a>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -119,6 +149,7 @@ export default {
   mounted() {
     this.getEditors();
   },
+
   methods: {
     async getEditors() {
       this.pending.editors = true;

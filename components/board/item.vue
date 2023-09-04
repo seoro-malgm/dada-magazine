@@ -95,8 +95,8 @@ export default {
   }
   img {
     object-fit: contain;
-    height: auto;
-    min-width: 100%;
+    width: auto;
+    min-height: 100%;
   }
 
   .item-image,

@@ -2,55 +2,92 @@
   <div>
     <b-container>
       <client-only>
-        <section class="section-category" v-if="categories?.length">
-          <ul class="list-category">
-            <li class="list-item">
-              <button
-                class="btn btn-outline-darkest btn-category text-16 text-lg-20"
-                :class="{ active: !categorySelected }"
-                @click="
-                  $router.push({
-                    path: '/',
-                    query: {
-                      categorySelected: null,
-                    },
-                  })
-                "
-              >
-                <span>All</span>
-              </button>
-            </li>
-            <li class="list-item" v-for="(category, i) in categories" :key="i">
-              <button
-                class="btn btn-outline-darkest btn-category text-16 text-lg-20"
-                :class="{ active: categorySelected === category.value }"
-                @click="
-                  $router.push({
-                    path: '/',
-                    query: {
-                      categorySelected: category.value,
-                    },
-                  })
-                "
-              >
-                <span>{{ category.text }}</span>
-              </button>
-            </li>
-          </ul>
-        </section>
+        <b-row align-h="center">
+          <b-col cols="12" md="10" lg="9">
+            <section class="section-category" v-if="categories?.length">
+              <ul class="list-category">
+                <li class="list-item">
+                  <button
+                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700"
+                    :class="{ active: !categorySelected }"
+                    @click="
+                      $router.push({
+                        path: '/',
+                      })
+                    "
+                  >
+                    <span>ALL</span>
+                  </button>
+                </li>
+                <li
+                  class="list-item"
+                  v-for="(category, i) in categories"
+                  :key="i"
+                >
+                  <button
+                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700"
+                    :class="{ active: categorySelected === category.value }"
+                    @click="
+                      $router.push({
+                        path: '/',
+                        query: {
+                          categorySelected: category.value,
+                        },
+                      })
+                    "
+                  >
+                    <span>{{ category.text }}</span>
+                  </button>
+                </li>
+              </ul>
+            </section>
+          </b-col>
+        </b-row>
         <bar-horizon />
       </client-only>
       <section>
         <ul class="list" v-if="items?.length">
           <li class="list-item" v-for="(item, i) in items" :key="i">
+            <template v-if="i === 5">
+              <div class="banner my-2 mb-4">
+                <span class="ad">광고</span>
+                <a
+                  href="https://maker-space-dream-frame.web.app/supporters/"
+                  target="_blank"
+                >
+                  <img
+                    class="w-100"
+                    :src="require('@/assets/images/banner.png')"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </template>
             <article class="item">
               <header class="header text-truncate">
                 <nuxt-link
                   class="text-24 text-md-28 text-lg-36 btn btn-text btn-text-gray-600"
                   :to="`/board/${item.docId}`"
                 >
-                  {{ item.title }}
+                  {{ item?.title }}
                 </nuxt-link>
+                <div class="mt-2 d-flex align-items-center">
+                  <small
+                    class="text-13 text-lg-14 fw-700 text-info border border-info rounded-pill px-3 py-1"
+                  >
+                    {{ getCategory(item.category) }}
+                  </small>
+                  <ul class="ml-2 d-flex align-items-center text-gray-500">
+                    <li class="d-flex align-items-center mr-2">
+                      <i class="icon icon-eye mr-1" />
+                      <span>{{ item?.viewer }}</span>
+                    </li>
+                    <li class="d-flex align-items-center mr-2">
+                      <i class="icon icon-heart mr-1" />
+                      <span>{{ item?.like }}</span>
+                    </li>
+                  </ul>
+                </div>
               </header>
               <div
                 class="item-thumbnail d-none d-lg-block"
@@ -68,7 +105,19 @@
               </figure>
             </article>
           </li>
+
+          <li v-if="items?.length >= count">
+            <div class="mt-5 text-center">
+              <b-btn
+                variant="outline-darkest px-4 py-2 rounded-0 text-16 text-lg-18"
+                @click="getItems(categorySelected)"
+              >
+                더보기
+              </b-btn>
+            </div>
+          </li>
         </ul>
+
         <section v-else>
           <template v-if="items !== null && !items?.length">
             <div class="py-3">
@@ -76,7 +125,7 @@
                 height="96px"
                 animation="wave"
                 class="rounded mb-4"
-                v-for="i in 10"
+                v-for="i in 3"
                 :key="i"
               />
             </div>
@@ -96,6 +145,7 @@ export default {
         items: false,
       },
       allCategories,
+      count: 20,
       items: [],
     };
   },
@@ -116,6 +166,12 @@ export default {
     // 선택된 카테고리
     categorySelected() {
       return this.$route.query?.categorySelected;
+    },
+    // 마지막
+    lastIndex() {
+      return this.items?.length
+        ? this.items[this.items?.length - 1]?.createdAt
+        : null;
     },
   },
   watch: {
@@ -138,19 +194,31 @@ export default {
       this.pending.items = true;
       const { getAllBoardItems } = this.$firebase();
       try {
-        const data = await getAllBoardItems("board", query, 30, [
-          "createdAt",
-          "desc",
-        ]);
+        const data = await getAllBoardItems(
+          "board",
+          {
+            ...query,
+            // startAfter: this.lastIndex,
+          },
+          this.count,
+          ["createdAt", "desc"]
+        );
         if (data) {
+          console.log("startAfter", this.lastIndex, data);
           this.items = data;
           this.pending.items = false;
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
         }
       } catch (error) {
         console.error("error:", error);
         this.pending.items = false;
       }
+    },
+    // 카테고리 불러오기
+    getCategory(category) {
+      return this.allCategories[category]
+        ? this.allCategories[category]
+        : this.allCategories["ETC"];
     },
   },
 };
@@ -165,9 +233,10 @@ export default {
   // border-bottom: 1px solid $gray-600;
 
   .list-category {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     .list-item {
       margin: 0 12px 12px 0;
       .btn-category {
@@ -232,7 +301,7 @@ export default {
         }
 
         .item-thumbnail {
-          transform: translateY(-50%) scale(0.2);
+          transform: translateY(35%) scale(0.2);
           transition: transform 0.4s $default-ease;
           user-select: none;
           background-position: center center;
@@ -248,10 +317,10 @@ export default {
           }
           .item-thumbnail {
             position: absolute;
-            top: 50%;
+            bottom: 0%;
             right: 2%;
-            width: 400px;
-            padding-bottom: 400px;
+            width: 240px;
+            padding-bottom: 240px;
             z-index: 2;
             mix-blend-mode: multiply;
             @media (max-width: $breakpoint-md) {
@@ -260,11 +329,28 @@ export default {
               padding-bottom: 45vw;
               right: 3vw;
             }
-            transform: translateY(-50%) scale(1);
+            transform: translateY(35%) scale(1);
           }
         }
       }
     }
+  }
+}
+.banner {
+  position: relative;
+
+  span.ad {
+    background-color: white;
+    border: 1px solid $gray-200;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    top: 0.25rem;
+    left: 0.25rem;
+    border-radius: 40rem;
+    font-size: 10px;
+    padding: 0.1rem 0.25rem;
   }
 }
 </style>

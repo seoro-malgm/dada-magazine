@@ -5,6 +5,7 @@
 <script>
 export default {
   name: "auth-edit-pwd",
+  layout: "trash",
 };
 </script>
 

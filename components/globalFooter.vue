@@ -1,51 +1,91 @@
 <template>
-  <footer id="gnf">
-    <b-container fluid class="py-3">
-      <ul class="list-unstyled">
-        <!-- <li>
+  <div>
+    <div class="py-3 border-top border-gray-400 bg-white">
+      <b-container>
+        <b-row>
+          <b-col
+            cols="6"
+            lg="3"
+            class="py-2 d-flex flex-column align-items-center justify-content-center"
+            v-for="(item, i) in partners"
+            :key="i"
+          >
+            <div
+              class="px-2 px-lg-4 d-flex flex-column align-items-center justify-content-center"
+            >
+              <a
+                :href="item?.url"
+                class="btn btn-text m-auto p-1"
+                target="_blank"
+              >
+                <template v-if="item?.image">
+                  <img
+                    :src="require(`@/assets/images/partners/${item?.image}`)"
+                    :alt="`${item?.name} 로고 이미지, 웹사이트로 이동`"
+                    class="w-100"
+                    :style="{
+                      maxHeight: '64px',
+                    }"
+                  />
+                </template>
+                <template v-else>
+                  {{ item.name }}
+                </template>
+              </a>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
+
+    <footer id="gnf">
+      <b-container fluid class="py-3">
+        <ul class="list-unstyled">
+          <!-- <li>
           <h4 class="logo mb-2">
             <img :src="require('@/assets/symbol-gongstar-white.svg')" />
           </h4>
         </li> -->
-        <li>
-          <strong> 주식회사 공스타 </strong>
-        </li>
-        <li>대표자 옹아름</li>
-        <li>사무실 주소 : 충남 공주시 흑수골길 41 2층</li>
-        <li>개인정보 보호 책임자 : 이상준</li>
-        <li>마케팅 제휴 문의 : gongstar2021@gmail.com</li>
-        <li>
-          <span class="copyright"> &copy; copyright gongstar reserved. </span>
-        </li>
-        <!-- <li class="mt-4">
+          <li>
+            <strong> 주식회사 공스타 </strong>
+          </li>
+          <li>대표자 옹아름</li>
+          <li>사무실 주소 : 충남 공주시 흑수골길 41 2층</li>
+          <li>개인정보 보호 책임자 : 이상준</li>
+          <li>마케팅 제휴 문의 : gongstar2021@gmail.com</li>
+          <li>
+            <span class="copyright"> &copy; copyright gongstar reserved. </span>
+          </li>
+          <!-- <li class="mt-4">
             <b-btn variant="dark" pill>다크모드</b-btn>
           </li> -->
-      </ul>
-      <div class="d-flex justify-content-between">
-        <nav class="footer-nav">
-          <b-btn variant="link" :to="{ name: 'terms-privacy' }"
-            >개인정보처리방침</b-btn
-          >
-          <b-btn variant="link" :to="{ name: 'customer-services-qna' }"
-            >고객지원</b-btn
-          >
-          <b-btn variant="link" :to="{ name: 'customer-services-faq' }"
-            >자주 묻는 질문</b-btn
-          >
-        </nav>
-        <ul class="list-unstyled">
-          <li>
-            <a
-              href="https://www.instagram.com/gong__star2021/?hl=ko"
-              target="_blank"
-            >
-              <i class="icon icon-instagram text-14 text-lg-16"></i>
-            </a>
-          </li>
         </ul>
-      </div>
-    </b-container>
-  </footer>
+        <div class="d-flex justify-content-between">
+          <nav class="footer-nav">
+            <b-btn variant="link" :to="{ name: 'terms-privacy' }"
+              >개인정보처리방침</b-btn
+            >
+            <b-btn variant="link" :to="{ name: 'customer-services-qna' }"
+              >고객지원</b-btn
+            >
+            <b-btn variant="link" :to="{ name: 'customer-services-faq' }"
+              >자주 묻는 질문</b-btn
+            >
+          </nav>
+          <ul class="list-unstyled">
+            <li>
+              <a
+                href="https://www.instagram.com/gong__star2021/?hl=ko"
+                target="_blank"
+              >
+                <i class="icon icon-instagram text-14 text-lg-16"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </b-container>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -53,6 +93,28 @@ import { copyText } from "~/plugins/commons.js";
 export default {
   data() {
     return {
+      partners: [
+        {
+          image: "gongjucf.png",
+          name: "공주문화관광재단",
+          url: "https://www.gongjucf.or.kr/intro.do",
+        },
+        {
+          image: "gongjuuniv.svg",
+          name: "공주대학교",
+          url: "https://www.kongju.ac.kr/k_intro/index.html",
+        },
+        {
+          image: "gongjuuniv_sh.svg",
+          name: "공주대학교 산학협력단",
+          url: "https://sanhak.kongju.ac.kr/",
+        },
+        {
+          image: "gongjusalon.svg",
+          name: "공주살롱",
+          url: "https://gongju-salon.web.app/",
+        },
+      ],
       contacts: [
         {
           icon: "mail-1",

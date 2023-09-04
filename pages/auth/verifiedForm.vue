@@ -68,6 +68,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam unde dolorem
 import formPrivacy from "@/assets/forms/form_privacy.js";
 export default {
   name: "auth-verifiedForm",
+  layout: "trash",
   props: {
     auth: {
       type: [Object, String],

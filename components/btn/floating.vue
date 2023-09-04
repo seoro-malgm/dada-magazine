@@ -5,7 +5,13 @@
       ...position,
     }"
   >
-    <b-btn :variant="variant" @click="$emit('click')">
+    <b-btn
+      :variant="variant"
+      @click="$emit('click')"
+      :style="{
+        ...btnStyle,
+      }"
+    >
       <slot name="content" />
     </b-btn>
   </div>
@@ -27,6 +33,10 @@ export default {
       type: String,
       default: "primary",
     },
+    btnStyle: {
+      type: Object,
+      default: null,
+    },
   },
 };
 </script>
@@ -36,9 +46,9 @@ export default {
   position: fixed;
   z-index: 1055;
   .btn {
-    border-radius: 40rem;
-    font-size: 1.15rem;
-    padding: 0.75rem 1.5rem;
+    // border-radius: 40rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  layout: "trash",
   data() {
     return {
       pending: {

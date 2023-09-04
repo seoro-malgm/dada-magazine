@@ -34,6 +34,7 @@
 import formPrivacy from "@/assets/forms/form_privacy.js";
 
 export default {
+  layout: "trash",
   props: {
     auth: {
       type: [Object],

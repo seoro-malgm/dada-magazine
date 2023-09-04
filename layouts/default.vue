@@ -5,24 +5,22 @@
     <main id="main">
       <nuxt-child :auth="auth" />
     </main>
-    <!-- <btn-floating
-      v-if="auth && routeName !== 'board-write'"
+    <btn-floating
       :position="{
-        bottom: '2.5rem',
+        bottom: onScrolled ? '4.5rem' : '-7rem',
         right: '1.5rem',
       }"
-      variant="primary text-darkest"
-      @click="
-        $router.push({
-          name: 'board-write',
-        })
-      "
+      variant="white text-darkest rounded-circle p-0"
+      :btnStyle="{
+        width: '48px',
+        height: '48px',
+      }"
+      @click="scrollTo(0, 0)"
     >
       <template #content>
-        <i class="icon icon-pencil" />
-        <span class="mx-1 fw-700">글쓰기</span>
+        <i class="icon icon-up-circled text-48" />
       </template>
-    </btn-floating> -->
+    </btn-floating>
     <!-- footer -->
 
     <global-footer />
@@ -32,6 +30,11 @@
 <script>
 export default {
   name: "default",
+  data() {
+    return {
+      onScrolled: false,
+    };
+  },
   async mounted() {
     this.modal();
     window.toast = this.toast;
@@ -44,7 +47,19 @@ export default {
       return this.$route.name;
     },
   },
+  mounted() {
+    // 스크롤 핸들러
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    // 스크롤 핸들러 해제
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+
   methods: {
+    scrollTo(x, y) {
+      window.scrollTo(x, y);
+    },
     modal() {
       window.alert = async (
         msg,
@@ -150,6 +165,17 @@ export default {
         toastClass: "border-0  pt-0",
         toaster: "b-toaster-bottom-right",
       });
+    },
+    handleScroll(e) {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      this.scrollY = scrollTop;
+      if (scrollTop <= 100) {
+        this.onScrolled = false;
+      }
+
+      if (scrollTop >= 180) {
+        this.onScrolled = true;
+      }
     },
   },
 };
