@@ -78,6 +78,10 @@
                     {{ getCategory(item.category) }}
                   </small>
                   <ul class="ml-2 d-flex align-items-center text-gray-500">
+                    <li class="mr-2 d-flex align-items-center mr-2">
+                      <i class="icon icon-calendar mr-1" />
+                      <span>{{ getDate(item?.createdAt) }}</span>
+                    </li>
                     <li class="d-flex align-items-center mr-2">
                       <i class="icon icon-eye mr-1" />
                       <span>{{ item?.viewer }}</span>
@@ -219,6 +223,11 @@ export default {
       return this.allCategories[category]
         ? this.allCategories[category]
         : this.allCategories["ETC"];
+    },
+    // 글날짜불러오기
+    getDate(time) {
+      const { seconds } = time;
+      return seconds ? new Date(seconds * 1000)?.toLocaleDateString() : "";
     },
   },
 };

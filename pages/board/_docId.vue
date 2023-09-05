@@ -173,8 +173,8 @@
           <b-row class="mx-n2">
             <b-col
               cols="6"
-              md="4"
-              class="px-2"
+              md="3"
+              class="px-2 mb-3"
               v-for="(item, i) in items"
               :key="i"
             >
@@ -208,7 +208,7 @@
           </b-row>
         </section>
       </article> -->
-        <div class="d-flex justify-content-between">
+        <!-- <div class="d-flex justify-content-between">
           <b-btn
             variant="secondary btn-go-top d-inline-flex align-items-center"
             pill
@@ -218,7 +218,7 @@
           >
             맨 위로
           </b-btn>
-        </div>
+        </div> -->
         <!-- 글 신고 모달 -->
         <modal-report-board
           :boardUser="currentBoardItem.user"
@@ -281,10 +281,10 @@ export default {
         "board",
         {
           ...query,
-          docId: ["<", params.docId, 3],
+          docId: ["<", params.docId, 4],
         },
-        3,
-        ["docId"]
+        4,
+        ["docId", "desc"]
       ),
     ]);
     return {
@@ -313,7 +313,7 @@ export default {
     createdDate() {
       const { seconds } = this.currentBoardItem?.createdAt;
       return seconds && this.getTimestamp
-        ? this.getTimestamp(new Date(seconds * 1000))
+        ? new Date(seconds * 1000)?.toLocaleDateString() // this.getTimestamp(new Date(seconds * 1000))
         : "";
     },
     author() {

@@ -73,12 +73,12 @@ export default {
       {
         name: "msapplication-TileColor",
         property: "msapplication-TileColor",
-        content: "#2f318e",
+        content: "#d0df00",
       },
       {
         name: "theme-color",
         property: "theme-color",
-        content: "#2f318e",
+        content: "#d0df00",
       },
       {
         name: "twitter:card",
@@ -133,7 +133,7 @@ export default {
       },
       {
         rel: "mask-icon",
-        color: "#5bbad5",
+        color: "#d0df00",
         href: "/safari-pinned-tab.svg",
       },
     ],

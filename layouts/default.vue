@@ -35,10 +35,6 @@ export default {
       onScrolled: false,
     };
   },
-  async mounted() {
-    this.modal();
-    window.toast = this.toast;
-  },
   computed: {
     auth() {
       return this.$store.getters.getUser;
@@ -50,6 +46,8 @@ export default {
   mounted() {
     // 스크롤 핸들러
     window.addEventListener("scroll", this.handleScroll);
+    this.modal();
+    window.toast = this.toast;
   },
   beforeDestroy() {
     // 스크롤 핸들러 해제

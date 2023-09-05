@@ -38,13 +38,13 @@
               </b-btn>
             </template>
             <template v-else-if="!auth?.isEditor">
-              <b-btn
+              <!-- <b-btn
                 variant="outline-primary w-100"
                 pill
                 :to="{ name: 'auth-editorConfirm' }"
               >
                 에디터 신청
-              </b-btn>
+              </b-btn> -->
             </template>
           </div>
         </template>
@@ -61,10 +61,13 @@
             로그인
           </b-btn>
           <b-btn
-            variant="outline-gray-400 mb-2"
-            :to="{ name: 'auth-signup' }"
+            id="coming-soon"
+            variant="outline-gray-400 mb-2 "
             pill
+            v-b-tooltip.hover
+            title="회원가입은 현재 준비중입니다."
           >
+            <!-- :to="{ name: 'auth-signup' }" -->
             회원가입
           </b-btn>
         </template>
@@ -139,6 +142,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      comingSoon: true,
+    };
   },
 };
 </script>

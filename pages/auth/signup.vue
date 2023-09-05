@@ -270,7 +270,7 @@ import {
 } from "~/plugins/helper";
 
 export default {
-  layout: "trash",
+  layout: "default",
   name: "auth-signup",
   head() {
     return {

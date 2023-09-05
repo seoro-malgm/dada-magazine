@@ -1,18 +1,18 @@
 <template>
   <b-card class="editor-item" @click="$router.push(`/${item.pid}`)">
     <b-card-header>
-      <b-avatar size="8rem" class="mb-2" :src="item?.profile_image_url" />
+      <b-avatar size="80px" class="mb-2" :src="item?.profile_image_url" />
       <h6 class="text-16 text-md-18">{{ item.nickname }}</h6>
       <span class="text-14 text-md-15">@{{ item.pid }}</span>
     </b-card-header>
-    <b-card-body>
+    <!-- <b-card-body>
       <p
         class="text-14 text-md-15 border-top border-light py-2"
         v-if="item?.introduction"
       >
         {{ item.introduction }}
       </p>
-    </b-card-body>
+    </b-card-body> -->
     <!-- <b-card-footer> foote </b-card-footer> -->
   </b-card>
 </template>
@@ -48,6 +48,10 @@ export default {
       flex-direction: column;
       text-align: center;
       align-items: center;
+      .b-avatar {
+        min-width: 40px;
+        min-height: 40px;
+      }
     }
     .card-body {
       padding: 0.25rem;

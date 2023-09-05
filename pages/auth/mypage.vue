@@ -280,7 +280,7 @@ import { validateIdHelper, validateNicknameHelper } from "~/plugins/helper";
 
 export default {
   name: "auth-mypage",
-  layout: "trash",
+  // layout: "trash",
   head() {
     return {
       title: `다다매거진 | 마이페이지`,

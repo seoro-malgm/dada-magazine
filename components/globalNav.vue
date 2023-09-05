@@ -3,7 +3,7 @@
     <div id="gnb">
       <b-navbar type="light" variant="white">
         <b-container fluid>
-          <b-navbar-brand class="mx-auto">
+          <b-navbar-brand class="mr-5 mr-md-0">
             <nuxt-link to="/" replace>
               <img
                 :src="require('@/assets/logo-short.svg')"
@@ -15,13 +15,13 @@
           </b-navbar-brand>
           <!-- <b-navbar-toggle target="nav-collapse" /> -->
 
-          <!-- <b-collapse id="nav-collapse" is-nav>
+          <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="d-flex align-items-center w-100">
               <client-only>
                 <div class="ml-auto uitls-auth">
-                  <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
+                  <!-- <b-btn variant="text p-0 mr-2" pill :to="{ name: 'search' }">
                     <i class="icon icon-search text-20 text-lg-24" />
-                  </b-btn>
+                  </b-btn> -->
                   <b-btn
                     variant="text p-0"
                     pill
@@ -29,26 +29,19 @@
                   >
                     <i class="icon icon-menu text-20 text-lg-24" />
                   </b-btn>
-                  <a
-                    class="btn btn-outline-light rounded-pill text-13 text-md-14"
-                    href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
-                    target="_blank"
-                  >
-                    다재다능매거진에 대하여
-                  </a>
                 </div>
               </client-only>
             </b-navbar-nav>
-          </b-collapse> -->
+          </b-collapse>
         </b-container>
       </b-navbar>
     </div>
-    <!-- <global-sidebar
+    <global-sidebar
       :auth="auth"
       :isBeta="isBeta"
       :visible="showSidebar"
       @on-close="showSidebar = false"
-    /> -->
+    />
   </header>
 </template>
 

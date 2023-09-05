@@ -73,9 +73,12 @@
                 <small>이미 가입된 아이디가 없다면?</small>
                 <b-btn
                   variant="outline-light ml-2"
-                  :to="{ name: 'auth-signup' }"
-                  >회원가입</b-btn
+                  v-b-tooltip.hover
+                  title="회원가입은 현재 준비중입니다."
                 >
+                  <!-- :to="{ name: 'auth-signup' }" -->
+                  회원가입
+                </b-btn>
               </div>
             </b-card-body>
           </b-card>
@@ -143,6 +146,7 @@ export default {
         }
       } catch (error) {
         console.error("error:", error);
+        window.toast(error);
       }
     },
     loginWithNaver() {

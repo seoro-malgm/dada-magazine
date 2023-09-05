@@ -61,10 +61,9 @@ class authAPI {
       })
       .catch((error) => {
         const errorCode = error.code;
-        window.toast(
+        throw new Error(
           errorCodes?.auth[errorCode] || "에러로 인해 로그인에 실패했습니다."
         );
-        throw error;
       });
   };
   // 로그인
@@ -88,10 +87,9 @@ class authAPI {
       })
       .catch((error) => {
         const errorCode = error.code;
-        window.toast(
+        throw new Error(
           errorCodes?.auth[errorCode] || "에러로 인해 로그인에 실패했습니다."
         );
-        throw error;
       });
   };
 

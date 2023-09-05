@@ -145,7 +145,7 @@ $default-line-height: 1.6;
     }
   }
   &:deep(div.ql-video),
-  &:deep(iframe.ql-video iframe) {
+  &:deep(iframe.ql-video, iframe) {
     width: 100%;
     min-height: 240px;
     @media (min-width: $breakpoint-lg) {
@@ -154,6 +154,7 @@ $default-line-height: 1.6;
   }
   &:deep(img) {
     max-width: 100%;
+    height: auto;
   }
 }
 </style>
