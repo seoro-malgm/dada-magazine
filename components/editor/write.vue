@@ -232,9 +232,9 @@ $default-line-height: 1.6;
   span *,
   p,
   p * {
-    font-size: 14px;
+    font-size: 16px;
     @media (min-width: $breakpoint-md) {
-      font-size: 16px;
+      font-size: 17px;
     }
   }
   h1,
@@ -267,16 +267,16 @@ $default-line-height: 1.6;
   }
   h5,
   h5 * {
-    font-size: 18px;
+    font-size: 20px;
     @media (min-width: $breakpoint-md) {
       font-size: 24px;
     }
   }
   h6,
   h6 * {
-    font-size: 16px;
+    font-size: 18px;
     @media (min-width: $breakpoint-md) {
-      font-size: 18px;
+      font-size: 19px;
     }
   }
   .ql-size-small,

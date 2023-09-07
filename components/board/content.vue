@@ -28,9 +28,9 @@ $default-line-height: 1.6;
   &:deep(p),
   &:deep(p *) {
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 16px;
     @media (min-width: $breakpoint-md) {
-      font-size: 16px;
+      font-size: 17px;
     }
   }
   &:deep(h1),
@@ -67,7 +67,7 @@ $default-line-height: 1.6;
   }
   &:deep(h5),
   &:deep(h5 *) {
-    font-size: 18px;
+    font-size: 20px;
     line-height: $default-line-height !important;
     @media (min-width: $breakpoint-md) {
       font-size: 24px;
@@ -75,10 +75,10 @@ $default-line-height: 1.6;
   }
   &:deep(h6),
   &:deep(h6 *) {
-    font-size: 16px;
+    font-size: 18px;
     line-height: $default-line-height !important;
     @media (min-width: $breakpoint-md) {
-      font-size: 18px;
+      font-size: 19px;
     }
   }
   &:deep(.ql-size-small),

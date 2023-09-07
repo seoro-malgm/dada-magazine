@@ -52,7 +52,7 @@
         <template v-else>
           <div class="mb-3 text-center">
             <b-avatar size="3rem" />
-            <span class="text-14 text-md-15 d-block mt-2">
+            <span class="text-15 text-md-15 d-block mt-2">
               서비스 이용을 위해서 <strong>로그인</strong> 혹은
               <strong>회원가입</strong>을 진행해주세요!
             </span>
@@ -115,7 +115,7 @@
         <div class="px-4 text-right">
           <template v-if="auth">
             <b-btn
-              variant="outline-gray-600 px-2 py-1 text-14 text-lg-15"
+              variant="outline-gray-600 px-2 py-1 text-15 text-lg-15"
               pill
               :to="{ name: 'auth-logout' }"
               >로그아웃

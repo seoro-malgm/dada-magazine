@@ -35,7 +35,7 @@
                     autocomplete="off"
                   />
                   <b-form-invalid-feedback>
-                    <span class="text-14 text-lg-15 fw-700 text-alert">
+                    <span class="text-15 text-lg-15 fw-700 text-alert">
                       <i class="icon icon-window-close" />
                       이메일을 입력하세요
                     </span>
@@ -48,7 +48,7 @@
                     </template>
                     <template v-else>
                       <span
-                        class="text-14 text-lg-15 fw-700"
+                        class="text-15 text-lg-15 fw-700"
                         :class="`text-${check.email ? 'info' : 'alert'}`"
                         v-if="typeof check.email === 'boolean'"
                       >
@@ -100,7 +100,7 @@
                     "
                   />
                   <b-form-invalid-feedback>
-                    <span class="text-14 text-lg-15 fw-700 text-alert">
+                    <span class="text-15 text-lg-15 fw-700 text-alert">
                       <i class="icon icon-window-close" />
                       확인을 위해 비밀번호와 동일하게 입력해주세요.
                     </span>
@@ -144,7 +144,7 @@
                       :state="state.pid"
                     />
                     <b-form-invalid-feedback>
-                      <span class="text-14 text-lg-15 fw-700 text-alert">
+                      <span class="text-15 text-lg-15 fw-700 text-alert">
                         <i class="icon icon-window-close" />
                         사용할 수 없는 아이디입니다
                       </span>
@@ -160,7 +160,7 @@
                       </template>
                       <template v-else>
                         <span
-                          class="text-14 text-lg-15 fw-700"
+                          class="text-15 text-lg-15 fw-700"
                           :class="`text-${check.pid ? 'info' : 'alert'}`"
                           v-if="typeof check.pid === 'boolean'"
                         >
@@ -197,7 +197,7 @@
                       :state="state.nickname"
                     />
                     <b-form-invalid-feedback>
-                      <span class="text-14 text-lg-15 fw-700 text-alert">
+                      <span class="text-15 text-lg-15 fw-700 text-alert">
                         <i class="icon icon-window-close" />
                         사용할 수 없는 별명입니다
                       </span>
@@ -213,7 +213,7 @@
                       </template>
                       <template v-else>
                         <span
-                          class="text-14 text-lg-15 fw-700"
+                          class="text-15 text-lg-15 fw-700"
                           :class="`text-${check.nickname ? 'info' : 'alert'}`"
                           v-if="typeof check.nickname === 'boolean'"
                         >

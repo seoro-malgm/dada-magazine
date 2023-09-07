@@ -47,8 +47,13 @@
       </client-only>
       <section>
         <ul class="list" v-if="items?.length">
+          <!-- lastVisible:
+          {{
+            lastVisible?.title
+          }} -->
+          <!-- 목록 -->
           <li class="list-item" v-for="(item, i) in items" :key="i">
-            <template v-if="i === 5">
+            <template v-if="i >= 1 && !(i % 7)">
               <div class="banner my-2 mb-4">
                 <span class="ad">광고</span>
                 <a
@@ -73,7 +78,7 @@
                 </nuxt-link>
                 <div class="mt-2 d-flex align-items-center">
                   <small
-                    class="text-13 text-lg-14 fw-700 text-info border border-info rounded-pill px-3 py-1"
+                    class="text-14 text-lg-14 fw-700 text-info border border-info rounded-pill px-3 py-1"
                   >
                     {{ getCategory(item.category) }}
                   </small>
@@ -110,18 +115,34 @@
             </article>
           </li>
 
-          <li v-if="items?.length >= count">
+          <!-- 더보기 -->
+          <li v-if="items?.length >= size">
             <div class="mt-5 text-center">
               <b-btn
                 variant="outline-darkest px-4 py-2 rounded-0 text-16 text-lg-18"
-                @click="getItems(categorySelected)"
+                @click="
+                  getItems({
+                    startAfter: lastVisible,
+                  })
+                "
               >
                 더보기
               </b-btn>
             </div>
           </li>
         </ul>
-
+        <template v-if="pending.loadMore">
+          <div class="py-3">
+            <b-skeleton
+              height="96px"
+              animation="wave"
+              class="rounded mb-4"
+              v-for="i in 6"
+              :key="i"
+            />
+          </div>
+        </template>
+        <!-- pending -->
         <section v-else>
           <template v-if="items !== null && !items?.length">
             <div class="py-3">
@@ -129,7 +150,7 @@
                 height="96px"
                 animation="wave"
                 class="rounded mb-4"
-                v-for="i in 3"
+                v-for="i in 6"
                 :key="i"
               />
             </div>
@@ -147,9 +168,10 @@ export default {
     return {
       pending: {
         items: false,
+        ladMore: false,
       },
       allCategories,
-      count: 20,
+      size: 14,
       items: [],
     };
   },
@@ -172,10 +194,8 @@ export default {
       return this.$route.query?.categorySelected;
     },
     // 마지막
-    lastIndex() {
-      return this.items?.length
-        ? this.items[this.items?.length - 1]?.createdAt
-        : null;
+    lastVisible() {
+      return this.items?.length ? this.items?.at(-1) : null;
     },
   },
   watch: {
@@ -194,23 +214,27 @@ export default {
   },
   methods: {
     // 글 불러오기
-    async getItems(query) {
+    async getItems(query, ladMore = false) {
       this.pending.items = true;
+      if (ladMore) {
+        this.pending.loadMore = true;
+      }
       const { getAllBoardItems } = this.$firebase();
+      const body = {
+        ...query,
+      };
       try {
-        const data = await getAllBoardItems(
-          "board",
-          {
-            ...query,
-            // startAfter: this.lastIndex,
-          },
-          this.count,
-          ["createdAt", "desc"]
-        );
+        const data = await getAllBoardItems("board", body, this.size, [
+          "createdAt",
+          "desc",
+        ]);
         if (data) {
-          console.log("startAfter", this.lastIndex, data);
-          this.items = data;
+          console.log("data:", data);
+          this.items = ladMore ? [...this.items, ...data] : [...data];
           this.pending.items = false;
+          if (ladMore) {
+            this.pending.loadMore = false;
+          }
           // window.scrollTo(0, 0);
         }
       } catch (error) {

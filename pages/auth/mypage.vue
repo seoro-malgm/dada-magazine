@@ -85,7 +85,7 @@
                         :state="state.pid"
                       />
                       <b-form-invalid-feedback>
-                        <span class="text-14 text-lg-15 fw-700 text-alert">
+                        <span class="text-15 text-lg-15 fw-700 text-alert">
                           <i class="icon icon-window-close" />
                           사용할 수 없는 아이디입니다
                         </span>
@@ -102,7 +102,7 @@
                         </template>
                         <template v-else>
                           <span
-                            class="text-14 text-lg-15 fw-700"
+                            class="text-15 text-lg-15 fw-700"
                             :class="`text-${check.pid ? 'info' : 'alert'}`"
                             v-if="typeof check.pid === 'boolean'"
                           >
@@ -140,7 +140,7 @@
                         :state="state.nickname"
                       />
                       <b-form-invalid-feedback>
-                        <span class="text-14 text-lg-15 fw-700 text-alert">
+                        <span class="text-15 text-lg-15 fw-700 text-alert">
                           <i class="icon icon-window-close" />
                           사용할 수 없는 별명입니다
                         </span>
@@ -156,7 +156,7 @@
                         </template>
                         <template v-else>
                           <span
-                            class="text-14 text-lg-15 fw-700"
+                            class="text-15 text-lg-15 fw-700"
                             :class="`text-${check.nickname ? 'info' : 'alert'}`"
                             v-if="typeof check.nickname === 'boolean'"
                           >
@@ -203,7 +203,7 @@
                 <div>
                   <header class="mb-3 text-center">
                     <h2 class="text-center text-20 text-lg-24">제안받기</h2>
-                    <span class="text-14 text-md-16">
+                    <span class="text-15 text-md-16">
                       에디터로서 제안을 받을 수있는 이메일, 연락처 등의 정보를
                       관리하세요.
                     </span>
@@ -251,7 +251,7 @@
             </div>
             <!-- <div class="d-flex justify-content-center my-3">
               <b-btn
-                variant="link p-0 text-light text-14 mx-4"
+                variant="link p-0 text-light text-15 mx-4"
                 @click="
                   $router.push({
                     name: 'auth-edit-pwd',
@@ -261,7 +261,7 @@
                 비밀번호 변경하기
               </b-btn>
               <b-btn
-                variant="link p-0 text-light text-14 mx-4 "
+                variant="link p-0 text-light text-15 mx-4 "
                 @click="onRemoveUser"
               >
                 회원 탈퇴하기

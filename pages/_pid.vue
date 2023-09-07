@@ -97,7 +97,7 @@
                 lg="9"
                 xl="10"
               >
-                <p class="text-14 text-lg-15 py-1">
+                <p class="text-15 text-lg-15 py-1">
                   {{ user?.introduction || "자기소개가 없습니다." }}
                 </p>
               </b-col>

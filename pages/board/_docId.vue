@@ -21,7 +21,7 @@
               {{ currentBoardItem?.title }}
             </h1>
             <div class="mt-3 d-flex align-items-center justify-content-center">
-              <small class="text-13 text-md-14">
+              <small class="text-14 text-md-14">
                 {{ createdDate }} | 조회수
                 {{ currentBoardItem.viewer + 1 || 0 }}
               </small>
@@ -149,7 +149,7 @@
                   >
                     {{ author?.nickname || "-" }}
                   </b-btn>
-                  <small class="text-13"> {{ author?.introduction }} </small>
+                  <small class="text-14"> {{ author?.introduction }} </small>
                 </div>
               </div>
             </template>

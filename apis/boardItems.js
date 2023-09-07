@@ -30,12 +30,13 @@ class boardItemsAPI {
   // boardItem 전체 불러오기
   getAllBoardItems = async (
     collectionName = "board",
-    queryData,
-    count,
+    queryData, // 쿼리
+    size, // 갯수
     [orderType, orderValue]
   ) => {
     try {
       const queryConstraints = [];
+      // 순서 색인
       if (orderType) {
         if (orderValue) {
           queryConstraints.push(orderBy(orderType, orderValue));
@@ -43,21 +44,20 @@ class boardItemsAPI {
           queryConstraints.push(orderBy(orderType));
         }
       }
+      // 추가 쿼리
       if (queryData) {
         for (const [key, value] of Object.entries(queryData)) {
-          // console.log("key, value:", key, value);
           if (typeof value === "object") {
-            queryConstraints.push(where(key, value[0], value[1], value[2]));
-          } else {
-            if (key === "startAfter") {
+            // 페이지네이션
+            if (key === "startAfter" && value)
               queryConstraints.push(startAfter(value));
-            } else {
-              queryConstraints.push(where(key, "==", value));
-            }
-          }
+            else
+              queryConstraints.push(where(key, value[0], value[1], value[2])); // 추가적으로 부호가 있을 경우
+          } else queryConstraints.push(where(key, "==", value));
         }
       }
-      if (count) queryConstraints.push(limit(count));
+      // 갯수
+      if (size) queryConstraints.push(limit(size));
 
       // 최종 쿼리
       const q = query(collection(db, collectionName), ...queryConstraints);

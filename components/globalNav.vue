@@ -2,7 +2,7 @@
   <header>
     <div id="gnb">
       <b-navbar type="light" variant="white">
-        <b-container fluid>
+        <b-container>
           <b-navbar-brand class="mr-5 mr-md-0">
             <nuxt-link to="/" replace>
               <img

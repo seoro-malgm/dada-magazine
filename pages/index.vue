@@ -8,11 +8,8 @@
         </h1>
         <b-row align-h="center">
           <b-col cols="12" lg="4">
-            <p class="text-13 text-md-15 text-light">
+            <p class="text-14 text-md-15 text-light">
               충남 공주시의 로컬매거진. 다재다능한 이야기를 만나보세요.
-              <!-- Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Eaque id ex recusandae
-              dolores ipsum nulla dolorum quidem veniam distinctio repellat. -->
             </p>
           </b-col>
         </b-row>

@@ -3,7 +3,7 @@
     <b-container class="my-5 py-5">
       <header class="mb-2 pb-2 border-bottom border-primary">
         <h1 class="text-18 text-md-32">에디터 신청하기</h1>
-        <p class="text-14 text-md-15">
+        <p class="text-15 text-md-15">
           다다매거진의 에디터가 되고 싶으신가요? 지금 신청하세요!
         </p>
       </header>

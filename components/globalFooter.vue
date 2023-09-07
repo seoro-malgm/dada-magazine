@@ -4,8 +4,8 @@
       <b-container>
         <b-row>
           <b-col
-            cols="6"
-            lg="3"
+            cols="20"
+            lg="20"
             class="py-2 d-flex flex-column align-items-center justify-content-center"
             v-for="(item, i) in partners"
             :key="i"
@@ -26,6 +26,7 @@
                     :style="{
                       maxHeight: '64px',
                     }"
+                    :title="item?.name"
                   />
                 </template>
                 <template v-else>
@@ -39,7 +40,7 @@
     </div>
 
     <footer id="gnf">
-      <b-container fluid class="py-3">
+      <b-container class="py-3">
         <ul class="list-unstyled">
           <!-- <li>
           <h4 class="logo mb-2">
@@ -78,7 +79,7 @@
                 href="https://www.instagram.com/gong__star2021/?hl=ko"
                 target="_blank"
               >
-                <i class="icon icon-instagram text-14 text-lg-16"></i>
+                <i class="icon icon-instagram text-15 text-lg-16"></i>
               </a>
             </li>
           </ul>
@@ -113,6 +114,11 @@ export default {
           image: "gongjusalon.svg",
           name: "공주살롱",
           url: "https://gongju-salon.web.app/",
+        },
+        {
+          image: "splfshop.svg",
+          name: "신풍애 농부들",
+          url: "https://smartstore.naver.com/splfshop",
         },
       ],
       contacts: [
@@ -165,5 +171,9 @@ export default {
       font-size: 0.85rem;
     }
   }
+}
+.col-20 {
+  flex: 20% 0 0;
+  max-width: 20%;
 }
 </style>

@@ -15,12 +15,12 @@
           </template>
           <figcaption>
             <div class="text">
-              <span class="text-13 d-block mb-2">
+              <span class="text-14 d-block mb-2">
                 {{ getCategory(item.category) }}
               </span>
               <hr />
               <h6
-                class="px-2 fw-700 text-truncate line-2 text-13 text-lg-16"
+                class="px-2 fw-700 text-truncate line-2 text-14 text-lg-16"
                 :class="titleClass"
               >
                 {{ item.title }}

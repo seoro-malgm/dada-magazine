@@ -5,7 +5,7 @@
     <b-input-group class="py-2 border border-primary rounded-pill">
       <b-form-input
         type="text"
-        class="px-3 text-14 text-lg-20 border-0 bg-transparent"
+        class="px-3 text-15 text-lg-20 border-0 bg-transparent"
         v-model="str"
         placeholder="검색어를 입력하세요"
         @keypress.enter="search(str)"
