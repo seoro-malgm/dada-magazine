@@ -49,9 +49,10 @@ class boardItemsAPI {
         for (const [key, value] of Object.entries(queryData)) {
           if (typeof value === "object") {
             // 페이지네이션
-            if (key === "startAfter" && value)
+            if (key === "startAfter" && value) {
+              console.log("lastVisible:", value);
               queryConstraints.push(startAfter(value));
-            else
+            } else
               queryConstraints.push(where(key, value[0], value[1], value[2])); // 추가적으로 부호가 있을 경우
           } else queryConstraints.push(where(key, "==", value));
         }

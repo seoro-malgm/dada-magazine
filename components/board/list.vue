@@ -118,16 +118,24 @@
           <!-- 더보기 -->
           <li v-if="items?.length >= size">
             <div class="mt-5 text-center">
-              <b-btn
-                variant="outline-darkest px-4 py-2 rounded-0 text-16 text-lg-18"
-                @click="
-                  getItems({
-                    startAfter: lastVisible,
-                  })
-                "
-              >
-                더보기
-              </b-btn>
+              <template v-if="onLastIndex">
+                <span class="text-13 text-gray-600"> 마지막 글입니다 </span>
+              </template>
+              <template v-else>
+                <b-btn
+                  variant="outline-darkest px-4 py-2 rounded-0 text-16 text-lg-18"
+                  @click="
+                    getItems(
+                      {
+                        startAfter: lastVisible,
+                      },
+                      true
+                    )
+                  "
+                >
+                  더보기
+                </b-btn>
+              </template>
             </div>
           </li>
         </ul>
@@ -168,11 +176,12 @@ export default {
     return {
       pending: {
         items: false,
-        ladMore: false,
+        loadMore: false,
       },
       allCategories,
       size: 14,
       items: [],
+      onLastIndex: false,
     };
   },
   computed: {
@@ -195,7 +204,7 @@ export default {
     },
     // 마지막
     lastVisible() {
-      return this.items?.length ? this.items?.at(-1) : null;
+      return this.items?.length ? this.items?.at(-1)?.createdAt : null;
     },
   },
   watch: {
@@ -214,9 +223,9 @@ export default {
   },
   methods: {
     // 글 불러오기
-    async getItems(query, ladMore = false) {
+    async getItems(query, loadMore = false) {
       this.pending.items = true;
-      if (ladMore) {
+      if (loadMore) {
         this.pending.loadMore = true;
       }
       const { getAllBoardItems } = this.$firebase();
@@ -229,11 +238,13 @@ export default {
           "desc",
         ]);
         if (data) {
-          console.log("data:", data);
-          this.items = ladMore ? [...this.items, ...data] : [...data];
+          this.items = loadMore ? [...this.items, ...data] : [...data];
           this.pending.items = false;
-          if (ladMore) {
+          if (loadMore) {
             this.pending.loadMore = false;
+            if (!data?.length) {
+              this.onLastIndex = true;
+            }
           }
           // window.scrollTo(0, 0);
         }
