@@ -8,7 +8,7 @@
               <ul class="list-category">
                 <li class="list-item">
                   <button
-                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700"
+                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700 text-oa"
                     :class="{ active: !categorySelected }"
                     @click="
                       $router.push({
@@ -25,7 +25,7 @@
                   :key="i"
                 >
                   <button
-                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700"
+                    class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700 text-oa"
                     :class="{ active: categorySelected === category.value }"
                     @click="
                       $router.push({
@@ -53,7 +53,7 @@
           }} -->
           <!-- 목록 -->
           <li class="list-item" v-for="(item, i) in items" :key="i">
-            <template v-if="i >= 1 && !(i % 7)">
+            <template v-if="i >= 1 && !(i % 5)">
               <div class="banner my-2 mb-4">
                 <span class="ad">광고</span>
                 <a
@@ -71,27 +71,33 @@
             <article class="item">
               <header class="header text-truncate">
                 <nuxt-link
-                  class="text-24 text-md-28 text-lg-36 btn btn-text btn-text-gray-600"
+                  class="text-16 text-md-18 text-lg-20 btn btn-text p-0 btn-text-gray-600 w-100 text-left"
                   :to="`/board/${item.docId}`"
                 >
                   {{ item?.title }}
                 </nuxt-link>
-                <div class="mt-2 d-flex align-items-center">
+                <div class="mt-1 d-flex align-items-center">
                   <small
-                    class="text-14 text-lg-14 fw-700 text-info border border-info rounded-pill px-3 py-1"
+                    class="text-14 text-md-15 fw-700 text-info border border-info rounded-pill px-3 py-1"
                   >
                     {{ getCategory(item.category) }}
                   </small>
                   <ul class="ml-2 d-flex align-items-center text-gray-500">
-                    <li class="mr-2 d-flex align-items-center mr-2">
+                    <li
+                      class="mr-2 d-flex align-items-center mr-2 text-14 text-md-15"
+                    >
                       <i class="icon icon-calendar mr-1" />
                       <span>{{ getDate(item?.createdAt) }}</span>
                     </li>
-                    <li class="d-flex align-items-center mr-2">
+                    <li
+                      class="d-flex align-items-center mr-2 text-14 text-md-15"
+                    >
                       <i class="icon icon-eye mr-1" />
                       <span>{{ item?.viewer }}</span>
                     </li>
-                    <li class="d-flex align-items-center mr-2">
+                    <li
+                      class="d-flex align-items-center mr-2 text-14 text-md-15"
+                    >
                       <i class="icon icon-heart mr-1" />
                       <span>{{ item?.like }}</span>
                     </li>
@@ -145,7 +151,7 @@
               height="96px"
               animation="wave"
               class="rounded mb-4"
-              v-for="i in 6"
+              v-for="i in 5"
               :key="i"
             />
           </div>
@@ -158,7 +164,7 @@
                 height="96px"
                 animation="wave"
                 class="rounded mb-4"
-                v-for="i in 6"
+                v-for="i in 5"
                 :key="i"
               />
             </div>
@@ -179,7 +185,7 @@ export default {
         loadMore: false,
       },
       allCategories,
-      size: 14,
+      size: 5,
       items: [],
       onLastIndex: false,
     };
@@ -269,31 +275,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 필터링
-.section-category {
-  margin-bottom: 1rem;
-  padding: 1rem 1rem 0.5rem;
-  // border-top: 1px solid $gray-600;
-  // border-bottom: 1px solid $gray-600;
-
-  .list-category {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    .list-item {
-      margin: 0 12px 12px 0;
-      .btn-category {
-        border-radius: 0;
-        &.active {
-          background-color: $gray-600;
-          border-color: $gray-600;
-        }
-      }
-    }
-  }
-}
-
 // 목록
 .list {
   margin-top: 48px;
@@ -380,6 +361,8 @@ export default {
     }
   }
 }
+
+// 배너
 .banner {
   position: relative;
 

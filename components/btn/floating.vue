@@ -45,6 +45,7 @@ export default {
 .floating-button {
   position: fixed;
   z-index: 1055;
+  transition: all 0.3s $default-ease;
   .btn {
     // border-radius: 40rem;
     font-size: 1rem;
@@ -52,6 +53,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.1);
   }
 }
 </style>

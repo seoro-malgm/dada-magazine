@@ -24,7 +24,7 @@
     <!-- 글들 -->
     <section class="pt-3 pb-5">
       <!-- <header-section title="포스트" /> -->
-      <board-list />
+      <board-items />
     </section>
     <!-- 에디터 -->
     <section class="py-5 bg-lightest">
@@ -93,14 +93,10 @@
     <!-- 뉴스레터 구독 -->
     <newsletter-invite />
     <!-- 협력요청 -->
-    <b-row class="py-3 py-md-0">
-      <b-col
-        cols="12"
-        md="6"
-        class="text-center py-2 py-md-4 px-2 border-right"
-      >
+    <b-row class="py-3 py-md-0" align-v="stretch">
+      <b-col cols="12" md="6" class="text-center px-2 border-right">
         <a
-          class="btn btn-outline-primary rounded-pill px-4 text-18 text-md-24"
+          class="w-100 px-4 text-18 text-md-24 h-100 d-block py-2 py-md-3"
           href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
           target="_blank"
         >
@@ -108,10 +104,10 @@
           다재다능매거진에 대하여
         </a>
       </b-col>
-      <b-col cols="12" md="6" class="text-center py-2 py-md-4 px-2">
+      <b-col cols="12" md="6" class="text-center px-2">
         <nuxt-link
           id="coming-soon"
-          class="btn btn-outline-primary rounded-pill px-4 text-18 text-md-24"
+          class="w-100 px-4 text-18 text-md-24 h-100 d-block py-2 py-md-3"
           to="/corporate"
           v-b-tooltip.hover
           title="협업은 현재 준비중입니다."
@@ -119,13 +115,29 @@
           다재다능매거진과 협업하기
           <i class="icon icon-right-dir" />
         </nuxt-link>
-        <!-- <b-tooltip
-          :show.sync="comingSoon"
-          target="coming-soon"
-          placement="bottom"
+      </b-col>
+      <b-col
+        cols="12"
+        md="6"
+        class="text-center px-2 border-right bg-lightest border-top"
+      >
+        <a
+          class="w-100 px-4 text-18 text-md-24 h-100 d-block py-2 py-md-3"
+          href="https://naver.me/F40qvwJW"
+          target="_blank"
         >
-          협업 요청은 준비중입니다.
-        </b-tooltip> -->
+          👨‍👩‍👧‍👦 다재다능한 사람들 추천
+        </a>
+      </b-col>
+      <b-col cols="12" md="6" class="text-center px-2 bg-lightest border-top">
+        <a
+          class="w-100 px-4 text-18 text-md-24 h-100 d-block py-2 py-md-3"
+          href="https://naver.me/5Cr9wH30"
+          target="_blank"
+        >
+          다다매거진에서 추천하는 여행루트 🚗
+          <!-- <i class="icon icon-right-dir" /> -->
+        </a>
       </b-col>
     </b-row>
   </div>

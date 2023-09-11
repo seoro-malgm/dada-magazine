@@ -4,14 +4,14 @@
       <b-container>
         <b-row>
           <b-col
-            cols="20"
-            lg="20"
+            cols="4"
+            lg="2"
             class="py-2 d-flex flex-column align-items-center justify-content-center"
             v-for="(item, i) in partners"
             :key="i"
           >
             <div
-              class="px-2 px-lg-4 d-flex flex-column align-items-center justify-content-center"
+              class="px-2 px-lg-1 d-flex flex-column align-items-center justify-content-center"
             >
               <a
                 :href="item?.url"
@@ -39,14 +39,14 @@
       </b-container>
     </div>
 
-    <footer id="gnf">
-      <b-container class="py-3">
+    <footer id="gnf" class="pb-5">
+      <b-container class="pt-3 pb-5">
         <ul class="list-unstyled">
-          <!-- <li>
-          <h4 class="logo mb-2">
-            <img :src="require('@/assets/symbol-gongstar-white.svg')" />
-          </h4>
-        </li> -->
+          <li>
+            <h4 class="logo mb-2">
+              <img :src="require('@/assets/symbol-gongstar-white.svg')" />
+            </h4>
+          </li>
           <li>
             <strong> 주식회사 공스타 </strong>
           </li>
@@ -79,7 +79,7 @@
                 href="https://www.instagram.com/gong__star2021/?hl=ko"
                 target="_blank"
               >
-                <i class="icon icon-instagram text-15 text-lg-16"></i>
+                <i class="icon icon-instagram text-18 text-lg-24" />
               </a>
             </li>
           </ul>
@@ -99,6 +99,11 @@ export default {
           image: "gongjucf.png",
           name: "공주문화관광재단",
           url: "https://www.gongjucf.or.kr/intro.do",
+        },
+        {
+          image: "gjccc.png",
+          name: "문화도시 공주",
+          url: "https://gjccc.or.kr/",
         },
         {
           image: "gongjuuniv.svg",

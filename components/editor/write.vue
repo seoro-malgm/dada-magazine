@@ -217,7 +217,7 @@ $default-line-height: 1.6;
     }
   }
   .ql-container {
-    font-family: "Roboto", "Noto Sans KR", "Pretendard-Regular", sans-serif !important;
+    font-family: "Noto Sans KR", sans-serif !important;
     padding: 24px 0;
     border-left-width: 0;
     border-right-width: 0;

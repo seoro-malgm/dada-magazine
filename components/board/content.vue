@@ -20,7 +20,7 @@ $default-line-height: 1.6;
 
 .board-content {
   &:deep(*) {
-    font-family: "Roboto", "Noto Sans KR", "Pretendard-Regular", sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
     line-height: $default-line-height !important;
   }
   &:deep(span),

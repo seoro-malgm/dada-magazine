@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-
 @font-face {
   font-family: "OAGothic";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2")
@@ -15,19 +13,10 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Pretendard-Bold";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-    format("woff");
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: -0.3px;
-}
-
 body,
 button,
 a:link {
-  font-family: "OAGothic", "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   letter-spacing: -0.02rem;
   color: $primary;
 }
@@ -39,6 +28,9 @@ h4,
 h5,
 h6 {
   margin: 0;
+  font-family: "OAGothic", "Noto Sans KR", sans-serif;
+}
+.text-oa {
   font-family: "OAGothic", "Noto Sans KR", sans-serif;
 }
 

@@ -22,8 +22,8 @@
             </h1>
             <div class="mt-3 d-flex align-items-center justify-content-center">
               <small class="text-14 text-md-14">
-                {{ createdDate }} | 조회수
-                {{ currentBoardItem.viewer + 1 || 0 }}
+                {{ createdDate }}
+                <!-- | 조회수 {{ currentBoardItem.viewer + 1 || 0 }} -->
               </small>
               <template v-if="auth">
                 <b-dd variant="text p-0" class="ml-2" no-caret>
@@ -68,9 +68,9 @@
             </client-only>
           </section>
           <!-- 글 하단 버튼 -->
-          <section class="my-5 py-5">
+          <section class="mt-5 mt-3 pt-5">
             <template v-if="!isMine">
-              <b-btn
+              <!-- <b-btn
                 variant="outline-heart d-flex align-items-center mx-auto px-4 py-3 like-button"
                 :class="{ actvie: onLikeToggle }"
                 pill
@@ -81,7 +81,7 @@
                 <span class="text-16 text-md-18 fw-700">
                   {{ currentBoardItem?.like }}
                 </span>
-              </b-btn>
+              </b-btn> -->
             </template>
             <template v-else-if="isMine">
               <div
@@ -93,7 +93,7 @@
                 </span>
               </div>
             </template>
-            <div class="mt-3 text-center">
+            <div class="mt-3 mb-5 text-center">
               <b-btn
                 variant="outline-gray-600"
                 pill
@@ -103,6 +103,8 @@
                 공유하기
               </b-btn>
             </div>
+            <!-- 뉴스레터 -->
+            <banner-newsletter />
           </section>
           <!-- 수정/삭제용 utils -->
           <!-- <client-only>
@@ -179,6 +181,21 @@
               :key="i"
             >
               <board-item :item="item" titleClass="text-15 text-lg-18" />
+            </b-col>
+            <b-col cols="6" md="3" class="px-2 mb-3">
+              <a
+                href="https://www.instagram.com/p/Cw69nILLBng/"
+                target="_blank"
+              >
+                <div
+                  class="bg-img ratio-100 bg-gray-200 banner"
+                  :style="{
+                    backgroundImage: `url(${require('@/assets/images/banner-square.png')})`,
+                  }"
+                >
+                  <span class="ad">광고</span>
+                </div>
+              </a>
             </b-col>
           </b-row>
         </section>
@@ -281,9 +298,9 @@ export default {
         "board",
         {
           ...query,
-          docId: ["<", params.docId, 4],
+          docId: ["<", params.docId, 3],
         },
-        4,
+        3,
         ["docId", "desc"]
       ),
     ]);
@@ -312,8 +329,10 @@ export default {
     },
     createdDate() {
       const { seconds } = this.currentBoardItem?.createdAt;
-      return seconds && this.getTimestamp
-        ? new Date(seconds * 1000)?.toLocaleDateString() // this.getTimestamp(new Date(seconds * 1000))
+
+      const data = new Date(seconds * 1000);
+      return seconds
+        ? `${data?.getFullYear()}년 ${data?.getMonth() + 1}월`
         : "";
     },
     author() {

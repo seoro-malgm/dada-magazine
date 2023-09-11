@@ -137,21 +137,21 @@ export default {
         href: "/safari-pinned-tab.svg",
       },
       // fonts
-      // {
-      //   rel: "stylesheet",
-      //   type: "text/css",
-      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2",
-      // },
-      // {
-      //   rel: "stylesheet",
-      //   type: "text/css",
-      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2",
-      // },
-      // {
-      //   rel: "stylesheet",
-      //   type: "text/css",
-      //   href: "https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
-      // },
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2",
+      },
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2",
+      },
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
+      },
     ],
   },
   css: [

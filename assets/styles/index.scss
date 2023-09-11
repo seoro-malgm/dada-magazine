@@ -355,3 +355,22 @@ a:hover {
     border-color: inherit;
   }
 }
+
+// 배너
+.banner {
+  position: relative;
+
+  span.ad {
+    background-color: white;
+    border: 1px solid $gray-200;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    top: 0.25rem;
+    left: 0.25rem;
+    border-radius: 40rem;
+    font-size: 10px;
+    padding: 0.1rem 0.25rem;
+  }
+}

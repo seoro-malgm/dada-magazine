@@ -385,7 +385,7 @@ export default {
       const type = file?.type.split("/").at(-1);
       const fileName = `profile_${new Date().valueOf()}.${type}`;
       // 가로 200으로 리사이징하여 url 적용함
-      this.resize.photo("w", file, 240, "object", async (result) => {
+      this.resize.photo("w", file, 200, "object", async (result) => {
         const uploadedFile = await getImageURL(
           result.blob,
           result.blob.type,

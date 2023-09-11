@@ -107,6 +107,34 @@
                 다재다능매거진에 대하여
               </a>
             </li>
+            <li class="text-center">
+              <nuxt-link
+                class="btn btn-text text-15 text-md-18 text-gray-600"
+                to="/corporate"
+                v-b-tooltip.hover
+                title="협업은 현재 준비중입니다."
+              >
+                다재다능매거진과 협업하기
+              </nuxt-link>
+            </li>
+            <li class="text-center">
+              <a
+                class="btn btn-text text-15 text-md-18 text-gray-600"
+                href="https://naver.me/F40qvwJW"
+                target="_blank"
+              >
+                다재다능한 사람들 👨‍👩‍👧‍👦
+              </a>
+            </li>
+            <li class="text-center">
+              <a
+                class="btn btn-text text-15 text-md-18 text-gray-600"
+                href="https://naver.me/5Cr9wH30"
+                target="_blank"
+              >
+                다다 추천 여행루트 🚗
+              </a>
+            </li>
           </ul>
         </div>
       </section>

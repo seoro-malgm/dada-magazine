@@ -7,7 +7,7 @@
     </main>
     <btn-floating
       :position="{
-        bottom: onScrolled ? '4.5rem' : '-7rem',
+        bottom: onScrolled ? '2rem' : '-7rem',
         right: '1.5rem',
       }"
       variant="white text-darkest rounded-circle p-0"
@@ -21,6 +21,20 @@
         <i class="icon icon-up-circled text-48" />
       </template>
     </btn-floating>
+    <btn-floating
+      :position="{
+        bottom: onScrolled ? '2rem' : '-4rem',
+        left: '1.5rem',
+      }"
+      variant="lightest rounded-pill fw-700 text-13"
+      @click="linkTo('https://dada-magazine.stibee.com/subscribe/')"
+    >
+      <template #content>
+        <i class="icon icon-paper-plane" />
+        다다매거진 구독하기
+      </template>
+    </btn-floating>
+
     <!-- footer -->
 
     <global-footer />
@@ -57,6 +71,9 @@ export default {
   methods: {
     scrollTo(x, y) {
       window.scrollTo(x, y);
+    },
+    linkTo(link) {
+      window.open(link, "_blank");
     },
     modal() {
       window.alert = async (

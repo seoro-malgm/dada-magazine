@@ -15,16 +15,36 @@
           </template>
           <figcaption>
             <div class="text">
-              <span class="text-14 d-block mb-2">
+              <span class="text-15 text-md-16 d-block mb-2">
                 {{ getCategory(item.category) }}
               </span>
               <hr />
               <h6
-                class="px-2 fw-700 text-truncate line-2 text-14 text-lg-16"
+                class="px-2 fw-700 text-truncate line-2 text-17 text-lg-20"
                 :class="titleClass"
               >
                 {{ item.title }}
               </h6>
+            </div>
+            <div class="mt-1 py-1 text-footer">
+              <ul
+                class="ml-2 d-flex align-items-center justify-content-end text-gray-500"
+              >
+                <li
+                  class="mr-2 d-flex align-items-center mr-2 text-13 text-md-45"
+                >
+                  <i class="icon icon-calendar mr-1" />
+                  <span>{{ getDate(item?.createdAt) }}</span>
+                </li>
+                <!-- <li class="d-flex align-items-center mr-2 text-13 text-md-14">
+                  <i class="icon icon-eye mr-1" />
+                  <span>{{ item?.viewer }}</span>
+                </li>
+                <li class="d-flex align-items-center mr-2 text-13 text-md-14">
+                  <i class="icon icon-heart mr-1" />
+                  <span>{{ item?.like }}</span>
+                </li> -->
+              </ul>
             </div>
           </figcaption>
         </figure>
@@ -72,6 +92,14 @@ export default {
       return this.allCategories[category]
         ? this.allCategories[category]
         : this.allCategories["ETC"];
+    },
+    // 글날짜불러오기
+    getDate(time) {
+      const { seconds } = time;
+      const data = new Date(seconds * 1000);
+      return seconds
+        ? `${data?.getFullYear()}년 ${data?.getMonth() + 1}월`
+        : "";
     },
   },
 };
@@ -145,6 +173,15 @@ export default {
       opacity: 1;
       top: 50%;
       transform: translate(-50%, -50%);
+    }
+    .text-footer {
+      text-align: center;
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      width: 90%;
+      max-width: 90%;
+      transform: translateX(-50%);
     }
   }
 

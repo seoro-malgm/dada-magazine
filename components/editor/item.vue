@@ -2,8 +2,12 @@
   <b-card class="editor-item" @click="$router.push(`/${item.pid}`)">
     <b-card-header>
       <b-avatar size="80px" class="mb-2" :src="item?.profile_image_url" />
-      <h6 class="text-16 text-md-18">{{ item.nickname }}</h6>
-      <span class="text-15 text-md-15">@{{ item.pid }}</span>
+      <h6 class="text-14 text-md-16 text-truncate w-100 px-1">
+        {{ item.nickname }}
+      </h6>
+      <div class="text-10 text-md-12 text-truncate w-100 px-1 text-gray-500">
+        @{{ item.pid }}
+      </div>
     </b-card-header>
     <!-- <b-card-body>
       <p

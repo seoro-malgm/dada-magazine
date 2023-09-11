@@ -56,7 +56,7 @@ export default {
     },
     size: {
       path: Number,
-      default: 1920,
+      default: 1140,
     },
   },
   data() {
