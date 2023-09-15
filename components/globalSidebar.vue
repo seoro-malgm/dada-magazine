@@ -83,14 +83,14 @@
                   나의 다다
                 </b-btn>
               </li>
-              <!-- <li class="text-center">
+              <li class="text-center">
                 <b-btn
                   variant="text text-15 text-md-18"
                   :to="{ name: 'auth-stats' }"
                 >
-                  내 글 통계
+                  내 글 랭킹
                 </b-btn>
-              </li> -->
+              </li>
             </ul>
             <hr class="my-4" />
           </template>

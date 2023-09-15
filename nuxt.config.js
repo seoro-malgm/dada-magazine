@@ -25,12 +25,12 @@ export default {
         hid: "description",
         name: "description",
         property: "description",
-        content: "로컬의 다재다능한 이야기의 잡지, 다다매거진입니다.",
+        content: "충남 공주시의 로컬매거진. 다재다능한 이야기를 만나보세요.",
       },
       {
         name: "keyword",
         content:
-          "다다매거진, 다다, 매거진다다, 매거진, 다다 매거진, 다재다능 매거진, 공주시, 공주인, 공주, 충남, 충청남도, 충청도, 공주여행, 커뮤니티, 공주커뮤니티, 공주시웹사이트, 공주시청, 공주대학교, 공주원룸, 공주대, 공주교대, 공주원도심, 공주신도심, 신관동, 반죽동, 중학동",
+          "공주시, 공주인, 공주, 충남, 충청남도, 충청도, 공주여행, 커뮤니티, 공주커뮤니티, 다다매거진, 다다, 매거진다다, 매거진, 다다 매거진, 다재다능 매거진, 공주시웹사이트, 공주시청, 공주대학교, 공주원룸, 공주대, 공주교대, 공주원도심, 공주신도심, 신관동, 반죽동, 중학동",
       },
       {
         hid: "og:image",
@@ -58,7 +58,7 @@ export default {
       {
         name: "og:type",
         property: "og:type",
-        content: "매거진, 플랫폼",
+        content: "매거진, 웹진",
       },
       {
         name: "og:site_name",
@@ -137,16 +137,16 @@ export default {
         href: "/safari-pinned-tab.svg",
       },
       // fonts
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2",
-      },
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2",
-      },
+      // {
+      //   rel: "stylesheet",
+      //   type: "text/css",
+      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2",
+      // },
+      // {
+      //   rel: "stylesheet",
+      //   type: "text/css",
+      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2",
+      // },
       {
         rel: "stylesheet",
         type: "text/css",
