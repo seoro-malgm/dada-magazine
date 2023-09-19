@@ -56,7 +56,8 @@
                   <span class="text-13 text-gray-600"> 마지막 글입니다 </span>
                 </template>
                 <template v-else>
-                  <b-btn
+                  <!-- todo: 페이지네이션 작동안함 -->
+                  <!-- <b-btn
                     variant="outline-darkest rounded-pill px-4 py-2 text-16 text-lg-18"
                     @click="
                       getItems(
@@ -68,7 +69,7 @@
                     "
                   >
                     더보기
-                  </b-btn>
+                  </b-btn> -->
                 </template>
               </div>
             </div>
@@ -82,6 +83,12 @@
 <script>
 import allCategories from "~/assets/json/allCategories";
 export default {
+  props: {
+    auth: {
+      type: [Object, String],
+      default: null,
+    },
+  },
   data() {
     return {
       pending: {
@@ -89,7 +96,7 @@ export default {
         loadMore: false,
       },
       allCategories,
-      size: 10,
+      size: null,
       items: [],
       onLastIndex: false,
     };
@@ -128,8 +135,15 @@ export default {
       );
     },
   },
-  mounted() {
-    this.getItems();
+  watch: {
+    auth(n) {
+      this.getItems();
+    },
+  },
+  async mounted() {
+    if (this.auth?.uid) {
+      this.getItems();
+    }
   },
   methods: {
     isBanner(index) {
@@ -145,8 +159,9 @@ export default {
       const { getAllBoardItems } = this.$firebase();
       const body = {
         ...query,
+        author: this.auth?.uid,
       };
-      console.log("body:", body);
+      // console.log("body:", body);
       try {
         const data = await getAllBoardItems("board", body, this.size, [
           "viewer",

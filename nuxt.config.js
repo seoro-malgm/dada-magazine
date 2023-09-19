@@ -7,7 +7,7 @@ export default {
   // mode: "universal",
   // target: "server",
   head: {
-    title: "다다매거진 | 우리들의 다재다능한 이야기",
+    title: "다다매거진",
     htmlAttrs: {
       lang: "ko-KR",
     },
@@ -19,13 +19,14 @@ export default {
         hid: "title",
         name: "title",
         property: "title",
-        content: "다다매거진 | 우리들의 다재다능한 이야기",
+        content: "다다매거진",
       },
       {
         hid: "description",
         name: "description",
         property: "description",
-        content: "충남 공주시의 로컬매거진. 다재다능한 이야기를 만나보세요.",
+        content:
+          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
       },
       {
         name: "keyword",
@@ -48,7 +49,8 @@ export default {
         hid: "og:description",
         name: "og:description",
         property: "og:description",
-        content: "우리들의 다재다능한 이야기",
+        content:
+          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
       },
       {
         name: "og:url",
@@ -102,12 +104,18 @@ export default {
       {
         name: "twitter:description",
         hid: "twitter:description",
-        content: "우리들의 다재다능한 이야기",
+        content:
+          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
       },
       {
         name: "twitter:image",
         hid: "twitter:image",
         content: "/og-image.png",
+      },
+      // 네이버 서치어드바이저
+      {
+        name: "naver-site-verification",
+        content: "e7e0d2f0aa7a7cf69ddf5a9467027f877e046828",
       },
     ],
     link: [
