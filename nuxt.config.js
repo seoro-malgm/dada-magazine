@@ -25,13 +25,12 @@ export default {
         hid: "description",
         name: "description",
         property: "description",
-        content:
-          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
+        content: "충남 공주시의 웹 로컬 매거진",
       },
       {
         name: "keyword",
         content:
-          "공주시, 공주인, 공주, 충남, 충청남도, 충청도, 공주여행, 커뮤니티, 공주커뮤니티, 다다매거진, 다다, 매거진다다, 매거진, 다다 매거진, 다재다능 매거진, 공주시웹사이트, 공주시청, 공주대학교, 공주원룸, 공주대, 공주교대, 공주원도심, 공주신도심, 신관동, 반죽동, 중학동",
+          "공주시, 공주인, 공주, 충남, 충청남도, 충청도, 공주여행, 커뮤니티, 공주커뮤니티, 다다매거진, 다다, 매거진다다, 매거진, 다다 매거진, 공주시웹사이트, 공주시청, 공주대학교, 공주원룸, 공주대, 공주교대, 공주원도심, 공주신도심, 신관동, 반죽동, 중학동",
       },
       {
         hid: "og:image",
@@ -49,8 +48,7 @@ export default {
         hid: "og:description",
         name: "og:description",
         property: "og:description",
-        content:
-          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
+        content: "충남 공주시의 웹 로컬 매거진",
       },
       {
         name: "og:url",
@@ -75,12 +73,12 @@ export default {
       {
         name: "msapplication-TileColor",
         property: "msapplication-TileColor",
-        content: "#d0df00",
+        content: "#001b7f",
       },
       {
         name: "theme-color",
         property: "theme-color",
-        content: "#d0df00",
+        content: "#001b7f",
       },
       {
         name: "twitter:card",
@@ -104,8 +102,7 @@ export default {
       {
         name: "twitter:description",
         hid: "twitter:description",
-        content:
-          "충남 공주시의 로컬매거진. 우리들의 다재다능한 이야기를 만나보세요.",
+        content: "충남 공주시의 웹 로컬 매거진",
       },
       {
         name: "twitter:image",
@@ -141,24 +138,19 @@ export default {
       },
       {
         rel: "mask-icon",
-        color: "#d0df00",
+        color: "#001b7f",
         href: "/safari-pinned-tab.svg",
       },
       // fonts
-      // {
-      //   rel: "stylesheet",
-      //   type: "text/css",
-      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2",
-      // },
-      // {
-      //   rel: "stylesheet",
-      //   type: "text/css",
-      //   href: "https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2",
-      // },
       {
         rel: "stylesheet",
         type: "text/css",
         href: "https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
+      },
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700;1,900&display=swap'",
       },
     ],
   },
@@ -220,7 +212,7 @@ export default {
   },
   // 로딩바
   loading: {
-    color: "#d0df00",
+    color: "#001b7f",
   },
 
   // 환경변수

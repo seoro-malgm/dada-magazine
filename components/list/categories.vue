@@ -2,12 +2,12 @@
   <div>
     <client-only>
       <b-row align-h="center">
-        <b-col cols="12" md="10" lg="9">
+        <b-col cols="12" md="10" lg="12" xl="10">
           <section class="section-category" v-if="categories?.length">
             <ul class="list-category">
               <li class="list-item">
                 <button
-                  class="btn btn-outline-darkest btn-category text-20 text-lg-28 fw-700 text-oa"
+                  class="btn btn-outline-darkest btn-category text-18 text-md-22 text-lg-28 fw-700 text-oa"
                   :class="{ active: !categorySelected }"
                   @click="
                     $router.push({

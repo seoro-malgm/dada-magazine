@@ -1,17 +1,9 @@
 {
-  "FOOD": "음식",
   "ART": "예술",
   "PLACE": "장소",
   "PEOPLE": "인물",
-  "TECH": "기술/IT",
-  "REVIEW": "리뷰",
-  "SOCIETY": "사회",
-  "ECONOMY": "경제",
-  "LOCAL": "로컬",
-  "ECO": "환경",
-  "WELFARE": "복지",
+  "TECH": "기술",
   "WORK": "일",
-  "MEETING": "모임",
-  "CULTURE": "문화도시",
-  "ETC": "기타"
+  "MEETING": "네트워킹",
+  "CULTURE": "문화도시"
 }

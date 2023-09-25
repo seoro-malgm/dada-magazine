@@ -2,10 +2,10 @@
   <div>
     <div class="py-3 border-top border-gray-400 bg-white">
       <b-container>
-        <b-row>
+        <b-row align-h="center">
           <b-col
             cols="4"
-            lg="2"
+            lg="14"
             class="py-2 d-flex flex-column align-items-center justify-content-center"
             v-for="(item, i) in partners"
             :key="i"
@@ -96,6 +96,11 @@ export default {
     return {
       partners: [
         {
+          image: "gongju.png",
+          name: "공주시청",
+          url: "https://www.gongju.go.kr/ ",
+        },
+        {
           image: "gongjucf.png",
           name: "공주문화관광재단",
           url: "https://www.gongjucf.or.kr/intro.do",
@@ -111,9 +116,9 @@ export default {
           url: "https://www.kongju.ac.kr/k_intro/index.html",
         },
         {
-          image: "gongjuuniv_sh.svg",
-          name: "공주대학교 산학협력단",
-          url: "https://sanhak.kongju.ac.kr/",
+          image: "gjs.svg",
+          name: "공주시 농촌신활력플러스",
+          url: "https://www.gongju.go.kr/prog/bbsArticle/BBSMSTR_000000001142/list.do?kind=gctc_file5",
         },
         {
           image: "gongjusalon.svg",
@@ -180,5 +185,12 @@ export default {
 .col-20 {
   flex: 20% 0 0;
   max-width: 20%;
+}
+
+.col-lg-14 {
+  @media (min-width: $breakpoint-lg) {
+    flex: 14.2% 0 0;
+    max-width: 14.2%;
+  }
 }
 </style>

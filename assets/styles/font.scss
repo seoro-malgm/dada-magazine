@@ -1,23 +1,18 @@
 @font-face {
-  font-family: "OAGothic";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-Medium.woff2")
+  font-family: "NanumSquareNeo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2")
     format("woff2");
-  font-weight: 500;
+  font-weight: normal;
   font-style: normal;
+  letter-spacing: -0.5rem;
 }
-@font-face {
-  font-family: "OAGothic";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2")
-    format("woff2");
-  font-weight: 800;
-  font-style: normal;
-}
+// @import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
 
 body,
 button,
 a:link {
-  font-family: "Noto Sans KR", sans-serif;
-  letter-spacing: -0.02rem;
+  font-family: "NanumSquareNeo", "Noto Sans KR", sans-serif;
+  // letter-spacing: -0.02rem;
   color: $primary;
 }
 
@@ -28,10 +23,10 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-family: "OAGothic", "Noto Sans KR", sans-serif;
+  font-family: "NanumSquareNeo", "Roboto", "Noto Sans KR", sans-serif;
 }
 .text-oa {
-  font-family: "OAGothic", "Noto Sans KR", sans-serif;
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
 }
 
 input[type="password"] {

@@ -24,11 +24,21 @@ $default-line-height: 1.6;
     line-height: $default-line-height !important;
   }
   &:deep(span),
+  &:deep(span *) {
+    // display: ;
+    display: pre;
+    white-space: pre-wrap;
+    // width: 100%;
+  }
+  &:deep(span),
   &:deep(span *),
   &:deep(p),
   &:deep(p *) {
     margin-bottom: 0;
     font-size: 16px;
+    // white-space: normal;
+    min-width: auto;
+    word-wrap: break-word;
     @media (min-width: $breakpoint-md) {
       font-size: 17px;
     }

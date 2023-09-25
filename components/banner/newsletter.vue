@@ -1,15 +1,15 @@
 <template>
   <section class="bg-primary">
     <b-container class="py-3">
-      <b-row align-v="center" class="justify-content-center">
+      <b-row align-v="center" class="justify-content-center text-lightest">
         <b-col cols="12" lg="5">
           <div class="px-1 px-lg-3">
             <div class="mb-2">
               <i class="icon icon-book text-56 text-md-100" />
             </div>
             <h3 class="mb-3 text-24 text-md-28 lh-110">
-              우리들의 다재다능한 이야기, <br />
-              다재다능매거진을 구독하세요!
+              충남 공주시의 웹 로컬 매거진<br />
+              다다매거진을 구독하세요!
             </h3>
           </div>
         </b-col>
@@ -23,7 +23,7 @@
           </p>
           <div class="mt-3">
             <a
-              class="btn btn-darkest text-primary px-4 py-3 rounded-pill text-14 text-md-15"
+              class="btn btn-lightest text-primary px-4 py-3 rounded-pill text-14 text-md-15"
               href="https://dada-magazine.stibee.com/subscribe/"
               target="_blank"
             >

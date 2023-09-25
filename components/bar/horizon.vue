@@ -1,5 +1,5 @@
 <template>
-  <div class="horizon-bar">
+  <!-- <div class="horizon-bar">
     <div class="bar rounded-left" />
     <img
       class="pin"
@@ -7,7 +7,8 @@
       alt="가로 바 핀"
     />
     <div class="bar rounded-right" />
-  </div>
+  </div> -->
+  <hr class="hr" />
 </template>
 
 <script>
@@ -22,6 +23,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+hr.hr {
+  margin: 0 auto !important;
+  border-width: 4px;
+  border-color: $primary;
+}
 .horizon-bar {
   display: flex;
   align-items: top;

@@ -57,17 +57,21 @@
               <strong>회원가입</strong>을 진행해주세요!
             </span>
           </div>
-          <b-btn variant="primary mb-2" pill :to="{ name: 'auth-login' }">
+          <b-btn
+            variant="primary text-lightest  mb-2"
+            pill
+            :to="{ name: 'auth-login' }"
+          >
             로그인
           </b-btn>
           <b-btn
             id="coming-soon"
             variant="outline-gray-400 mb-2 "
             pill
-            v-b-tooltip.hover
-            title="회원가입은 현재 준비중입니다."
+            :to="{ name: 'auth-signup' }"
           >
-            <!-- :to="{ name: 'auth-signup' }" -->
+            <!-- v-b-tooltip.hover
+            title="회원가입은 현재 준비중입니다." -->
             회원가입
           </b-btn>
         </template>
@@ -83,7 +87,7 @@
                   나의 다다
                 </b-btn>
               </li>
-              <li class="text-center">
+              <li class="text-center" v-if="auth?.isEditor">
                 <b-btn
                   variant="text text-15 text-md-18"
                   :to="{ name: 'auth-stats' }"
@@ -104,7 +108,7 @@
                 href="https://gongstar.notion.site/fdde182e8b1543a19e5311e8c69d25af?pvs=4"
                 target="_blank"
               >
-                다재다능매거진에 대하여
+                다다매거진에 대하여
               </a>
             </li>
             <li class="text-center">
@@ -114,7 +118,7 @@
                 v-b-tooltip.hover
                 title="협업은 현재 준비중입니다."
               >
-                다재다능매거진과 협업하기
+                다다매거진과 협업하기
               </nuxt-link>
             </li>
             <li class="text-center">
@@ -123,7 +127,7 @@
                 href="https://naver.me/F40qvwJW"
                 target="_blank"
               >
-                다재다능한 사람들 👨‍👩‍👧‍👦
+                다다매거진 추천 PEOPLE 👨‍👩‍👧‍👦
               </a>
             </li>
             <li class="text-center">
@@ -132,7 +136,7 @@
                 href="https://naver.me/5Cr9wH30"
                 target="_blank"
               >
-                다다 추천 여행루트 🚗
+                다다매거진 추천 여행루트 🚗
               </a>
             </li>
           </ul>

@@ -34,12 +34,12 @@
                 >
                   <div class="d-flex flex-column align-items-start">
                     <b-btn
-                      variant="text p-0 text-gray-800 text-28 text-md-28 fw-700 mb-0"
+                      variant="text p-0 text-lightest text-28 text-md-28 fw-700 mb-0"
                       :to="`/${user.pid}`"
                     >
                       {{ user.nickname || "-" }}
                     </b-btn>
-                    <span class="text-16 text-md-16 fw-700">
+                    <span class="text-16 text-md-16 fw-700 text-lightest">
                       @{{ user?.pid }}
                     </span>
                   </div>
@@ -47,7 +47,9 @@
                 <b-col cols="2" md="1" class="text-right">
                   <b-dd variant="text p-0" class="ml-2" no-caret>
                     <template #button-content>
-                      <i class="icon icon-cog text-16 text-md-20" />
+                      <i
+                        class="icon icon-cog text-16 text-md-20 text-lightest"
+                      />
                     </template>
                     <template v-if="isMine">
                       <b-dd-item-btn

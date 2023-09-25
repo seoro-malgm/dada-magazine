@@ -365,7 +365,7 @@ export default {
       board
         .writeText(
           `${this.url}
-출처: ${this.currentBoardItem?.title} | 우리들의 다재다능한 이야기, 다다매거진`
+출처: ${this.currentBoardItem?.title} | 충남 공주시의 웹 매거진, 다다매거진`
         )
         .then(() => {
           window.toast("클립보드에 복사되었습니다.");

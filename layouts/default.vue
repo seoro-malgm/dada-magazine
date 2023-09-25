@@ -196,16 +196,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$gnb-height: 82px;
+$gnb-height: 69px;
 #main {
   min-height: 100vh;
   // @media (max-width: $breakpoint-md) {
   //   padding-top: 72px;
   // }
   // padding-top: 82px;
-  padding-top: 70pxx;
+  padding-top: 69px;
   @media (min-width: $breakpoint-lg) {
-    padding-top: 84px;
+    padding-top: 69px;
     // padding-top: calc($gnb-height + 12px);
   }
   // padding-bottom: 2.5rem;

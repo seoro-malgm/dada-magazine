@@ -2,14 +2,12 @@
   <div class="pt-5 pt-lg-0">
     <!-- header -->
     <header class="px-3 text-center">
-      <b-container fluid class="pt-5">
-        <h1 class="fw-900 text-24 text-lg-48 text-primary">
-          우리들의 다재다능한 이야기
-        </h1>
+      <b-container fluid class="pt-md-5">
+        <h1 class="text-40 text-lg-48 text-primary">Like DADAISM</h1>
         <b-row align-h="center">
           <b-col cols="12" lg="4">
             <p class="text-14 text-md-15 text-light">
-              충남 공주시의 로컬매거진. 다재다능한 이야기를 만나보세요.
+              충남 공주시의 웹 로컬 매거진을 만나보세요.
             </p>
           </b-col>
         </b-row>
@@ -27,7 +25,7 @@
       <board-items />
     </section>
     <!-- 에디터 -->
-    <section class="py-5 bg-lightest">
+    <section class="py-5 bg-gray-100">
       <template v-if="pending.editors">
         <div class="text-center p-5">
           <b-spinner />
@@ -37,12 +35,9 @@
         <template v-if="editors?.length">
           <b-container>
             <header class="text-center">
-              <h4 class="text-20 text-md-30 text-lg-36 text-primary">
-                크리에이터
-              </h4>
+              <h4 class="text-20 text-md-30 text-lg-36">크리에이터</h4>
               <span>
-                다다매거진의 다재다능한 이야기를 수록하는 전문 크리에이터들을
-                만나보세요.
+                다다매거진의 이야기를 수록하는 전문 크리에이터들을 만나보세요.
               </span>
             </header>
             <b-row align-h="center" class="my-3">
@@ -101,7 +96,7 @@
           target="_blank"
         >
           <i class="icon icon-left-dir" />
-          다재다능매거진에 대하여
+          다다매거진에 대하여
         </a>
       </b-col>
       <b-col cols="12" md="6" class="text-center px-2">
@@ -112,7 +107,7 @@
           v-b-tooltip.hover
           title="협업은 현재 준비중입니다."
         >
-          다재다능매거진과 협업하기
+          다다매거진과 협업하기
           <i class="icon icon-right-dir" />
         </nuxt-link>
       </b-col>
@@ -126,7 +121,7 @@
           href="https://naver.me/F40qvwJW"
           target="_blank"
         >
-          👨‍👩‍👧‍👦 다재다능한 사람들 추천
+          👨‍👩‍👧‍👦 사람들 추천
         </a>
       </b-col>
       <b-col cols="12" md="6" class="text-center px-2 bg-lightest border-top">

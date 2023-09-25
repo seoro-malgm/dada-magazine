@@ -6,7 +6,7 @@
           <b-navbar-brand class="mr-5 mr-md-0">
             <nuxt-link to="/" replace>
               <img
-                :src="require('@/assets/logo-short.svg')"
+                :src="require('@/assets/logo-horizontal.svg')"
                 alt="다다매거진 로고 이미지, 메인으로 이동"
               />
             </nuxt-link>

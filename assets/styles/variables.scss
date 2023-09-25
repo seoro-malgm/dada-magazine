@@ -1,13 +1,13 @@
 $white: #ffffff !default;
 $gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
+$gray-200: #dce5ff !default;
 $gray-300: #dee2e6 !default;
 $gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #6c757d !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-500: #a7b4d8 !default;
+$gray-600: #596eaa !default;
+$gray-700: #4d5f92 !default;
+$gray-800: #2b3652 !default;
+$gray-900: #012125 !default;
 $black: #000 !default;
 $transparant: rgba(
   $color: #ffffff,
@@ -73,11 +73,11 @@ $colors: (
 ) !default;
 // scss-docs-end colors-map
 
-$primary: #d0df00;
-$darkest: #352f2d;
-$gray: #333;
-$light: rgb(143, 143, 143);
-$lightest: #f5f3f2;
+$primary: #001b7f;
+$darkest: #012125;
+$gray: #596eaa;
+$light: #a7b4d8;
+$lightest: #dce5ff;
 $alert: #ff0a5c;
 
 $skeleton: #e7e7e7e7;
