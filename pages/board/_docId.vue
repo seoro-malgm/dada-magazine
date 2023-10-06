@@ -84,14 +84,14 @@
               </b-btn> -->
             </template>
             <template v-else-if="isMine">
-              <div
+              <!-- <div
                 class="d-flex align-items-center justify-content-center text-heart"
               >
                 <i class="icon icon-heart text-16 text-md-18 mr-3" />
                 <span class="text-16 text-md-18 fw-700">
                   {{ currentBoardItem?.like }}
                 </span>
-              </div>
+              </div> -->
             </template>
             <div class="mt-3 mb-5 text-center">
               <b-btn

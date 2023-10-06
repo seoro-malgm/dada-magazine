@@ -31,17 +31,14 @@
                 <template v-if="isBanner(i + 1)">
                   <div class="banner my-2 mb-4">
                     <span class="ad">광고</span>
-                    <a
-                      href="https://maker-space-dream-frame.web.app/supporters/"
-                      target="_blank"
-                    >
-                      <img
+                    <a href="https://gjccc.or.kr/events/19" target="_blank">
+                      <!-- <img
                         class="w-100 d-block d-md-none"
                         :src="require('@/assets/images/banner-m.png')"
                         alt=""
-                      />
+                      /> -->
                       <img
-                        class="w-100 d-none d-md-block"
+                        class="w-100"
                         :src="require('@/assets/images/banner.png')"
                         alt=""
                       />
